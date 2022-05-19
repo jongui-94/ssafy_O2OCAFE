@@ -45,6 +45,9 @@ class CardFragment : Fragment() {
         binding.textCardHistory.setOnClickListener {
             requireParentFragment().findNavController().navigate(R.id.action_rootFragment_to_cardHistoryFragment)
         }
+        binding.textCardCharge.setOnClickListener {
+            requireParentFragment().findNavController().navigate(R.id.action_rootFragment_to_cardChargeFragment)
+        }
     }
 
     override fun onDestroyView() {

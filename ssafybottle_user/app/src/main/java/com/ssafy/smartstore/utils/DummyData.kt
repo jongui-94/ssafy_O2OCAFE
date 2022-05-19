@@ -8,6 +8,8 @@ val dummyPromotions = listOf(
     Promotion("SSAFY COFFEE 제주 지점 OPEN", "promotion2.png")
 )
 
+val dummyChargePrices = arrayOf("10,000원","20,000원","30,000원","40,000원","50,000원")
+
 val dummyCardHistories = listOf(
     CardHistory("카드 충전", "2022.05.21 20:34", 50000, true),
     CardHistory("압구정점 사용", "2022.05.21 16:32", 20000, false),

@@ -95,6 +95,13 @@
             app:exitAnim="@anim/to_left"
             app:popEnterAnim="@anim/form_left"
             app:popExitAnim="@anim/to_right" />
+        <action
+            android:id="@+id/action_rootFragment_to_cardChargeFragment"
+            app:destination="@id/cardChargeFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/form_left"
+            app:popExitAnim="@anim/to_right" />
     </fragment>
     <fragment
         android:id="@+id/shoppingListFragment"
@@ -167,4 +174,9 @@
         android:name="com.ssafy.smartstore.ui.root.card.CardHistoryFragment"
         android:label="fragment_card_history"
         tools:layout="@layout/fragment_card_history" />
+    <fragment
+        android:id="@+id/cardChargeFragment"
+        android:name="com.ssafy.smartstore.ui.root.card.CardChargeFragment"
+        android:label="fragment_card_charge"
+        tools:layout="@layout/fragment_card_charge" />
 </navigation>
