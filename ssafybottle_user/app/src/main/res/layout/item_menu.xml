@@ -9,6 +9,8 @@
         <variable
             name="product"
             type="com.ssafy.smartstore.data.dto.product.ProductDto" />
+
+        <import type="com.ssafy.smartstore.utils.StringUtilKt" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -41,12 +43,12 @@
 
         <TextView
             android:id="@+id/text_item_menu_name"
-            style="@style/BodyItem"
+            style="@style/BodyItemBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text='@{product.name}'
-            android:textColor="@color/dark_gray"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/card_item_menu_img"
             tools:text="아메리카노" />
@@ -57,9 +59,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text='@{String.valueOf(product.price) + "원"}'
+            android:text='@{StringUtilKt.toMoney(product.price) + "원"}'
+            android:textColor="@color/dark_gray"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/card_item_menu_img"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_item_menu_name"
             tools:text="12,500원" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

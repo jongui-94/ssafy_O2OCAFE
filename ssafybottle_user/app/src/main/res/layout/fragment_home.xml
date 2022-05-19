@@ -86,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="32dp"
-                android:text="프로모션"
+                android:text="프로모션 🎉"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/text_home_user_hello" />
 
@@ -121,7 +121,7 @@
                 style="@style/HeadTitleBold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="님을 위한 추천메뉴"
+                android:text="님을 위한 추천메뉴 🎈"
                 app:layout_constraintBottom_toBottomOf="@id/text_home_recommend_name"
                 app:layout_constraintStart_toEndOf="@id/text_home_recommend_name"
                 app:layout_constraintTop_toTopOf="@id/text_home_recommend_name" />
@@ -139,7 +139,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/text_home_recommend_name"
-                tools:listitem="@layout/item_recent_order" />
+                tools:listitem="@layout/item_recommend_menu" />
 
             <TextView
                 android:id="@+id/text_home_recentorder"
@@ -148,7 +148,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="32dp"
-                android:text="최근 주문"
+                android:text="최근 주문 📃"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/recycler_home_recommend" />
 

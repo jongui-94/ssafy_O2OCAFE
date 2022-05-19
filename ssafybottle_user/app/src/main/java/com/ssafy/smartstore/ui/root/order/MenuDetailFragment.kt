@@ -2,10 +2,12 @@ package com.ssafy.smartstore.ui.root.order
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -26,6 +28,7 @@ class MenuDetailFragment : Fragment() {
 
     private lateinit var beverageAdapter: MenuDetailAdapter
     private lateinit var dessertAdapter: MenuDetailAdapter
+    private lateinit var top10Adapter: MenuDetailAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,11 +41,16 @@ class MenuDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.getProducts()
-
+        initData()
         initAdapter()
         registerObserver()
         setOnClickListeners()
+        otherListener()
+    }
+
+    private fun initData() {
+        binding.progressbarMenudetailLoading.isVisible = true
+        viewModel.getProducts()
     }
 
     private fun initAdapter() {
@@ -61,10 +69,19 @@ class MenuDetailFragment : Fragment() {
             adapter = dessertAdapter
             layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
         }
+
+        top10Adapter = MenuDetailAdapter().apply {
+            this.onItemClickListener = this@MenuDetailFragment.onItemClickListener
+        }
+        binding.recyclerMenudetailTop10.apply {
+            adapter = top10Adapter
+            layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
+        }
     }
 
     private fun registerObserver() {
         viewModel.beverage.observe(viewLifecycleOwner) {
+            binding.progressbarMenudetailLoading.isVisible = false
             beverageAdapter.apply {
                 products = it
                 notifyDataSetChanged()
@@ -72,6 +89,12 @@ class MenuDetailFragment : Fragment() {
         }
         viewModel.dessert.observe(viewLifecycleOwner) {
             dessertAdapter.apply {
+                products = it
+                notifyDataSetChanged()
+            }
+        }
+        viewModel.top10.observe(viewLifecycleOwner) {
+            top10Adapter.apply {
                 products = it
                 notifyDataSetChanged()
             }
@@ -100,6 +123,17 @@ class MenuDetailFragment : Fragment() {
         binding.imgMenudetailLocation.setOnClickListener {
             requireParentFragment().findNavController()
                 .navigate(R.id.action_rootFragment_to_mapFragment)
+        }
+        binding.imgMenudetailNotification.setOnClickListener {
+            requireParentFragment().findNavController()
+                .navigate(R.id.action_rootFragment_to_notificationFragment)
+        }
+    }
+
+    private fun otherListener() {
+        binding.refreshMenudetail.setOnRefreshListener {
+            initData()
+            binding.refreshMenudetail.isRefreshing = false
         }
     }
 

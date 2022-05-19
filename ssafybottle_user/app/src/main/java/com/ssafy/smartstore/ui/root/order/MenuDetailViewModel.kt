@@ -17,6 +17,9 @@ class MenuDetailViewModel : BaseViewModel() {
     private val _dessert = MutableLiveData<List<ProductDto>>()
     val dessert : LiveData<List<ProductDto>> get() = _dessert
 
+    private val _top10 = MutableLiveData<List<ProductDto>>()
+    val top10 : LiveData<List<ProductDto>> get() = _top10
+
     val isSuccess = MutableLiveData<Boolean>()
 
 
@@ -32,6 +35,13 @@ class MenuDetailViewModel : BaseViewModel() {
             repository.getDessert().let{
                 if(it.isSuccessful) {
                     _dessert.postValue(it.body())
+                } else {
+                    isSuccess.postValue(false)
+                }
+            }
+            repository.getProducts().let{
+                if(it.isSuccessful) {
+                    _top10.postValue(it.body())
                 } else {
                     isSuccess.postValue(false)
                 }
