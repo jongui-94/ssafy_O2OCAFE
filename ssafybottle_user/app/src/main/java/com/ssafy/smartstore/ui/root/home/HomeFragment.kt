@@ -138,7 +138,7 @@ class HomeFragment : Fragment() {
             }
         }
         viewModel.user.observe(viewLifecycleOwner) {
-            binding.textHomeUsername.text = "${it.user.name}님"
+            binding.textHomeUsername.text = it.user.name
             binding.textHomeRecommendName.text = it.user.name
         }
         viewModel.products.observe(viewLifecycleOwner) {

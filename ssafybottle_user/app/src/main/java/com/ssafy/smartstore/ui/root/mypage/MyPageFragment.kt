@@ -20,6 +20,7 @@ import com.ssafy.smartstore.databinding.FragmentMyPageBinding
 import com.ssafy.smartstore.ui.adapter.OnItemClickListener
 import com.ssafy.smartstore.ui.adapter.OrderHistoryAdapter
 import com.ssafy.smartstore.utils.*
+import com.ssafy.smartstore.utils.view.getResourceId
 
 class MyPageFragment : Fragment() {
 

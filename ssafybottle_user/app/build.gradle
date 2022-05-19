@@ -25,6 +25,7 @@ android {
         }
     }
     compileOptions {
+        coreLibraryDesugaringEnabled true
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
@@ -102,4 +103,8 @@ dependencies {
 
     // Beacon
     implementation group: 'org.altbeacon', name: 'android-beacon-library', version: '2.18'
+
+    // zxing 바코드 앱앱
+    implementation 'com.journeyapps:zxing-android-embedded:4.3.0'
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
 }

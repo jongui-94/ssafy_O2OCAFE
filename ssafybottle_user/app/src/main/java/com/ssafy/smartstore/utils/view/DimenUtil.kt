@@ -1,9 +1,6 @@
-package com.ssafy.smartstore.utils
+package com.ssafy.smartstore.utils.view
 
-import android.app.Activity
 import android.content.Context
-import android.util.DisplayMetrics
-import android.util.Log
 import android.util.TypedValue
 
 fun Context.statusBarHeight(): Int {

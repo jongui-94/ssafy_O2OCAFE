@@ -17,6 +17,8 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.snackbar.Snackbar
 import com.ssafy.smartstore.R
+import com.ssafy.smartstore.utils.view.navigationHeight
+import com.ssafy.smartstore.utils.view.statusBarHeight
 
 // Milliseconds used for UI animations in Camera
 const val ANIMATION_FAST_MILLIS = 50L

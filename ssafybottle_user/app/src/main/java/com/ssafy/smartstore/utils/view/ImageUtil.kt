@@ -1,4 +1,4 @@
-package com.ssafy.smartstore.utils
+package com.ssafy.smartstore.utils.view
 
 import android.view.View
 

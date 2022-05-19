@@ -22,6 +22,7 @@ import com.ssafy.smartstore.ui.adapter.CommentAdapter
 import com.ssafy.smartstore.ui.adapter.OnItemClickListener
 import com.ssafy.smartstore.utils.*
 import com.ssafy.smartstore.utils.retrofit.FetchState
+import com.ssafy.smartstore.utils.view.getResourceId
 
 class OrderFragment : Fragment() {
 
