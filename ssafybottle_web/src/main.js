@@ -20,7 +20,7 @@ Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 
 Vue.use(vueCookies);
-Vue.$cookies.config("1d")
+Vue.$cookies.config(60 * 60); // 1시간
 
 Vue.config.productionTip = false
 
