@@ -5,13 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.ssafy.smartstore.data.dto.user.UserDto
 import com.ssafy.smartstore.databinding.FragmentJoinBinding
 import com.ssafy.smartstore.utils.retrofit.FetchState
-import com.ssafy.smartstore.utils.setStatusBarOrigin
-import com.ssafy.smartstore.utils.setStatusBarTransparent
+import com.ssafy.smartstore.utils.saveUserId
+import com.ssafy.smartstore.utils.setAutoLogin
 
 class JoinFragment : Fragment() {
 
@@ -37,8 +38,11 @@ class JoinFragment : Fragment() {
 
     private fun registerObserver() {
         viewModel.isComplete.observe(viewLifecycleOwner) {
-            if(it) {
+            binding.progressbarJoinLoading.isVisible = false
+            if (it) {
                 Toast.makeText(requireContext(), "회원가입 성공", Toast.LENGTH_SHORT).show()
+                setAutoLogin(binding.edtJoinId.text.toString(), binding.edtJoinPw.text.toString())
+                saveUserId(binding.edtJoinId.text.toString())
                 requireActivity().onBackPressed()
             } else {
                 Toast.makeText(requireContext(), "회원가입 실패", Toast.LENGTH_SHORT).show()
@@ -46,18 +50,23 @@ class JoinFragment : Fragment() {
         }
 
         viewModel.isOverlap.observe(viewLifecycleOwner) {
-            if(it) {
+            binding.progressbarJoinLoading.isVisible = false
+            if (it) {
                 Toast.makeText(requireContext(), "중복된 아이디 입니다.", Toast.LENGTH_SHORT).show()
             }
         }
 
         viewModel.fetchState.observe(viewLifecycleOwner) {
             Toast.makeText(requireContext(), "상품정보를 받아오는데 실패했습니다.", Toast.LENGTH_SHORT).show()
-            when(it) {
-                FetchState.BAD_INTERNET -> { }
-                FetchState.PARSE_ERROR -> {}
-                FetchState.WRONG_CONNECTION -> {}
-                FetchState.FAIL -> {}
+            when (it) {
+                FetchState.BAD_INTERNET -> {
+                }
+                FetchState.PARSE_ERROR -> {
+                }
+                FetchState.WRONG_CONNECTION -> {
+                }
+                FetchState.FAIL -> {
+                }
             }
         }
     }
@@ -73,11 +82,7 @@ class JoinFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            if(!binding.checkboxJoinTermsofservice.isChecked) {
-                Toast.makeText(requireContext(), "이용약관에 동의해주세요.", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-
+            binding.progressbarJoinLoading.isVisible = true
             viewModel.insertUser(
                 UserDto(
                     id = id,
@@ -91,24 +96,6 @@ class JoinFragment : Fragment() {
         binding.imgJoinBack.setOnClickListener {
             requireActivity().onBackPressed()
         }
-    }
-
-    private fun setStatusBarTransParent() {
-        binding.constraintJoinInnerContainer.setStatusBarTransparent(requireActivity())
-    }
-
-    private fun setStatusBarOrigin() {
-        requireActivity().setStatusBarOrigin()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        setStatusBarTransParent()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        setStatusBarOrigin()
     }
 
     override fun onDestroyView() {

@@ -111,7 +111,7 @@ class MyPageFragment : Fragment() {
             showLogoutDialog { dialog, _ ->
                 unSetAutoLogin()
                 clearUserId()
-                findNavController().navigate(R.id.action_rootFragment_to_loginFragment)
+                findNavController().navigate(R.id.action_rootFragment_to_loginMainFragment)
                 dialog.dismiss()
             }
         }

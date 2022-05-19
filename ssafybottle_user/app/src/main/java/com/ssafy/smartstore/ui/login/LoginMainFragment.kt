@@ -12,27 +12,26 @@ import androidx.navigation.fragment.findNavController
 import com.ssafy.smartstore.R
 import com.ssafy.smartstore.data.dto.user.UserDto
 import com.ssafy.smartstore.data.repository.Repository
-import com.ssafy.smartstore.databinding.FragmentLoginBinding
-import com.ssafy.smartstore.utils.USER_ID
-import com.ssafy.smartstore.utils.saveUserId
-import com.ssafy.smartstore.utils.setAutoLogin
+import com.ssafy.smartstore.databinding.FragmentLoginMainBinding
+import com.ssafy.smartstore.utils.*
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class LoginFragment : Fragment() {
+class LoginMainFragment : Fragment() {
 
-    private var _binding: FragmentLoginBinding? = null
+    private var _binding: FragmentLoginMainBinding? = null
     private val binding get() = _binding!!
 
     private val isSuccess = MutableLiveData<Boolean>()
+    private var user : Map<String, String?>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentLoginBinding.inflate(inflater, container, false)
+        _binding = FragmentLoginMainBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -40,40 +39,44 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         registerObserver()
+        checkAutoLogin()
         setOnClickListeners()
     }
 
     private fun registerObserver() {
+        binding.progressbarLoginmainLoading.isVisible = false
         isSuccess.observe(viewLifecycleOwner) {
-            binding.progressbarLoginLoading.isVisible = false
             if (it) {
-                setAutoLogin(binding.edtLoginId.text.toString(), binding.edtLoginPw.text.toString())
-                saveUserId(binding.edtLoginId.text.toString())
+                user?.let {
+                    saveUserId(user!![USER_ID]!!)
+                }
                 navigateToRootFragment()
             } else {
+                unSetAutoLogin()
                 Toast.makeText(requireContext(), "로그인 실패", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    private fun setOnClickListeners() {
-        binding.btnLoginLogin.setOnClickListener {
-            val id = binding.edtLoginId.text.toString()
-            val pw = binding.edtLoginPw.text.toString()
-
-            if (id.isEmpty() || pw.isEmpty()) {
-                Toast.makeText(requireContext(), "모두 입력해주세요.", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-            loginUser(id, pw)
+    private fun checkAutoLogin() {
+        // 자동 로그인이면
+        if (isAutoLogin()) {
+            user = getUserInfo()
+            loginUser(user!![USER_ID]!!, user!![USER_PASS]!!)
         }
-        binding.imgLoginBack.setOnClickListener {
-            requireActivity().onBackPressed()
+    }
+
+    private fun setOnClickListeners() {
+        binding.btnLoginmainLogin.setOnClickListener {
+            findNavController().navigate(R.id.action_loginMainFragment_to_loginFragment)
+        }
+        binding.textLoginmainJoin.setOnClickListener {
+            findNavController().navigate(R.id.action_loginMainFragment_to_joinFragment)
         }
     }
 
     private fun loginUser(id: String, pass: String) {
-        binding.progressbarLoginLoading.isVisible = true
+        binding.progressbarLoginmainLoading.isVisible = true
         val user = UserDto(
             id = id,
             name = "",
@@ -101,8 +104,26 @@ class LoginFragment : Fragment() {
 
     private fun navigateToRootFragment() {
         findNavController().apply {
-            navigate(R.id.action_loginFragment_to_rootFragment)
+            navigate(R.id.action_loginMainFragment_to_rootFragment)
         }
+    }
+
+    private fun setStatusBarTransParent() {
+        binding.constraintLoginmainInnerContainer.setStatusBarTransparent(requireActivity())
+    }
+
+    private fun setStatusBarOrigin() {
+        requireActivity().setStatusBarOrigin()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        setStatusBarTransParent()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        setStatusBarOrigin()
     }
 
     override fun onDestroyView() {

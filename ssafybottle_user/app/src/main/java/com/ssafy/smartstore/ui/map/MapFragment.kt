@@ -3,26 +3,21 @@ package com.ssafy.smartstore.ui.map
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.location.Address
 import android.location.Geocoder
-import android.location.LocationManager
 import android.os.Bundle
 import android.os.Looper
 import android.provider.Settings
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -37,7 +32,6 @@ import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.normal.TedPermission
 import com.ssafy.smartstore.R
 import com.ssafy.smartstore.databinding.FragmentMapBinding
-import com.ssafy.smartstore.ui.dlg.StoreInfoDialog
 import com.ssafy.smartstore.utils.*
 import java.io.IOException
 import java.util.*
@@ -116,13 +110,20 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
         val latLng = LatLng(DEFAULT_LATITUDE, DEFAULT_LONGITUDE)
 
         storeMarker?.remove()
-        storeMarker = drawMarker(LatLng(DEFAULT_LATITUDE, DEFAULT_LONGITUDE) , "싸피벅스", "010-1234-5678")
+        storeMarker =
+            drawMarker(LatLng(DEFAULT_LATITUDE, DEFAULT_LONGITUDE), "싸피벅스", "010-1234-5678")
         moveCamera(latLng)
     }
 
 
     private fun setMyLocation() {
-        if(checkPermissions(listOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION))) {
+        if (checkPermissions(
+                listOf(
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                )
+            )
+        ) {
             startLocationUpdates()
         } else {
             // 퍼미션 없으면 권한 요청
@@ -208,7 +209,13 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
         if (!checkLocationServicesStatus()) {
             showDialogForLocationServiceSetting()
         } else {
-            if (checkPermissions(listOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION))) {
+            if (checkPermissions(
+                    listOf(
+                        Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.ACCESS_COARSE_LOCATION
+                    )
+                )
+            ) {
                 mFusedLocationClient.requestLocationUpdates(
                     locationRequest,
                     locationCallback,

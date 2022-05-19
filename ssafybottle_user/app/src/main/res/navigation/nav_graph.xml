@@ -3,29 +3,36 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/loginMainFragment">
 
     <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.ssafy.smartstore.ui.login.LoginFragment"
-        android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
+        android:id="@+id/loginMainFragment"
+        android:name="com.ssafy.smartstore.ui.login.LoginMainFragment"
+        android:label="fragment_login_main"
+        tools:layout="@layout/fragment_login_main">
         <action
-            android:id="@+id/action_loginFragment_to_joinFragment"
+            android:id="@+id/action_loginMainFragment_to_joinFragment"
             app:destination="@id/joinFragment"
             app:enterAnim="@anim/from_right"
             app:exitAnim="@anim/to_left"
             app:popEnterAnim="@anim/form_left"
             app:popExitAnim="@anim/to_right" />
         <action
-            android:id="@+id/action_loginFragment_to_rootFragment"
-            app:popUpTo="@id/loginFragment"
-            app:popUpToInclusive="true"
+            android:id="@+id/action_loginMainFragment_to_rootFragment"
             app:destination="@id/rootFragment"
             app:enterAnim="@animator/nav_default_enter_anim"
             app:exitAnim="@animator/nav_default_exit_anim"
             app:popEnterAnim="@animator/nav_default_pop_enter_anim"
-            app:popExitAnim="@animator/nav_default_pop_exit_anim" />
+            app:popExitAnim="@animator/nav_default_pop_exit_anim"
+            app:popUpTo="@id/loginMainFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_loginMainFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/form_left"
+            app:popExitAnim="@anim/to_right" />
     </fragment>
     <fragment
         android:id="@+id/joinFragment"
@@ -36,14 +43,14 @@
         android:id="@+id/rootFragment"
         android:name="com.ssafy.smartstore.ui.root.RootFragment"
         android:label="fragment_root"
-        tools:layout="@layout/fragment_root" >
+        tools:layout="@layout/fragment_root">
         <action
             android:id="@+id/action_rootFragment_to_shoppingListFragment"
             app:destination="@id/shoppingListFragment"
             app:enterAnim="@anim/from_up"
-            app:popExitAnim="@anim/to_up"
             app:exitAnim="@anim/to_down"
-            app:popEnterAnim="@anim/from_down" />
+            app:popEnterAnim="@anim/from_down"
+            app:popExitAnim="@anim/to_up" />
         <action
             android:id="@+id/action_rootFragment_to_orderDetailFragment"
             app:destination="@id/orderDetailFragment"
@@ -59,14 +66,14 @@
             app:popEnterAnim="@animator/nav_default_pop_enter_anim"
             app:popExitAnim="@animator/nav_default_pop_exit_anim" />
         <action
-            android:id="@+id/action_rootFragment_to_loginFragment"
-            app:popUpTo="@id/rootFragment"
-            app:popUpToInclusive="true"
-            app:destination="@id/loginFragment"
+            android:id="@+id/action_rootFragment_to_loginMainFragment"
+            app:destination="@id/loginMainFragment"
             app:enterAnim="@animator/nav_default_enter_anim"
             app:exitAnim="@animator/nav_default_exit_anim"
             app:popEnterAnim="@animator/nav_default_pop_enter_anim"
-            app:popExitAnim="@animator/nav_default_pop_exit_anim" />
+            app:popExitAnim="@animator/nav_default_pop_exit_anim"
+            app:popUpTo="@id/rootFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_rootFragment_to_mapFragment"
             app:destination="@id/mapFragment"
@@ -86,12 +93,12 @@
         android:id="@+id/shoppingListFragment"
         android:name="com.ssafy.smartstore.ui.order.ShoppingListFragment"
         android:label="ShoppingListFragment"
-        tools:layout="@layout/fragment_shopping_list"/>
+        tools:layout="@layout/fragment_shopping_list" />
     <fragment
         android:id="@+id/orderDetailFragment"
         android:name="com.ssafy.smartstore.ui.order.OrderDetailFragment"
         android:label="OrderDetailFragment"
-        tools:layout="@layout/fragment_order_detail"/>
+        tools:layout="@layout/fragment_order_detail" />
     <fragment
         android:id="@+id/orderFragment"
         android:name="com.ssafy.smartstore.ui.order.OrderFragment"
@@ -109,7 +116,7 @@
         android:id="@+id/mapFragment"
         android:name="com.ssafy.smartstore.ui.map.MapFragment"
         android:label="fragment_map"
-        tools:layout="@layout/fragment_map" >
+        tools:layout="@layout/fragment_map">
         <action
             android:id="@+id/action_mapFragment_to_storeFragment"
             app:destination="@id/storeFragment"
@@ -133,4 +140,19 @@
         android:name="com.ssafy.smartstore.ui.order.ReviewFragment"
         android:label="fragment_review"
         tools:layout="@layout/fragment_review" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.ssafy.smartstore.ui.login.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_rootFragment"
+            app:destination="@id/rootFragment"
+            app:enterAnim="@animator/nav_default_enter_anim"
+            app:exitAnim="@animator/nav_default_exit_anim"
+            app:popEnterAnim="@animator/nav_default_pop_enter_anim"
+            app:popExitAnim="@animator/nav_default_pop_exit_anim"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

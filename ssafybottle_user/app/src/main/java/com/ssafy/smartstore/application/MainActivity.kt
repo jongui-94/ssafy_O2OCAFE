@@ -6,18 +6,14 @@ import android.content.IntentFilter
 import android.nfc.NdefMessage
 import android.nfc.NdefRecord
 import android.nfc.NfcAdapter
-import android.nfc.Tag
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.os.bundleOf
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
 import com.ssafy.smartstore.R
 import com.ssafy.smartstore.application.SmartStoreApplication.Companion.tableName
 import com.ssafy.smartstore.databinding.ActivityMainBinding
-import com.ssafy.smartstore.ui.login.LoginFragment
+import com.ssafy.smartstore.ui.login.LoginMainFragment
 import com.ssafy.smartstore.ui.root.RootFragment
 
 class MainActivity : AppCompatActivity() {
@@ -118,7 +114,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         val curFragment = supportFragmentManager.findFragmentById(R.id.nav_host)!!.childFragmentManager.fragments[0]
-        if(curFragment is RootFragment || curFragment is LoginFragment) {
+        if(curFragment is RootFragment || curFragment is LoginMainFragment) {
             val currentTime = System.currentTimeMillis()
             val elapsedTime = currentTime - backPressedTime
             backPressedTime = currentTime
