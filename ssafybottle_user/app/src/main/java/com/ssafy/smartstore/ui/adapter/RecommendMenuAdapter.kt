@@ -5,17 +5,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ssafy.smartstore.data.dto.product.ProductDto
-import com.ssafy.smartstore.data.entitiy.Product
-import com.ssafy.smartstore.databinding.ItemMenuBinding
+import com.ssafy.smartstore.databinding.ItemRecommendMenuBinding
 
-class MenuDetailAdapter : RecyclerView.Adapter<MenuDetailAdapter.MenuDetailViewHolder>() {
+class RecommendMenuAdapter : RecyclerView.Adapter<RecommendMenuAdapter.RecommendMenuViewHolder>() {
 
     var products: List<ProductDto> = emptyList()
     lateinit var onItemClickListener : (View, Int) -> Unit
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MenuDetailViewHolder {
-        return MenuDetailViewHolder(
-            ItemMenuBinding.inflate(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecommendMenuViewHolder {
+        return RecommendMenuViewHolder(
+            ItemRecommendMenuBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -25,13 +24,13 @@ class MenuDetailAdapter : RecyclerView.Adapter<MenuDetailAdapter.MenuDetailViewH
         }
     }
 
-    override fun onBindViewHolder(holder: MenuDetailViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecommendMenuViewHolder, position: Int) {
         holder.bind(products[position])
     }
 
     override fun getItemCount() = products.size
 
-    class MenuDetailViewHolder(private val binding: ItemMenuBinding) :
+    class RecommendMenuViewHolder(private val binding: ItemRecommendMenuBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(product: ProductDto) {

@@ -9,6 +9,8 @@ import com.ssafy.smartstore.application.SmartStoreApplication
 import com.ssafy.smartstore.base.BaseViewModel
 import com.ssafy.smartstore.data.dto.order.OrderByOrderIdDto
 import com.ssafy.smartstore.data.dto.order.OrderByUserDto
+import com.ssafy.smartstore.data.dto.product.ProductDto
+import com.ssafy.smartstore.data.dto.user.UserInfoResponseDto
 import com.ssafy.smartstore.data.entitiy.*
 import com.ssafy.smartstore.data.repository.Repository
 import kotlinx.coroutines.launch
@@ -19,23 +21,56 @@ class HomeViewModel : BaseViewModel() {
     private val _recentOrders = MutableLiveData<List<OrderByUserDto>>()
     val recentOrders: LiveData<List<OrderByUserDto>> get() = _recentOrders
 
+    private val _user = MutableLiveData<UserInfoResponseDto>()
+    val user: LiveData<UserInfoResponseDto> get() = _user
+
+    private val _products = MutableLiveData<List<ProductDto>>()
+    val products: LiveData<List<ProductDto>> get() = _products
+
     val isSuccess = MutableLiveData<Boolean>()
 
     fun getRecentOrders(userId: String) {
         viewModelScope.launch(exceptionHandler) {
             repository.getOrderByUser(userId).let {
-                if(it.isSuccessful) {
+                if (it.isSuccessful) {
                     _recentOrders.postValue(it.body())
                 }
             }
         }
     }
-    fun insertRecentOrder(orderId : Int, userId: String) {
+
+    fun getProducts() {
+        viewModelScope.launch(exceptionHandler) {
+            repository.getProducts().let {
+                if (it.isSuccessful) {
+                    _products.postValue(it.body())
+                } else {
+                    isSuccess.postValue(false)
+                }
+            }
+        }
+    }
+
+    fun getUser(id: String) {
+        viewModelScope.launch(exceptionHandler) {
+            repository.getUserInfo(id).let { response ->
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        _user.postValue(it)
+                        return@launch
+                    }
+                    isSuccess.postValue(false)
+                }
+            }
+        }
+    }
+
+    fun insertRecentOrder(orderId: Int, userId: String) {
         viewModelScope.launch(exceptionHandler) {
             var orderList = emptyList<OrderByOrderIdDto>()
             launch(exceptionHandler) {
                 repository.getOrderByOrderId(orderId).let {
-                    if(it.isSuccessful) {
+                    if (it.isSuccessful) {
                         orderList = it.body()!!
                     } else {
                         isSuccess.postValue(false)
@@ -43,7 +78,7 @@ class HomeViewModel : BaseViewModel() {
                 }
             }.join()
 
-            if(orderList.isEmpty()) {
+            if (orderList.isEmpty()) {
                 isSuccess.postValue(false)
                 return@launch
             }
@@ -57,7 +92,7 @@ class HomeViewModel : BaseViewModel() {
                 }
             }.join()
 
-            if(result < 1) {
+            if (result < 1) {
                 isSuccess.postValue(false)
                 return@launch
             }
@@ -69,7 +104,7 @@ class HomeViewModel : BaseViewModel() {
                 }
             }.join()
 
-            val orderDetails : List<OrderDetail> = orderList.map {
+            val orderDetails: List<OrderDetail> = orderList.map {
                 OrderDetail(
                     orderId = SmartStoreApplication.orderId,
                     productId = it.p_id,
@@ -83,7 +118,7 @@ class HomeViewModel : BaseViewModel() {
                     res += t
                 }
             }
-            if(res > 0) {
+            if (res > 0) {
                 isSuccess.postValue(true)
             } else {
                 isSuccess.postValue(false)

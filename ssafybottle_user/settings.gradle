@@ -13,5 +13,5 @@ dependencyResolutionManagement {
         jcenter() // Warning: this repository is going to shut down soon
     }
 }
-rootProject.name = "SmartStore"
+rootProject.name = "ssafybottle_user"
 include ':app'

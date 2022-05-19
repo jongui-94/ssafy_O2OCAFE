@@ -8,6 +8,8 @@
         <variable
             name="recentOrder"
             type="com.ssafy.smartstore.data.dto.order.OrderByUserDto" />
+
+        <import type="com.ssafy.smartstore.utils.StringUtilKt" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -40,38 +42,42 @@
 
         <TextView
             android:id="@+id/text_item_recentorder_name"
-            style="@style/BodyItem"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text='@{recentOrder.name}'
-            android:textColor="@color/dark_gray"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/card_item_recentorder_img"
-            tools:text="아메리카노" />
-
-        <TextView
-            android:id="@+id/text_item_recentorder_price"
             style="@style/BodyItemBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text='@{String.valueOf(recentOrder.price) + "원"}'
-            app:layout_constraintEnd_toEndOf="parent"
+            android:text='@{recentOrder.name}'
+            app:layout_constraintEnd_toStartOf="@id/text_item_recentorder_quantity"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/card_item_recentorder_img"
-            tools:text="12,500원" />
+            tools:text="아메리카노" />
 
         <TextView
             android:id="@+id/text_item_recentorder_quantity"
             style="@style/BodyItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
+            android:layout_marginStart="4dp"
             android:text='@{"포함 " + String.valueOf(recentOrder.quantity) + "잔"}'
+            app:layout_constraintBottom_toBottomOf="@id/text_item_recentorder_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/text_item_recentorder_name"
+            app:layout_constraintTop_toTopOf="@id/text_item_recentorder_name"
+            tools:text="포함 2잔" />
+
+        <TextView
+            android:id="@+id/text_item_recentorder_price"
+            style="@style/BodyItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text='@{StringUtilKt.toMoney(recentOrder.price) + "원"}'
             android:textColor="@color/dark_gray"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_item_recentorder_name"
-            tools:text="포함 2잔" />
+            tools:text="12,500원" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

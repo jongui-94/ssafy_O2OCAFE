@@ -7,37 +7,6 @@
     android:background="@color/background"
     tools:context=".ui.root.RootFragment">
 
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbar_root"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        app:contentInsetStart="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            style="@style/HeadBoldPrimary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center|center_vertical"
-            android:text="SSAFY COFFEE"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:id="@+id/img_root_notification"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_gravity="end"
-            android:layout_marginEnd="14dp"
-            android:background="@drawable/ripple_effect"
-            android:clickable="true"
-            android:focusable="true"
-            android:padding="2dp"
-            android:src="@drawable/ic_notification" />
-
-    </com.google.android.material.appbar.MaterialToolbar>
-
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentcontainer_root"
         android:layout_width="0dp"
@@ -45,7 +14,7 @@
         app:layout_constraintBottom_toTopOf="@id/bottomnavigation_root"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_root" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomnavigation_root"

@@ -8,18 +8,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ssafy.smartstore.R
-import com.ssafy.smartstore.application.SmartStoreApplication.Companion.isOrder
 import com.ssafy.smartstore.databinding.FragmentHomeBinding
 import com.ssafy.smartstore.ui.adapter.OnItemClickListener
 import com.ssafy.smartstore.ui.adapter.PromotionAdapter
 import com.ssafy.smartstore.ui.adapter.RecentOrderAdapter
-import com.ssafy.smartstore.utils.ORDER_ID
+import com.ssafy.smartstore.ui.adapter.RecommendMenuAdapter
+import com.ssafy.smartstore.utils.PRODUCT_ID
 import com.ssafy.smartstore.utils.getUserId
 
 class HomeFragment : Fragment() {
@@ -30,6 +31,7 @@ class HomeFragment : Fragment() {
     private val viewModel: HomeViewModel by viewModels()
     private lateinit var recentOrderAdapter: RecentOrderAdapter
     private lateinit var promotionAdapter: PromotionAdapter
+    private lateinit var recommendMenuAdapter: RecommendMenuAdapter
 
     private lateinit var userId: String
 
@@ -47,16 +49,21 @@ class HomeFragment : Fragment() {
         initData()
         initAdapter()
         registerObserver()
+        setOnClickListener()
+        otherListener()
     }
 
     private fun initData() {
+        binding.progressbarHomeLoading.isVisible = true
         userId = getUserId()
         viewModel.getRecentOrders(userId)
+        viewModel.getUser(userId)
+        viewModel.getProducts()
     }
 
     private fun initAdapter() {
         recentOrderAdapter = RecentOrderAdapter().apply {
-            this.onItemClickListener = this@HomeFragment.itemClickListener
+            onItemClickListener = itemRecentOrderClickListener
         }
         binding.recyclerHomeRecentorder.apply {
             adapter = recentOrderAdapter
@@ -68,9 +75,17 @@ class HomeFragment : Fragment() {
             adapter = promotionAdapter
             layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
         }
+
+        recommendMenuAdapter = RecommendMenuAdapter().apply {
+            onItemClickListener = itemRecommendMenuClickListener
+        }
+        binding.recyclerHomeRecommend.apply {
+            adapter = recommendMenuAdapter
+            layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
+        }
     }
 
-    private val itemClickListener = object : OnItemClickListener {
+    private val itemRecentOrderClickListener = object : OnItemClickListener {
         override fun onItemClick(view: View, position: Int) {
             showShippingListDialog { dialog, _ ->
                 viewModel.recentOrders.value!![position].let {
@@ -82,6 +97,13 @@ class HomeFragment : Fragment() {
                 dialog.dismiss()
             }
         }
+    }
+
+    private val itemRecommendMenuClickListener: (View, Int) -> Unit = { _, id ->
+        requireParentFragment().findNavController().navigate(
+            R.id.action_rootFragment_to_orderFragment,
+            bundleOf(PRODUCT_ID to id)
+        )
     }
 
     private fun showShippingListDialog(listener: DialogInterface.OnClickListener) {
@@ -99,6 +121,10 @@ class HomeFragment : Fragment() {
 
     private fun registerObserver() {
         viewModel.recentOrders.observe(viewLifecycleOwner) {
+            binding.progressbarHomeLoading.isVisible = false
+
+            binding.nocontentHomeRecentorder.isVisible = it.isEmpty()
+
             recentOrderAdapter.apply {
                 recentOrders = it
                 notifyDataSetChanged()
@@ -111,6 +137,30 @@ class HomeFragment : Fragment() {
                     .navigate(R.id.action_rootFragment_to_shoppingListFragment)
                 viewModel.isSuccess.value = false
             }
+        }
+        viewModel.user.observe(viewLifecycleOwner) {
+            binding.textHomeTitle.text = "${it.user.name}님"
+            binding.textHomeRecommendName.text = it.user.name
+        }
+        viewModel.products.observe(viewLifecycleOwner) {
+            recommendMenuAdapter.apply {
+                products = it
+                notifyDataSetChanged()
+            }
+        }
+    }
+
+    private fun setOnClickListener() {
+        binding.imgHomeNotification.setOnClickListener {
+            requireParentFragment().findNavController()
+                .navigate(R.id.action_rootFragment_to_notificationFragment)
+        }
+    }
+
+    private fun otherListener() {
+        binding.refreshHome.setOnRefreshListener {
+            initData()
+            binding.refreshHome.isRefreshing = false
         }
     }
 
