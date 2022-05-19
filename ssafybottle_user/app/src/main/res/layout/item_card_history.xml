@@ -9,6 +9,8 @@
         <variable
             name="cardHistory"
             type="com.ssafy.smartstore.data.dto.card.CardHistory" />
+
+        <import type="com.ssafy.smartstore.utils.StringUtilKt" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -43,13 +45,13 @@
             style="@style/Body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text='@{cardHistory.isCharge? String.format("+%d원", cardHistory.price) : String.format("-%d원", cardHistory.price)}'
+            android:text='@{cardHistory.isCharge? StringUtilKt.toMoney(cardHistory.price) + "원" : "-" + StringUtilKt.toMoney(cardHistory.price) + "원"}'
             android:textColor="@{cardHistory.isCharge? @color/primaryColor: @color/black }"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="-20000원" />
+            tools:text="-20,000원" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

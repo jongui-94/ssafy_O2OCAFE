@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.ssafy.smartstore.R
 import com.ssafy.smartstore.databinding.FragmentCardBinding
 import com.ssafy.smartstore.ui.adapter.CardHistoryAdapter
 import com.ssafy.smartstore.utils.createBarcode
@@ -40,7 +42,9 @@ class CardFragment : Fragment() {
     }
 
     private fun setOnClickListeners() {
-
+        binding.textCardHistory.setOnClickListener {
+            requireParentFragment().findNavController().navigate(R.id.action_rootFragment_to_cardHistoryFragment)
+        }
     }
 
     override fun onDestroyView() {
