@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:colorBackground">@color/white</item>
+
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryVariant">@color/primaryLightColor</item>
+        <item name="colorOnPrimary">@color/primaryTextColor</item>
+
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/secondaryColor</item>
+        <item name="colorSecondaryVariant">@color/secondaryLightColor</item>
+        <item name="colorOnSecondary">@color/secondaryTextColor</item>
+
+        <!-- Status bar color. -->
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="android:statusBarColor">@color/transparent</item>
+        <item name="android:enforceNavigationBarContrast" tools:targetApi="q">false</item>
+        <item name="android:enforceStatusBarContrast" tools:targetApi="q">false</item>
+
+    </style>
+
+    <!-- Text Style. -->
+    <style name="Head" parent="android:TextAppearance">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:fontFamily">@font/notosanskr_regular</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="HeadBold" parent="android:TextAppearance">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:fontFamily">@font/notosanskr_medium</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="HeadTitleBold" parent="android:TextAppearance">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/notosanskr_medium</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="SubHead" parent="android:TextAppearance">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:fontFamily">@font/notosanskr_regular</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="SubHeadBold" parent="android:TextAppearance">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:fontFamily">@font/notosanskr_medium</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="Body" parent="android:TextAppearance">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:fontFamily">@font/notosanskr_regular</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="BodyItem" parent="android:TextAppearance">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:fontFamily">@font/notosanskr_regular</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="BodyItemBold" parent="android:TextAppearance">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:fontFamily">@font/notosanskr_regular</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="HeadWhite" parent="android:TextAppearance">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/notosanskr_regular</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="HeadBoldWhite" parent="android:TextAppearance">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/notosanskr_medium</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="SubHeadBoldWhite" parent="android:TextAppearance">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/notosanskr_medium</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="SubHeadWhite" parent="android:TextAppearance">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/notosanskr_regular</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="BodyWhite" parent="android:TextAppearance">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:fontFamily">@font/notosanskr_regular</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="HeadPrimary" parent="android:TextAppearance">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/primaryColor</item>
+        <item name="android:fontFamily">@font/notosanskr_regular</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="HeadBoldPrimary" parent="android:TextAppearance">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/primaryColor</item>
+        <item name="android:fontFamily">@font/notosanskr_medium</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="SubHeadPrimary" parent="android:TextAppearance">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/primaryColor</item>
+        <item name="android:fontFamily">@font/notosanskr_regular</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="SubHeadBoldPrimary" parent="android:TextAppearance">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/primaryColor</item>
+        <item name="android:fontFamily">@font/notosanskr_medium</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="BodyPrimary" parent="android:TextAppearance">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/primaryColor</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:fontFamily">@font/notosanskr_regular</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+</resources>

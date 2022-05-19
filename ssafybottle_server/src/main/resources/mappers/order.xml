@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.cafe.model.dao.OrderDao">
+
+	<insert id="insert" parameterType="Order">
+		<selectKey keyProperty="id" resultType="int" order="AFTER">
+			SELECT MAX(o_id) FROM t_order
+		</selectKey>
+		INSERT INTO t_order (user_id, order_table)
+		VALUES (#{userId}, #{orderTable})
+	</insert>
+
+	<update id="update" parameterType="Order">
+		UPDATE t_order
+		SET completed = #{completed}
+		WHERE o_id = #{id}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		DELETE FROM t_order
+		WHERE o_id = #{id}
+	</delete>
+	
+	<select id="select" parameterType="int" resultMap="OrderBasic">
+		SELECT * FROM t_order
+		WHERE o_id = #{id}
+		ORDER BY o_id DESC
+	</select>
+	
+	<select id="selectAll" resultMap="OrderBasic">
+		SELECT * FROM t_order
+		ORDER BY o_id DESC
+	</select>
+
+	<select id="selectByUser" resultMap="OrderBasic" parameterType="string">
+		SELECT * FROM t_order
+		WHERE user_id = #{userId}
+		ORDER BY o_id DESC
+	</select>
+
+	<select id="selectWithDetail" resultMap="OrderWithDetail">
+		SELECT o.o_id, o.user_id, o.order_table, o.order_time, o.completed, d.d_id, d.order_id, d.product_id, d.quantity
+		FROM t_order o
+		JOIN t_order_detail d ON o.o_id = d.order_id
+		WHERE o.o_id = #{id}
+		ORDER BY d.d_id DESC
+	</select>
+
+	<resultMap type="Order" id="OrderBasic">
+		<id column="o_id" property="id" />
+		<result column="user_id" property="userId" />
+		<result column="order_table" property="orderTable" />
+		<result column="order_time" property="orderTime" />
+		<result column="completed" property="completed" />
+	</resultMap>
+
+	<resultMap type="Order" id="OrderWithDetail" extends="OrderBasic">
+		<association property="stamp" column="order_id" javaType="Stamp" resultMap="com.ssafy.cafe.model.dao.StampDao.StampBasic"/>
+		<collection property="details" column="order_id" javaType="list" ofType="OrderDetail" resultMap="com.ssafy.cafe.model.dao.OrderDetailDao.OrderDetailBasic"/>
+	</resultMap>
+
+	<!-- 관통 6번째에서 추가됨 주문 상세 페이지에 o.completed를 이용해 주문 상태 확인 위한 추가 -->
+	<!-- 메인화면에서 장바구니로 해당 주문내역 더할때 물품 구분 위해 p.id 추가 -->
+	<!-- 상품 type에 따라 개수 표기 변동 (개, 잔) -->
+	<select id="selectOrderTotalInfo" resultType="map" parameterType="int">
+		SELECT o.o_id, o.order_table, o.order_time, o.completed, d.quantity, 
+			p.id as p_id, p.name, p.price as unitprice, p.img,
+			s.quantity as stamp, d.quantity * p.price as totalprice, p.type
+		FROM t_order o
+		JOIN t_order_detail d ON o.o_id = d.order_id
+		JOIN t_product p ON d.product_id =p.id
+		JOIN t_stamp s ON o.o_id = s.order_id
+		WHERE o_id = #{id};
+	</select>
+
+	<!-- 관통 프로젝트 6단계에서 추가됨 -->
+	<!-- 메인화면에서 장바구니로 해당 주문내역 더하기 위해 p.id추가 -->
+	<!-- 상품 type에 따라 개수 표기 변동 (개, 잔) -->
+	<select id="getLastMonthOrder" parameterType="string" resultType="map">
+		SELECT o.o_id, o.user_id, o.order_time, o.completed, d.quantity, 
+			p.id as p_id, p.name, p.img, p.price, p.type
+		FROM t_order o 
+		JOIN t_order_detail d ON d.order_id = o.o_id
+		JOIN t_product p ON d.product_id = p.id
+		WHERE user_id = #{id} AND order_time > DATE_ADD(NOW(), INTERVAL -1 MONTH)
+		ORDER BY o.o_id DESC, d.d_id DESC
+	</select>
+	
+</mapper>

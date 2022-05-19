@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.ssafy.smartstore.data.entitiy.ShoppingItem" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_item_shoppinglist_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/img_item_shoppinglist_coffee"
+                android:layout_width="128dp"
+                android:layout_height="128dp"
+                app:imageUrl="@{item.img}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/coffee1" />
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/text_item_shoppinglist_name"
+            style="@style/BodyItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@{item.name}"
+            android:textColor="@color/dark_gray"
+            app:layout_constraintStart_toEndOf="@id/card_item_shoppinglist_img"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="아메리카노" />
+
+
+        <TextView
+            android:id="@+id/text_item_shoppinglist_price"
+            style="@style/BodyItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text='@{String.valueOf(item.price) + "원"}'
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/card_item_shoppinglist_img"
+            tools:text="4000원" />
+
+        <TextView
+            android:id="@+id/text_item_shoppinglist_quantity"
+            style="@style/BodyItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text='@{String.valueOf(item.quantity) + "잔"}'
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="2잔" />
+
+        <TextView
+            android:id="@+id/text_item_shoppinglist_totalprice"
+            style="@style/BodyItemBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text='@{String.valueOf(item.totalPrice) + "원"}'
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="8000원" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

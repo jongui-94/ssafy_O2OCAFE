@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.cafe.model.dao.ProductDao">
+	<insert id="insert" parameterType="Product">
+		INSERT INTO t_product (name, type, price, img)
+		VALUES (#{name}, #{type}, #{price}, #{img})
+	</insert>
+
+	<update id="update" parameterType="Product">
+		UPDATE t_product
+		SET
+			name = #{name},
+			type = #{type},
+			price = #{price},
+			img = #{img}
+		WHERE id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		DELETE FROM t_product
+		WHERE id = #{id}
+	</delete>
+	
+	<select id="select" parameterType="int" resultType="Product">
+		SELECT * FROM t_product
+		WHERE id = #{id}
+	</select>
+	
+	<select id="selectAll" resultType="Product">
+		SELECT * FROM t_product
+		ORDER BY id ASC
+	</select>
+	
+	<select id="selectBeverage" resultType="Product">
+		SELECT * FROM t_product WHERE type = "coffee"
+		ORDER BY id DESC
+	</select>
+	
+	<select id="selectDessert" resultType="Product">
+		SELECT * FROM t_product WHERE type = "dessert"
+		ORDER BY id DESC
+	</select>
+
+
+	<!-- backend 관통 과정에서 추가됨 -->
+	<!-- "개, 잔" 표기 위하여 type을 받아서 추가 -->
+	<select id="selectWithComment" resultType="map" parameterType="int">
+		SELECT p.name, p.price, p.img, p.type, 
+			c.id as commentId, c.user_id, c.rating, c.comment,
+			(SELECT name FROM t_user WHERE id = c.user_Id) userName,
+			(SELECT COUNT(rating) FROM t_comment WHERE product_id = p.id) as commentCnt,
+			(SELECT AVG(rating) FROM t_comment WHERE product_id = p.id) as avg,
+			(SELECT SUM(quantity) FROM t_order_detail WHERE product_id = p.id) as sells
+		FROM t_product p
+		LEFT JOIN t_comment c ON p.id = c.product_id
+		WHERE p.id = #{productId}
+		ORDER BY c.id DESC
+	</select>
+
+</mapper>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/text_dlg_storeinfo_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="싸피벅스"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/img_dlg_storeinfo_logo"
+        android:layout_marginHorizontal="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_dlg_storeinfo_name" />
+
+    <TextView
+        android:id="@+id/text_dlg_storeinfo_possibleordertime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="주문가능시간"
+        android:textColor="@color/coffee_dark_brown"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/img_dlg_storeinfo_logo" />
+
+    <TextView
+        android:id="@+id/text_dlg_storeinfo_weekday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="8dp"
+        android:text="주중   07:00~20:30"
+        android:textColor="@color/coffee_brown"
+        android:textSize="22sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_dlg_storeinfo_possibleordertime" />
+
+    <TextView
+        android:id="@+id/text_dlg_storeinfo_weekend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="8dp"
+        android:text="주말   09:00~22:00"
+        android:textColor="@color/coffee_brown"
+        android:textSize="22sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_dlg_storeinfo_weekday" />
+
+    <TextView
+        android:id="@+id/text_dlg_storeinfo_call"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="전화걸기"
+        android:textColor="@color/coffee_brown"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_dlg_storeinfo_weekend" />
+
+    <TextView
+        android:id="@+id/text_dlg_storeinfo_road"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="길찾기"
+        android:textColor="@color/coffee_brown"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@id/text_dlg_storeinfo_call"
+        app:layout_constraintEnd_toStartOf="@id/text_dlg_storeinfo_call"
+        app:layout_constraintTop_toTopOf="@id/text_dlg_storeinfo_call" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

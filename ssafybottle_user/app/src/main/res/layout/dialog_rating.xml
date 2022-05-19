@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/text_dlg_rating_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="별점선택"
+        android:textColor="@color/coffee_dark_brown"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RatingBar
+        android:id="@+id/ratingbar_dlg_rating_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:numStars="5"
+        android:progressBackgroundTint="@color/coffee_light_gray"
+        android:progressTint="@color/coffee_point_red"
+        android:rating="5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_dlg_rating_title"
+        app:tint="@color/coffee_point_red" />
+
+    <TextView
+        android:id="@+id/text_dlg_rating_confirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="16dp"
+        android:text="확인"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/coffee_brown"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ratingbar_dlg_rating_rating" />
+
+    <TextView
+        android:id="@+id/text_dlg_rating_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:text="취소"
+        android:textColor="@color/coffee_brown"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@id/text_dlg_rating_confirm"
+        app:layout_constraintEnd_toStartOf="@id/text_dlg_rating_confirm"
+        app:layout_constraintTop_toTopOf="@id/text_dlg_rating_confirm"
+
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

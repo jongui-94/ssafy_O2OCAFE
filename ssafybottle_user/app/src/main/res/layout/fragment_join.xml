@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraint_join_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_join"
+    tools:context=".ui.login.JoinFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_join_inner_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar_root"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            app:contentInsetStart="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/img_join_back"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="start"
+                android:layout_marginStart="16dp"
+                android:background="@drawable/ripple_effect"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="3dp"
+                android:src="@drawable/ic_back"
+                app:tint="@color/white" />
+
+        </com.google.android.material.appbar.MaterialToolbar>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/overlay_gradient_join"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/img_join_logo"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <ImageView
+            android:id="@+id/img_join_logo"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="12dp"
+            android:src="@drawable/ic_logo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.208"
+            app:tint="@color/primaryColor" />
+
+        <EditText
+            android:id="@+id/edt_join_id"
+            style="@style/BodyWhite"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_marginHorizontal="48dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/overlay_gradient_edt"
+            android:hint="아이디를 입력하세요."
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="8dp"
+            android:textColorHint="@color/white"
+            app:layout_constraintBottom_toTopOf="@id/edt_join_pw"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+
+            app:layout_constraintVertical_bias="0.552" />
+
+        <EditText
+            android:id="@+id/edt_join_pw"
+            style="@style/BodyWhite"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_marginHorizontal="48dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/overlay_gradient_edt"
+            android:hint="비밀번호를 입력하세요."
+            android:inputType="textPassword"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="8dp"
+            android:textColorHint="@color/white"
+            app:layout_constraintBottom_toTopOf="@id/edt_join_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/edt_join_name"
+            style="@style/BodyWhite"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_marginHorizontal="48dp"
+            android:background="@drawable/overlay_gradient_edt"
+            android:hint="별명을 입력하세요."
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="8dp"
+            android:textColorHint="@color/white"
+            app:layout_constraintBottom_toTopOf="@id/checkbox_join_termsofservice"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <CheckBox
+            android:id="@+id/checkbox_join_termsofservice"
+            style="@style/BodyItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="48dp"
+            android:buttonTint="@color/white"
+            android:text="이용약관에 동의합니다."
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toTopOf="@id/btn_join_join"
+            app:layout_constraintEnd_toEndOf="@id/edt_join_name"
+            app:layout_constraintStart_toStartOf="@id/edt_join_name" />
+
+        <Button
+            android:id="@+id/btn_join_join"
+            style="@style/BodyWhite"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_marginHorizontal="48dp"
+            android:layout_marginBottom="48dp"
+            android:background="@drawable/button_regular"
+            android:text="회원가입"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
