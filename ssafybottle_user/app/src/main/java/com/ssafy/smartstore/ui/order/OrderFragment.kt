@@ -101,7 +101,7 @@ class OrderFragment : Fragment() {
             textOrderCoffeename.text = product.name
             textOrderPrice.text = "${product.price}원"
             textOrderRating.text = "(${product.commentCnt})"
-            ratingbarOrderRating.rating = product.avg
+            ratingbarOrderRating.rating = product.avg/2
             imgOrderCoffee.setImageResource(requireView().getResourceId(product.img))
         }
     }

@@ -43,7 +43,7 @@ class CommentAdapter(
         }
 
         fun bindClickListeners(onItemClickListener: OnItemClickListener) {
-            binding.imgIcommentEdit.setOnClickListener {
+            binding.imgItemCommentEdit.setOnClickListener {
                 onItemClickListener.onItemClick(it, adapterPosition)
             }
         }
