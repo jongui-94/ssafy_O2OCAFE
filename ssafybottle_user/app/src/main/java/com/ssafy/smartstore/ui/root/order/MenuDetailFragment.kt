@@ -124,10 +124,6 @@ class MenuDetailFragment : Fragment() {
             requireParentFragment().findNavController()
                 .navigate(R.id.action_rootFragment_to_mapFragment)
         }
-        binding.imgMenudetailNotification.setOnClickListener {
-            requireParentFragment().findNavController()
-                .navigate(R.id.action_rootFragment_to_notificationFragment)
-        }
     }
 
     private fun otherListener() {

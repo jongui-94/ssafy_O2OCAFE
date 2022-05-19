@@ -49,7 +49,6 @@ class HomeFragment : Fragment() {
         initData()
         initAdapter()
         registerObserver()
-        setOnClickListener()
         otherListener()
     }
 
@@ -139,7 +138,7 @@ class HomeFragment : Fragment() {
             }
         }
         viewModel.user.observe(viewLifecycleOwner) {
-            binding.textHomeTitle.text = "${it.user.name}님"
+            binding.textHomeUsername.text = "${it.user.name}님"
             binding.textHomeRecommendName.text = it.user.name
         }
         viewModel.products.observe(viewLifecycleOwner) {
@@ -147,13 +146,6 @@ class HomeFragment : Fragment() {
                 products = it
                 notifyDataSetChanged()
             }
-        }
-    }
-
-    private fun setOnClickListener() {
-        binding.imgHomeNotification.setOnClickListener {
-            requireParentFragment().findNavController()
-                .navigate(R.id.action_rootFragment_to_notificationFragment)
         }
     }
 

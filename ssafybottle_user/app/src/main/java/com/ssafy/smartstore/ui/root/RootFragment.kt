@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ssafy.smartstore.R
 import com.ssafy.smartstore.databinding.FragmentRootBinding
@@ -77,6 +78,10 @@ class RootFragment : Fragment() {
 
     private fun setOnClickListeners() {
         binding.bottomnavigationRoot.setOnNavigationItemSelectedListener(itemSelectedListener)
+        binding.imgRootNotification.setOnClickListener {
+            findNavController()
+                .navigate(R.id.action_rootFragment_to_notificationFragment)
+        }
     }
 
     private val itemSelectedListener =

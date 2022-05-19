@@ -24,45 +24,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <com.google.android.material.appbar.MaterialToolbar
-                    android:id="@+id/toolbar_menudetail"
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    app:contentInsetStart="0dp"
-                    app:layout_constraintEnd_toEndOf="parent"
+                <TextView
+                    android:id="@+id/text_menudetail_title"
+                    style="@style/HeadTitleBold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:textSize="24sp"
+                    android:text="Order"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <TextView
-                        style="@style/HeadBoldPrimary"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:text="SSAFYBOTTLE"
-                        android:textStyle="bold" />
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_marginStart="8dp"
-                        android:src="@drawable/ic_logo"
-                        app:layout_constraintBottom_toBottomOf="@id/text_home_user_hello"
-                        app:layout_constraintStart_toEndOf="@id/text_home_user_hello"
-                        app:tint="@color/primaryColor" />
-
-                    <ImageView
-                        android:id="@+id/img_menudetail_notification"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:layout_gravity="end"
-                        android:layout_marginEnd="16dp"
-                        android:background="@drawable/ripple_effect"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:padding="2dp"
-                        android:src="@drawable/ic_notification" />
-
-                </com.google.android.material.appbar.MaterialToolbar>
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/text_menudetail_store"
@@ -70,10 +42,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="24dp"
                     android:text="주변 매장 찾기"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/toolbar_menudetail" />
+                    app:layout_constraintTop_toBottomOf="@id/text_menudetail_title" />
 
                 <TextView
                     android:id="@+id/text_menudetail_store_description"

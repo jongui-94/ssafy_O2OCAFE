@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -44,6 +45,7 @@ class MyPageFragment : Fragment() {
         initAdapter()
         registerObserver()
         setOnClickListeners()
+        otherListener()
     }
 
     override fun onResume() {
@@ -52,6 +54,7 @@ class MyPageFragment : Fragment() {
     }
 
     private fun initData() {
+        binding.progressbarMypageLoading.isVisible = true
         userId = getUserId()
         viewModel.getUser(userId)
         viewModel.getRecentOrders(userId)
@@ -77,6 +80,9 @@ class MyPageFragment : Fragment() {
             setUserInfo(it)
         }
         viewModel.orderByUserId.observe(viewLifecycleOwner) {
+            binding.progressbarMypageLoading.isVisible = false
+            binding.nocontentMypageRecentorder.isVisible = it.isEmpty()
+
             adapter.apply {
                 orderHistories = it
                 notifyDataSetChanged()
@@ -114,6 +120,13 @@ class MyPageFragment : Fragment() {
                 findNavController().navigate(R.id.action_rootFragment_to_loginMainFragment)
                 dialog.dismiss()
             }
+        }
+    }
+
+    private fun otherListener() {
+        binding.refreshMypage.setOnRefreshListener {
+            initData()
+            binding.refreshMypage.isRefreshing = false
         }
     }
 
