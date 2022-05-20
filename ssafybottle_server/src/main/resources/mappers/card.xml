@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.cafe.model.dao.CardDao">
+	<insert id="insertCard" parameterType="Card">
+		INSERT INTO t_card (user_id, order_id, payment, content)
+		VALUES (#{userId}, #{orderId}, #{payment}, #{content})
+	</insert>
+
+	
+	<select id="selectUserCard" parameterType="String" resultType="Card">
+		SELECT * FROM t_card
+		WHERE user_id = #{userId}
+	</select>
+	
+	
+</mapper>

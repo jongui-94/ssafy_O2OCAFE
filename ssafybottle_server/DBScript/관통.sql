@@ -154,7 +154,7 @@ INSERT INTO t_stamp (user_id, order_id, quantity) VALUES ('ssafy10', 10, 20);
 
 commit;
 
-INSERT INTO t_card (user_id, order_id, payment, content) VALUES('user', 1, 12000, "강남점"); 
+INSERT INTO t_card (user_id, order_id, payment, content) VALUES('ssafy01', 1, -12000, "구미 황상동점"); 
 
 SELECT *
 from t_user;

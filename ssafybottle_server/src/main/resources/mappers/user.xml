@@ -12,7 +12,8 @@
 		UPDATE t_user
 		SET
 			name = #{name},
-			pass = #{pass}
+			pass = #{pass},
+			cash = #{cash}
 		WHERE id = #{id}
 	</update>
 
@@ -36,5 +37,5 @@
 	<select id="selectAll" resultType="User">
 		SELECT * FROM t_user
 	</select>
-	
+			
 </mapper>
