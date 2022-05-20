@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/img_dlg_beacon_store"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:src="@drawable/promotion2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_dlg_beacon_title"
+        style="@style/HeadTitleBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:text="이용안내"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/img_dlg_beacon_store" />
+
+    <TextView
+        android:id="@+id/text_dlg_beacon_description"
+        style="@style/Body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="매장 내 이용시 테이블의 NFC를 태그하면\n해당 테이블로 음료를 가져다드립니다."
+        android:textColor="@color/dark_gray"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_dlg_beacon_title" />
+
+    <View
+        android:id="@+id/view_dlg_divider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="24dp"
+        android:background="@color/divider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_dlg_beacon_description" />
+
+    <TextView
+        android:id="@+id/text_dlg_beacon_recommend"
+        style="@style/HeadTitleBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:text="추천음료"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view_dlg_divider" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_dlg_beacon_product"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="24dp"
+        android:layout_marginStart="16dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_dlg_beacon_recommend">
+
+        <ImageView
+            android:id="@+id/img_dlg_beacon_coffee"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:src="@drawable/coffee1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/text_dlg_beacon_name"
+        style="@style/Body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="아메리카노"
+        app:layout_constraintBottom_toTopOf="@id/text_dlg_beacon_price"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/card_dlg_beacon_product"
+        app:layout_constraintTop_toTopOf="@id/card_dlg_beacon_product" />
+
+    <TextView
+        android:id="@+id/text_dlg_beacon_price"
+        style="@style/Body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="4,100원"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/card_dlg_beacon_product"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/card_dlg_beacon_product"
+        app:layout_constraintTop_toBottomOf="@id/text_dlg_beacon_name" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_dlg_beacon_ok"
+        style="@style/BodyWhite"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_marginHorizontal="48dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/button_regular_gray"
+        android:backgroundTint="@color/gray"
+        android:text="확인"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/card_dlg_beacon_product" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

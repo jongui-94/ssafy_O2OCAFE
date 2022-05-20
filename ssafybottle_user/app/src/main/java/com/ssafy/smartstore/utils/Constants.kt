@@ -52,6 +52,11 @@ const val DEFAULT_LONGITUDE = 128.41827450414362
 const val DEFAULT_TEL = "010-1234-5678"
 
 /**
+ Beacon
+ */
+const val STORE_DISTANCE = 1
+
+/**
 Time
  */
 const val UPDATE_INTERVAL = 1000 // 1초

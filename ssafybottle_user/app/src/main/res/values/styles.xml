@@ -166,10 +166,16 @@
         <item name="android:includeFontPadding">false</item>
     </style>
 
+    <!-- Number Picker Text -->
     <style name="NumberPickerText">
         <item name="android:textSize">22sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:fontFamily">@font/notosanskr_regular</item>
+    </style>
+
+    <!-- Dialog -->
+    <style name="RoundedCornersDialog" parent="@style/Theme.MaterialComponents.Dialog">
+        <item name="dialogCornerRadius">16dp</item>
     </style>
 
 </resources>
