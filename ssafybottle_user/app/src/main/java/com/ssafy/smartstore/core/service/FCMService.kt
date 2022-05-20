@@ -10,6 +10,7 @@ import com.ssafy.smartstore.application.MainActivity
 import com.ssafy.smartstore.data.entitiy.Notification
 import com.ssafy.smartstore.data.repository.Repository
 import com.ssafy.smartstore.utils.getNotificationBuilder
+import com.ssafy.smartstore.utils.getUserId
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -49,16 +50,16 @@ class FCMService : FirebaseMessagingService() {
                     pIntent
                 ).build()
             )
-
-            insertNotification(it.title ?: "", it.body ?: "")
+            val userId = getUserId()
+            insertNotification(userId, it.title ?: "", it.body ?: "")
         }
     }
 
-    private fun insertNotification(title: String, content: String) {
+    private fun insertNotification(userId: String, title: String, content: String) {
         CoroutineScope(Dispatchers.Main).launch {
             repository.insertNotification(
                 Notification(
-                    title, content
+                    userId, title, content
                 )
             )
         }

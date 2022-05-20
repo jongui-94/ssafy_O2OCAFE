@@ -36,6 +36,18 @@
             android:layout_gravity="center|center_vertical"
             android:text="알림" />
 
+        <ImageView
+            android:id="@+id/img_notification_delete"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginEnd="12dp"
+            android:background="@drawable/ripple_effect"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/ic_delete"
+            app:tint="@color/icon_tint" />
+
     </com.google.android.material.appbar.MaterialToolbar>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -49,5 +61,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar_notification"
         tools:listitem="@layout/item_notice_board" />
+
+    <TextView
+        android:id="@+id/nocontent_notification"
+        style="@style/SubHead"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="알림 내역이 없습니다.🤷‍♂️"
+        android:textColor="@color/dark_gray"
+        android:visibility="invisible"
+        tools:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

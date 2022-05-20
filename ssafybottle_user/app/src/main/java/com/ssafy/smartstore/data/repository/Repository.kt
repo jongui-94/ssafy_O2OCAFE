@@ -83,12 +83,13 @@ class Repository private constructor(context: Context) {
     /**
     Notification
      */
-    fun getNotifications() = notificationDao.getNotifications()
+    suspend fun getNotifications(userId: String) = notificationDao.getNotifications(userId)
     suspend fun insertNotification(notification: Notification) =
         database.withTransaction { notificationDao.insertNotification(notification) }
-
     suspend fun deleteNotification(notification: Notification) =
         database.withTransaction { notificationDao.deleteNotification(notification) }
+    suspend fun deleteAllNotifications(userId: String) =
+        database.withTransaction { notificationDao.deleteAllNotifications(userId) }
 
     /**
     Card

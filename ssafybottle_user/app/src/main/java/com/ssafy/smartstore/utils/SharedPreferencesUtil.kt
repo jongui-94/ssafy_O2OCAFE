@@ -59,6 +59,11 @@ fun Fragment.getUserInfo() : Map<String, String?> {
     return map
 }
 
+fun Context.getUserId(): String = getSharedPreferences(
+    USER,
+    Context.MODE_PRIVATE
+).getString(USER_ID, DEFAULT_STRING)!!
+
 fun Fragment.getUserId(): String = requireContext().getSharedPreferences(
     USER,
     Context.MODE_PRIVATE

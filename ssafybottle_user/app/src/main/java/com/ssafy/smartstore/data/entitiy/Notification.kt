@@ -7,6 +7,9 @@ import com.ssafy.smartstore.utils.NOTIFICATION
 
 @Entity(tableName = NOTIFICATION)
 data class Notification(
+    @ColumnInfo(name="user_id")
+    var userId: String,
+
     @ColumnInfo(name = "title")
     var title: String,
 
