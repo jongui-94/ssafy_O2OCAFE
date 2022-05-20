@@ -19,12 +19,4 @@ data class OrderDetail(
     @ColumnInfo(name = "d_id")
     @PrimaryKey(autoGenerate = true)
     var dId: Int = 0
-
-    fun toOrderDetailDto() : OrderDetailDto =
-        OrderDetailDto(
-            id = 0,
-            orderId = orderId,
-            productId = productId,
-            quantity = quantity
-        )
 }

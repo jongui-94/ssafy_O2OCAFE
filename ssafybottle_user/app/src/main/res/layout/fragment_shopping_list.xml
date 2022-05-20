@@ -110,6 +110,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:text="0개"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@id/text_shoppinglist_label_totalquantity"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/text_shoppinglist_label_totalquantity" />
@@ -133,6 +134,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:text="0원"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@id/text_shoppinglist_label_totalprice"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/text_shoppinglist_label_totalprice" />

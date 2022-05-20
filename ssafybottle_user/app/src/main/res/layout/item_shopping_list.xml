@@ -8,7 +8,9 @@
 
         <variable
             name="item"
-            type="com.ssafy.smartstore.data.entitiy.ShoppingItem" />
+            type="com.ssafy.smartstore.data.dto.order.OrderDetailDto" />
+
+        <import type="com.ssafy.smartstore.utils.StringUtilKt" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -44,8 +46,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
             android:text="@{item.name}"
-            android:textColor="@color/dark_gray"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/card_item_shoppinglist_img"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="아메리카노" />
@@ -57,7 +61,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text='@{String.valueOf(item.price) + "원"}'
+            android:text='@{StringUtilKt.toMoney(item.price) + "원"}'
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/card_item_shoppinglist_img"
             tools:text="4000원" />
@@ -67,9 +71,11 @@
             style="@style/BodyItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
             android:text='@{String.valueOf(item.quantity) + "잔"}'
+            app:layout_constraintBottom_toBottomOf="@id/text_item_shoppinglist_name"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@id/text_item_shoppinglist_name"
             tools:text="2잔" />
 
         <TextView
@@ -77,10 +83,18 @@
             style="@style/BodyItemBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text='@{String.valueOf(item.totalPrice) + "원"}'
+            android:text='@{StringUtilKt.toMoney(item.price * item.quantity) + "원"}'
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             tools:text="8000원" />
+
+        <ImageView
+            android:id="@+id/img_item_shoppinglist_cancel"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_close"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

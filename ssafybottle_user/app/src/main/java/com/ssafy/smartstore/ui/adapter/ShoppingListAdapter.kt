@@ -3,18 +3,18 @@ package com.ssafy.smartstore.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.ssafy.smartstore.data.entitiy.ShoppingItem
+import com.ssafy.smartstore.data.dto.order.OrderDetailDto
 import com.ssafy.smartstore.databinding.ItemShoppingListBinding
 
 class ShoppingListAdapter : RecyclerView.Adapter<ShoppingListAdapter.ShoppingViewHolder>() {
 
-    var shoppingList: List<ShoppingItem> = emptyList()
+    var shoppingList: List<OrderDetailDto> = emptyList()
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): ShoppingListAdapter.ShoppingViewHolder {
-        return ShoppingListAdapter.ShoppingViewHolder(
+    ): ShoppingViewHolder {
+        return ShoppingViewHolder(
             ItemShoppingListBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
@@ -23,7 +23,7 @@ class ShoppingListAdapter : RecyclerView.Adapter<ShoppingListAdapter.ShoppingVie
         )
     }
 
-    override fun onBindViewHolder(holder: ShoppingListAdapter.ShoppingViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ShoppingViewHolder, position: Int) {
         holder.bind(shoppingList[position])
     }
 
@@ -32,8 +32,8 @@ class ShoppingListAdapter : RecyclerView.Adapter<ShoppingListAdapter.ShoppingVie
     class ShoppingViewHolder(private val binding: ItemShoppingListBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(shoppingItem: ShoppingItem) {
-            binding.item = shoppingItem
+        fun bind(orderDetail: OrderDetailDto) {
+            binding.item = orderDetail
         }
     }
 }

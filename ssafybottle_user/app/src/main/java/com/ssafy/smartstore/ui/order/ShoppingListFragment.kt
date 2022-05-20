@@ -1,7 +1,6 @@
 package com.ssafy.smartstore.ui.order
 
 import android.app.AlertDialog
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,22 +8,23 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ssafy.smartstore.R
-import com.ssafy.smartstore.application.SmartStoreApplication.Companion.isOrder
-import com.ssafy.smartstore.application.SmartStoreApplication.Companion.orderId
+import com.ssafy.smartstore.application.MainViewModel
 import com.ssafy.smartstore.application.SmartStoreApplication.Companion.tableName
+import com.ssafy.smartstore.data.dto.order.OrderRequestDto
 import com.ssafy.smartstore.databinding.FragmentShoppingListBinding
 import com.ssafy.smartstore.ui.adapter.ShoppingListAdapter
 import com.ssafy.smartstore.utils.getUserId
+import com.ssafy.smartstore.utils.toMoney
 
 class ShoppingListFragment : Fragment() {
 
     private var _binding: FragmentShoppingListBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: ShoppingListViewModel by viewModels()
+    private val mainViewModel: MainViewModel by activityViewModels()
     private lateinit var adapter: ShoppingListAdapter
 
     private lateinit var userId: String
@@ -42,6 +42,7 @@ class ShoppingListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initData()
+        initViews()
         initAdapter()
         registerObserver()
         setOnClickListeners()
@@ -49,13 +50,26 @@ class ShoppingListFragment : Fragment() {
 
     private fun initData() {
         userId = getUserId()
-        if (isOrder) {
-            viewModel.getShoppingList(orderId)
+    }
+
+    private fun initViews() {
+        var totalQuantity = 0
+        var totalPrice = 0
+        mainViewModel.orderList.forEach {
+            totalQuantity += it.quantity
+            totalPrice += (it.price * it.quantity)
+        }
+
+        binding.apply {
+            textShoppinglistTotalquantity.text = "${totalQuantity}개"
+            textShoppinglistTotalprice.text = "${toMoney(totalPrice)}원"
         }
     }
 
     private fun initAdapter() {
-        adapter = ShoppingListAdapter()
+        adapter = ShoppingListAdapter().apply {
+            shoppingList = mainViewModel.orderList
+        }
         binding.recyclerShoppinglistOrder.apply {
             this.adapter = this@ShoppingListFragment.adapter
             layoutManager = LinearLayoutManager(requireContext())
@@ -63,30 +77,11 @@ class ShoppingListFragment : Fragment() {
     }
 
     private fun registerObserver() {
-        viewModel.shoppingList.observe(viewLifecycleOwner) {
-            adapter.apply {
-                shoppingList = it
-                notifyDataSetChanged()
-            }
-
-            var totalCost = 0
-            var totalCount = 0
-            it.forEach { item ->
-                totalCost += item.totalPrice
-                totalCount += item.quantity
-            }
-
-            binding.apply {
-                textShoppinglistTotalprice.text = "$totalCost 원"
-                textShoppinglistTotalquantity.text = "총 ${totalCount}개"
-            }
-        }
-
-        viewModel.isComplete.observe(viewLifecycleOwner) {
+        mainViewModel.isComplete.observe(viewLifecycleOwner) {
             if (it) {
-                isOrder = false
-                orderId = 0
                 Toast.makeText(requireContext(), "주문을 완료하였습니다.", Toast.LENGTH_SHORT).show()
+                mainViewModel.orderList = mutableListOf()
+                tableName = ""
                 requireActivity().onBackPressed()
             } else {
                 Toast.makeText(requireContext(), "주문에 실패했습니다.", Toast.LENGTH_SHORT).show()
@@ -108,17 +103,25 @@ class ShoppingListFragment : Fragment() {
 
     private fun setOnClickListeners() {
         binding.btnShoppinglistOrder.setOnClickListener {
-            if (isOrder) {
-                if (isStore) {
-                    if(tableName == "") {
-                        showNfcDialog()
-                        return@setOnClickListener
-                    }
-                }
-                viewModel.completeOrder(orderId)
-            } else {
+            if (mainViewModel.orderList.isEmpty()) {
                 Toast.makeText(requireContext(), "장바구니에 담긴 상품이 없습니다.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
             }
+
+            if (isStore) {
+                if (tableName == "") {
+                    showNfcDialog()
+                    return@setOnClickListener
+                }
+            }
+
+            mainViewModel.postOrder(
+                OrderRequestDto(
+                    details = mainViewModel.orderList,
+                    orderTable = tableName,
+                    userId = userId
+                )
+            )
         }
         binding.imgShoppinglistBack.setOnClickListener {
             requireActivity().onBackPressed()

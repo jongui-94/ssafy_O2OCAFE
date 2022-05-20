@@ -1,19 +1,16 @@
 package com.ssafy.smartstore.ui.order
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.ssafy.smartstore.R
 import com.ssafy.smartstore.databinding.FragmentOrderDetailBinding
-import com.ssafy.smartstore.databinding.FragmentShoppingListBinding
 import com.ssafy.smartstore.ui.adapter.OrderDetailAdapter
 import com.ssafy.smartstore.utils.ORDER_ID
-import kotlin.math.log
+import com.ssafy.smartstore.utils.toMoney
 
 class OrderDetailFragment : Fragment() {
 
@@ -64,7 +61,7 @@ class OrderDetailFragment : Fragment() {
             it.forEach { orderDetail ->
                 totalCost += orderDetail.totalprice
             }
-            binding.textOrderdetailTotalprice.text = "${totalCost}원"
+            binding.textOrderdetailTotalprice.text = "${toMoney(totalCost)}원"
         }
     }
 

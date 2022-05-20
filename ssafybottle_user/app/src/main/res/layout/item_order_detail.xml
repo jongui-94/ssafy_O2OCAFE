@@ -9,6 +9,8 @@
         <variable
             name="orderDetail"
             type="com.ssafy.smartstore.data.dto.order.OrderByOrderIdDto" />
+
+        <import type="com.ssafy.smartstore.utils.StringUtilKt" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -46,8 +48,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             android:text="@{orderDetail.name}"
-            android:textColor="@color/dark_gray"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/card_item_orderdetail_img"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="아메리카노" />
@@ -59,7 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text='@{String.valueOf(orderDetail.unitprice) + "원"}'
+            android:text='@{StringUtilKt.toMoney(orderDetail.unitprice) + "원"}'
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/card_item_orderdetail_img"
             tools:text="4000원" />
@@ -70,8 +73,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text='@{String.valueOf(orderDetail.quantity) + "잔"}'
+            app:layout_constraintBottom_toBottomOf="@id/text_item_orderdetail_name"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@id/text_item_orderdetail_name"
             tools:text="2잔" />
 
         <TextView
@@ -79,7 +83,7 @@
             style="@style/BodyItemBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text='@{String.valueOf(orderDetail.totalprice) + "원"}'
+            android:text='@{StringUtilKt.toMoney(orderDetail.totalprice) + "원"}'
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             tools:text="8000원" />

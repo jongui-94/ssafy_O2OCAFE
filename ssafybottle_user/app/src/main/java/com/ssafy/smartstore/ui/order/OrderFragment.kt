@@ -8,19 +8,20 @@ import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ssafy.smartstore.R
-import com.ssafy.smartstore.application.SmartStoreApplication.Companion.isOrder
-import com.ssafy.smartstore.application.SmartStoreApplication.Companion.orderId
+import com.ssafy.smartstore.application.MainViewModel
+import com.ssafy.smartstore.data.dto.order.OrderDetailDto
 import com.ssafy.smartstore.data.dto.product.ProductDetailDto
-import com.ssafy.smartstore.data.entitiy.Order
-import com.ssafy.smartstore.data.entitiy.OrderDetail
 import com.ssafy.smartstore.databinding.FragmentOrderBinding
 import com.ssafy.smartstore.ui.adapter.CommentAdapter
 import com.ssafy.smartstore.ui.adapter.OnItemClickListener
-import com.ssafy.smartstore.utils.*
+import com.ssafy.smartstore.utils.COMMENT
+import com.ssafy.smartstore.utils.PRODUCT_ID
+import com.ssafy.smartstore.utils.getUserId
 import com.ssafy.smartstore.utils.retrofit.FetchState
 import com.ssafy.smartstore.utils.view.getResourceId
 
@@ -30,7 +31,8 @@ class OrderFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var adapter: CommentAdapter
-    private val viewModel: OrderViewModel by viewModels()
+    private val orderViewModel: OrderViewModel by viewModels()
+    private val mainViewModel: MainViewModel by activityViewModels()
     private lateinit var userId: String
     private var productId = 0
 
@@ -60,7 +62,7 @@ class OrderFragment : Fragment() {
 
     private fun initData() {
         productId = arguments?.getInt(PRODUCT_ID)!!
-        viewModel.getProduct(productId)
+        orderViewModel.getProduct(productId)
     }
 
     private fun initAdapter() {
@@ -72,7 +74,7 @@ class OrderFragment : Fragment() {
         }
     }
 
-    private val itemClickListener = object: OnItemClickListener {
+    private val itemClickListener = object : OnItemClickListener {
         override fun onItemClick(view: View, position: Int) {
             showPopMenu(view, position)
         }
@@ -82,13 +84,17 @@ class OrderFragment : Fragment() {
         val popupMenu = PopupMenu(requireContext(), view)
         requireActivity().menuInflater.inflate(R.menu.popupmenu_comment_more, popupMenu.menu)
         popupMenu.setOnMenuItemClickListener {
-            when(it.itemId) {
+            when (it.itemId) {
                 R.id.popup_comment_delete -> {
-                    viewModel.deleteComment(viewModel.comments.value!![position].commentId)
+                    orderViewModel.deleteComment(orderViewModel.comments.value!![position].commentId)
                 }
                 R.id.popup_comment_edit -> {
-                    findNavController().navigate(R.id.action_orderFragment_to_reviewFragment, bundleOf(
-                        PRODUCT_ID to productId, COMMENT to viewModel.comments.value!![position]))
+                    findNavController().navigate(
+                        R.id.action_orderFragment_to_reviewFragment, bundleOf(
+                            PRODUCT_ID to productId,
+                            COMMENT to orderViewModel.comments.value!![position]
+                        )
+                    )
                 }
             }
             false
@@ -101,22 +107,22 @@ class OrderFragment : Fragment() {
             textOrderCoffeename.text = product.name
             textOrderPrice.text = "${product.price}원"
             textOrderRating.text = "(${product.commentCnt})"
-            ratingbarOrderRating.rating = product.avg/2
+            ratingbarOrderRating.rating = product.avg / 2
             imgOrderCoffee.setImageResource(requireView().getResourceId(product.img))
         }
     }
 
     private fun registerObserver() {
-        viewModel.product.observe(viewLifecycleOwner) {
+        orderViewModel.product.observe(viewLifecycleOwner) {
             setProduct(it)
         }
-        viewModel.comments.observe(viewLifecycleOwner) { it ->
+        orderViewModel.comments.observe(viewLifecycleOwner) { it ->
             adapter.apply {
                 comments = it
                 notifyDataSetChanged()
             }
         }
-        viewModel.isDeleted.observe(viewLifecycleOwner) {
+        orderViewModel.isDeleted.observe(viewLifecycleOwner) {
             if (it) {
                 Toast.makeText(requireContext(), "상품평을 삭제했습니다.", Toast.LENGTH_SHORT).show()
                 initData()
@@ -125,22 +131,17 @@ class OrderFragment : Fragment() {
             }
         }
 
-        viewModel.isComplete.observe(viewLifecycleOwner) {
-            if (it) {
-                Toast.makeText(requireContext(), "장바구니에 상품을 담았습니다.", Toast.LENGTH_SHORT).show()
-                requireActivity().onBackPressed()
-            } else {
-                Toast.makeText(requireContext(), "장바구니에 상품을 담는데 실패했습니다.", Toast.LENGTH_SHORT).show()
-            }
-        }
-
-        viewModel.fetchState.observe(viewLifecycleOwner) {
+        orderViewModel.fetchState.observe(viewLifecycleOwner) {
             Toast.makeText(requireContext(), "상품정보를 받아오는데 실패했습니다.", Toast.LENGTH_SHORT).show()
-            when(it) {
-                FetchState.BAD_INTERNET -> { }
-                FetchState.PARSE_ERROR -> {}
-                FetchState.WRONG_CONNECTION -> {}
-                FetchState.FAIL -> {}
+            when (it) {
+                FetchState.BAD_INTERNET -> {
+                }
+                FetchState.PARSE_ERROR -> {
+                }
+                FetchState.WRONG_CONNECTION -> {
+                }
+                FetchState.FAIL -> {
+                }
             }
         }
     }
@@ -148,8 +149,11 @@ class OrderFragment : Fragment() {
     private fun setOnClickListeners() {
         binding.imgOrderBack.setOnClickListener { requireActivity().onBackPressed() }
         binding.btnOrderReview.setOnClickListener {
-            findNavController().navigate(R.id.action_orderFragment_to_reviewFragment, bundleOf(
-                PRODUCT_ID to productId, COMMENT to null))
+            findNavController().navigate(
+                R.id.action_orderFragment_to_reviewFragment, bundleOf(
+                    PRODUCT_ID to productId, COMMENT to null
+                )
+            )
         }
         binding.imgOrderPlus.setOnClickListener {
             binding.textOrderQuantity.text = "${++count}"
@@ -166,24 +170,18 @@ class OrderFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            if (isOrder) { // 장바구니에 이미 주문이 있다면
-                viewModel.insertOrder(
-                    OrderDetail(
-                        orderId = orderId,
-                        productId = productId,
-                        quantity = binding.textOrderQuantity.text.toString().toInt()
-                    )
+            mainViewModel.orderList.add(
+                OrderDetailDto(
+                    productId = productId,
+                    quantity = binding.textOrderQuantity.text.toString().toInt(),
+                    img = orderViewModel.product.value!!.img,
+                    name = orderViewModel.product.value!!.name,
+                    price = orderViewModel.product.value!!.price
                 )
-            } else {
-                viewModel.insertFirstOrder(
-                    Order(userId = userId, orderTable = ""),
-                    OrderDetail(
-                        orderId = 0,
-                        productId = productId,
-                        quantity = binding.textOrderQuantity.text.toString().toInt()
-                    )
-                )
-            }
+            )
+
+            Toast.makeText(requireContext(), "장바구니에 상품을 담았습니다.", Toast.LENGTH_SHORT).show()
+            requireActivity().onBackPressed()
         }
     }
 
