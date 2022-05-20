@@ -20,4 +20,7 @@ interface UserApi {
 
     @POST("user/info")
     suspend fun getUserInfo(@Query("id") id: String) : Response<UserInfoResponseDto>
+
+    @GET("user/checkCash")
+    suspend fun checkCash(@Query("id")userId : String) : Response<Int>
 }

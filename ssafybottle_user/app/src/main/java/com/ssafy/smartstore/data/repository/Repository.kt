@@ -57,6 +57,7 @@ class Repository private constructor(context: Context) {
     suspend fun insertUser(user: UserDto) = userApi.insertUser(user)
     suspend fun login(user: UserDto) = userApi.login(user)
     suspend fun getUserInfo(userId: String) = userApi.getUserInfo(userId)
+    suspend fun checkCash(userId: String) = userApi.checkCash(userId)
 
     /**
     Comment
