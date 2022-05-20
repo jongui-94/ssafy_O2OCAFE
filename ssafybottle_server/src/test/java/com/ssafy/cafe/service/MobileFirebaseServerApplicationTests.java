@@ -17,7 +17,7 @@ class MobileFirebaseServerApplicationTests {
     @Test
     void contextLoads() throws IOException {
     	
-        String token = "fFSPXa5wQcWN-t2AtodK5m:APA91bEuh1mTC9nYXGYuF57-BIliW6ht8Avc44imm9yAJex114y4LaPnPaQkyzVEt1lxkQ1hfg1OI-cLtr5cOaoU2MApGHpyXh0z8lB9lb0DC6I0b2GZBQ7or-r20BqJhav_SYJO6185";
+        String token = "dgDjjZSwSeCM6prk-qjM6A:APA91bEC33YPI6CR_N-2eO4qqxjLoA6QI5g7Y6dtq6YlLfqpyYIdUtm0iq7cRBDICLW58AEU4xSvK_yP_0r6vZySbhDRIOghIeKSexiuW73lrbu3lpj7fa4uX91_Ie24Da-3s4QjH0hK";
 //        String token1 = "cHI9bL4QQTKQI_nJVtoUt7:APA91bF-VKnKY0NxeikBXORc0FhmS3iRHFYZgH5yBF34GNt-tYaUCvABVal1CSibhAEWkj9DDcmpZWlD4lA481JoC_UjVnykSYhyd5OHi3-91E-kVlX4YjEEK2v0fTQlqoW35yjNnlrd";
 //		한건 메시지
 //        service.sendMessageTo(token, "from 사무국", "싸피 여러분 화이팅!!");
