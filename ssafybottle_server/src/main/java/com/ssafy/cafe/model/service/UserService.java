@@ -29,6 +29,16 @@ public interface UserService {
      * @return
      * 조회된 User 정보를 반환한다.
      */
+    
+    public User login2(String id, String pass, Integer admin);
+    /**
+     * id에 해당하는 User 정보를 반환한다.
+     * admin의 값이 true 일때 로그인 한다.
+     * @param id
+     * @return
+     * 조회된 User 정보를 반환한다.
+     */
+    
     public User info(String id);
     
     /**

@@ -9,8 +9,21 @@ create table t_user(
 	id varchar(100) primary key,
     name varchar(100) not null,
     pass varchar(100) not null,
-    stamps integer default 0
+    cash Integer default 0,
+    stamps integer default 0,
+    ftoken varchar(100) default "",
+    admin integer default 0
 );
+
+create table t_card(
+	id integer auto_increment primary key,
+    user_id varchar(100) not null,
+    order_id integer not null,
+    payment integer default 0 not null,
+    content varchar(100) default "",
+    pay_time timestamp default CURRENT_TIMESTAMP
+    );
+    
 create table t_product(
 	id integer auto_increment primary key,
     name varchar(100) not null,
@@ -68,6 +81,8 @@ INSERT INTO t_user (id, name, pass, stamps) VALUES ('ssafy07', '김병관', 'pas
 INSERT INTO t_user (id, name, pass, stamps) VALUES ('ssafy08', '강석우', 'pass08', 8);
 INSERT INTO t_user (id, name, pass, stamps) VALUES ('ssafy09', '견본무', 'pass09', 9);
 INSERT INTO t_user (id, name, pass, stamps) VALUES ('ssafy10', '전인성', 'pass10', 20);
+INSERT INTO t_user (id, name, pass, cash, stamps, ftoken, admin) VALUES ('user', '사용자', '0000', 50000, 0, "hello", 0);
+INSERT INTO t_user (id, name, pass, admin) VALUES ('admin', '관리자', '0000', 1);
 
 INSERT INTO t_product (name, type, price, img) VALUES 
 ('아메리카노', 'coffee', 4100, 'coffee1.png'),
@@ -138,3 +153,11 @@ INSERT INTO t_stamp (user_id, order_id, quantity) VALUES ('ssafy10', 10, 20);
 
 
 commit;
+
+INSERT INTO t_card (user_id, order_id, payment, content) VALUES('user', 1, 12000, "강남점"); 
+
+SELECT *
+from t_user;
+
+SELECT *
+from t_card;

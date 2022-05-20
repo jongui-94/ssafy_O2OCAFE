@@ -65,6 +65,18 @@ public class UserRestController {
 		}
 		return selected;
 	}
+	
+	@PostMapping("/login2")
+	@ApiOperation(value = "관리자 로그인 처리 후 성공적으로 로그인 되었다면 loginId라는 쿠키를 내려보낸다.", response = User.class)
+	public User login2(@RequestBody User user, HttpServletResponse response) throws UnsupportedEncodingException {
+		User selected = uService.login2(user.getId(), user.getPass(), user.getAdmin());
+		if (selected != null) {
+			Cookie cookie = new Cookie("loginId", URLEncoder.encode(selected.getId(), "utf-8"));
+			cookie.setMaxAge(1000 * 1000);
+			response.addCookie(cookie);
+		}
+		return selected;
+	}
 
 	// android app 에서 사용자 정보 확인시 비밀번호 확인은 아닌것 같아 수정
 	@PostMapping("/info")

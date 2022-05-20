@@ -37,6 +37,18 @@ public class UserServiceImpl implements UserService {
 			return null;
 		}
 	}
+	
+	@Override
+	public User login2(String id, String pass, Integer admin) {
+		User user = userDao.select(id);
+		
+		if (user != null && user.getPass().equals(pass) && admin == 1) {
+			return user;
+		}
+		else {
+			return null;
+		}
+	}
 
 	@Override
 	public User info(String id) {
