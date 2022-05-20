@@ -38,5 +38,7 @@ public interface UserDao {
 	List<User> selectAll(); 
 
 	int update(User user);
+	
+	int checkCash(String userId);
 
 }

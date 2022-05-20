@@ -53,5 +53,12 @@ public interface UserService {
      * @return
      */
     public boolean isUsedId(String id);
+    
+    public int checkCash(String id);
+    /**
+     * id를 입력하면 cash잔액을 반환한다.
+     * @param id
+     * @return
+     */
 
 }

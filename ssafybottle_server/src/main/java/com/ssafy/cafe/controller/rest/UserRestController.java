@@ -53,6 +53,12 @@ public class UserRestController {
 	public Boolean isUsedId(String id) {
 		return uService.isUsedId(id);
 	}
+	
+	@GetMapping("/checkCash")
+	@ApiOperation(value = "전달된 id의 남아있는 cash잔액을 반환한다.", response = Integer.class)
+	public Integer checkCash(String id) {
+		return uService.checkCash(id);
+	}
 
 	@PostMapping("/login")
 	@ApiOperation(value = "로그인 처리 후 성공적으로 로그인 되었다면 loginId라는 쿠키를 내려보낸다.", response = User.class)

@@ -34,6 +34,11 @@
 		WHERE id = #{id}
 	</select>
 	
+	<select id="checkCash" parameterType ="string" resultType="int">
+		SELECT cash FROM t_user
+		WHERE id = #{id}	
+	</select>
+	
 	<select id="selectAll" resultType="User">
 		SELECT * FROM t_user
 	</select>

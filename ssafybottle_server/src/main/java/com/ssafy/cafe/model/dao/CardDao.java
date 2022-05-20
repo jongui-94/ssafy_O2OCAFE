@@ -4,9 +4,9 @@ import java.util.List;
 import com.ssafy.cafe.model.dto.Card;
 
 public interface CardDao {
-	
-	List<Card> selectUserCard(String userId);
-	
-	int insertCard(Card card);
+
+   List<Card> selectUserCard(String userId);
+
+   int insertCard(Card card);
 
 }
