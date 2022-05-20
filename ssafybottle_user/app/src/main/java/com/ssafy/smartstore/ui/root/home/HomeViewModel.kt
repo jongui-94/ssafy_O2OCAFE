@@ -32,9 +32,9 @@ class HomeViewModel : BaseViewModel() {
         }
     }
 
-    fun getProducts() {
+    fun getRecommend() {
         viewModelScope.launch(exceptionHandler) {
-            repository.getProducts().let {
+            repository.getProductRecommend().let {
                 if (it.isSuccessful) {
                     _products.postValue(it.body())
                 }

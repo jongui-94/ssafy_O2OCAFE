@@ -7,6 +7,7 @@ import com.ssafy.smartstore.data.dto.card.CardDto
 import com.ssafy.smartstore.data.dto.comment.CommentDto
 import com.ssafy.smartstore.data.dto.order.OrderByUserDto
 import com.ssafy.smartstore.data.dto.order.OrderRequestDto
+import com.ssafy.smartstore.data.dto.product.ProductDto
 import com.ssafy.smartstore.data.dto.user.UserDto
 import com.ssafy.smartstore.data.entitiy.*
 import com.ssafy.smartstore.data.local.AppDatabase
@@ -48,6 +49,8 @@ class Repository private constructor(context: Context) {
     suspend fun getBeverage() = productApi.getBeverage()
     suspend fun getDessert() = productApi.getDessert()
     suspend fun getProductDetail(productId: Int) = productApi.getProductDetail(productId)
+    suspend fun getProductRecommend() = productApi.getProductRecommend()
+    suspend fun getProductTop10() = productApi.getProductTop10()
 
     /**
     User

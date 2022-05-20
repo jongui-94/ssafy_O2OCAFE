@@ -62,7 +62,7 @@ class HomeFragment : Fragment() {
         userId = getUserId()
         viewModel.getRecentOrders(userId)
         viewModel.getUser(userId)
-        viewModel.getProducts()
+        viewModel.getRecommend()
     }
 
     private fun initAdapter() {

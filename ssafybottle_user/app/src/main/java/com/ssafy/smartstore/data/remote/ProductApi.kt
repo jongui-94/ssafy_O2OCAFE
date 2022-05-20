@@ -18,5 +18,11 @@ interface ProductApi {
 
     @GET("product/{productId}")
     suspend fun getProductDetail(@Path("productId") productId: Int) : Response<List<ProductDetailResponseDto>>
+
+    @GET("product/recommendByRating")
+    suspend fun getProductRecommend() : Response<List<ProductDto>>
+
+    @GET("product/recommendBySell")
+    suspend fun getProductTop10() : Response<List<ProductDto>>
 }
 

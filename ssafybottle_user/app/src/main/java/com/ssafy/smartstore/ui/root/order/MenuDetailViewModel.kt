@@ -39,7 +39,7 @@ class MenuDetailViewModel : BaseViewModel() {
                     isSuccess.postValue(false)
                 }
             }
-            repository.getProducts().let{
+            repository.getProductTop10().let{
                 if(it.isSuccessful) {
                     _top10.postValue(it.body())
                 } else {
