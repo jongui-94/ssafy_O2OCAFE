@@ -3,6 +3,7 @@ package com.ssafy.smartstore.utils
 import android.app.PendingIntent
 import android.content.Context
 import androidx.core.app.NotificationCompat
+import com.ssafy.smartstore.R
 
 fun Context.getNotificationBuilder(
     channelId: String,
@@ -11,7 +12,7 @@ fun Context.getNotificationBuilder(
     pIntent: PendingIntent
 ): NotificationCompat.Builder =
     NotificationCompat.Builder(this, channelId)
-        .setSmallIcon(android.R.drawable.ic_dialog_info)
+        .setSmallIcon(R.drawable.ic_logo_color)
         .setContentTitle(title)
         .setContentText(content)
         .setAutoCancel(true)

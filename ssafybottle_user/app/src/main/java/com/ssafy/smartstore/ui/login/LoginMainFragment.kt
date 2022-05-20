@@ -89,12 +89,18 @@ class LoginMainFragment : Fragment() {
                 if (it.isSuccessful) {
                     it.body()?.let {
                         isSuccess.postValue(true)
+                        postToken(id)
                         return@launch
                     }
                 }
                 isSuccess.postValue(false)
             }
         }
+    }
+
+    private suspend fun postToken(userId: String) {
+        val token = getToken()
+        Repository.get().postToken(mapOf("userId" to userId, "token" to token))
     }
 
     private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->

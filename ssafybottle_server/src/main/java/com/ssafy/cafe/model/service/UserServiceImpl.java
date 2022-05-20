@@ -76,4 +76,13 @@ public class UserServiceImpl implements UserService {
 	public int checkCash(String id) {
 		return userDao.checkCash(id);
 	}
+	
+	@Override
+	public int insertToken(String id, String token) {
+		User user = userDao.select(id);
+		user.setFtoken(token);		
+		
+		return userDao.update(user);
+	}
+	
 }

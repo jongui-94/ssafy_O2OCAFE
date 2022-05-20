@@ -9,11 +9,13 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.database.core.Repo
 import com.ssafy.smartstore.R
 import com.ssafy.smartstore.data.dto.user.UserDto
 import com.ssafy.smartstore.data.repository.Repository
 import com.ssafy.smartstore.databinding.FragmentLoginBinding
 import com.ssafy.smartstore.utils.USER_ID
+import com.ssafy.smartstore.utils.getToken
 import com.ssafy.smartstore.utils.saveUserId
 import com.ssafy.smartstore.utils.setAutoLogin
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -87,12 +89,18 @@ class LoginFragment : Fragment() {
                 if (it.isSuccessful) {
                     it.body()?.let {
                         isSuccess.postValue(true)
+                        postToken(id)
                         return@launch
                     }
                 }
                 isSuccess.postValue(false)
             }
         }
+    }
+
+    private suspend fun postToken(userId: String) {
+        val token = getToken()
+        Repository.get().postToken(mapOf("userId" to userId, "token" to token))
     }
 
     private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->

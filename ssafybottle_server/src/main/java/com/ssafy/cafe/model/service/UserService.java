@@ -60,5 +60,7 @@ public interface UserService {
      * @param id
      * @return
      */
+    
+    public int insertToken(String id, String token);
 
 }

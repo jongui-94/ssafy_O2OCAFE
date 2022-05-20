@@ -16,6 +16,7 @@ import com.ssafy.smartstore.R
 import com.ssafy.smartstore.databinding.FragmentSearchBinding
 import com.ssafy.smartstore.ui.adapter.SearchAdapter
 import com.ssafy.smartstore.utils.PRODUCT_ID
+import com.ssafy.smartstore.utils.hideKeyboard
 
 class SearchFragment : Fragment() {
 
@@ -90,6 +91,7 @@ class SearchFragment : Fragment() {
                             viewModel.searchProduct(it)
                         }
                     }
+                    requireActivity().hideKeyboard(binding.edtSearchSearch)
                     return@setOnEditorActionListener true
                 }
                 else -> return@setOnEditorActionListener false

@@ -9,6 +9,7 @@ import android.util.Log
 import androidx.annotation.RequiresApi
 import com.google.firebase.messaging.FirebaseMessaging
 import com.ssafy.smartstore.data.repository.*
+import com.ssafy.smartstore.utils.saveToken
 
 class SmartStoreApplication : Application() {
     @RequiresApi(Build.VERSION_CODES.O)
@@ -33,6 +34,7 @@ class SmartStoreApplication : Application() {
             }
             // 새로운 FCM 등록 토큰을 얻음
             Log.d("Application_싸피", "onCreate: 새로운 등록 토큰: ${it.result}")
+            saveToken(it.result)
             createNotificationChannel("smart_store", "smart_store")
         }
     }

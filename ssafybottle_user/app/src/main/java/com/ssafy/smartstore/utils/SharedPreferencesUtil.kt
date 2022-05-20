@@ -33,6 +33,18 @@ fun Fragment.unSetAutoLogin() {
     }
 }
 
+fun Context.saveToken(token: String) {
+    getSharedPreferences(TOKEN, Context.MODE_PRIVATE).edit().apply {
+        putString(TOKEN, token)
+        apply()
+    }
+}
+
+fun Fragment.getToken(): String = requireContext().getSharedPreferences(
+    TOKEN,
+    Context.MODE_PRIVATE
+).getString(TOKEN, DEFAULT_STRING)!!
+
 fun Fragment.isAutoLogin() : Boolean  =
     requireContext().getSharedPreferences(AUTO_LOGIN, Context.MODE_PRIVATE).getBoolean(AUTO_LOGIN, false)
 

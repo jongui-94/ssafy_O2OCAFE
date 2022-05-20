@@ -13,7 +13,8 @@
 		SET
 			name = #{name},
 			pass = #{pass},
-			cash = #{cash}
+			cash = #{cash},
+			ftoken = #{ftoken}
 		WHERE id = #{id}
 	</update>
 

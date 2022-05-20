@@ -40,6 +40,7 @@ class Repository private constructor(context: Context) {
     private val userApi = RetrofitBuilder.retrofit.create(UserApi::class.java)
     private val commentApi = RetrofitBuilder.retrofit.create(CommentApi::class.java)
     private val cardApi = RetrofitBuilder.retrofit.create(CardApi::class.java)
+    private val tokenApi = RetrofitBuilder.retrofit.create(TokenApi::class.java)
 
     /**
     Product
@@ -94,6 +95,11 @@ class Repository private constructor(context: Context) {
      */
     suspend fun getCardHistory(userId : String) = cardApi.getCardHistory(userId)
     suspend fun postcard(card: CardDto) = cardApi.postcard(card)
+
+    /**
+    Token
+     */
+    suspend fun postToken(tokenRequest: Map<String, String>) = tokenApi.postToken(tokenRequest)
 
     /**
     Singleton

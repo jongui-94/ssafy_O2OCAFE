@@ -57,6 +57,11 @@ const val DEFAULT_TEL = "010-1234-5678"
 const val STORE_DISTANCE = 1
 
 /**
+ Token
+ */
+const val TOKEN = "token"
+
+/**
 Time
  */
 const val UPDATE_INTERVAL = 1000 // 1초

@@ -11,7 +11,7 @@ create table t_user(
     pass varchar(100) not null,
     cash Integer default 0,
     stamps integer default 0,
-    ftoken varchar(100) default "",
+    ftoken varchar(512) default "",
     admin integer default 0
 );
 
