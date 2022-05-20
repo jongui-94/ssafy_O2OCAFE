@@ -1,10 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="primaryColor">#00a1dd</color>
+    <color name="primaryLightColor">#61d2ff</color>
+    <color name="primaryDarkColor">#0073ab</color>
+
+    <color name="secondaryColor">#00a1dd</color>
+    <color name="secondaryLightColor">#61d2ff</color>
+    <color name="secondaryDarkColor">#0073ab</color>
+
+    <color name="primaryTextColor">#000000</color>
+    <color name="secondaryTextColor">#ffffff</color>
+
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
+
+    <color name="divider">#D3D3D3</color>
+    <color name="bottom_sheet_background">#FBFBFB</color>
+
+    <color name="lightGray">#E0E0E0</color>
+    <color name="edt_gray">#DBDBDB</color>
+    <color name="transparent">#00000000</color>
+    <color name="gray">#AcAcAc</color>
+    <color name="dark_gray">#616161</color>
+    <color name="red">#ff0000</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="beige">#d2c9bd</color>
+    <color name="button_gray">#dddddd</color>
+
+    <color name="background">#FFFFFF</color>
+    <color name="icon_tint">#2b3954</color>
+
+    <color name="coffee_dark_brown">#493319</color>
+    <color name="coffee_brown">#907f60</color>
+    <color name="coffee_light_gray">#c7ccd3</color>
+    <color name="coffee_light_white">#FFFFFF</color>
+    <color name="coffee_point_red">#9d0200</color>
+    <color name="coffee_menu_back">#F0E3DB</color>
 </resources>
