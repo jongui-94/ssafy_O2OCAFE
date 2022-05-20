@@ -1,12 +1,9 @@
 package com.ssafy.smartstore.ui.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.ssafy.smartstore.data.dto.product.ProductCommentDto
-import com.ssafy.smartstore.data.entitiy.Comment
 import com.ssafy.smartstore.databinding.ItemCommentBinding
 
 class CommentAdapter(

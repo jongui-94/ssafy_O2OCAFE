@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ssafy.smartstore.data.dto.order.OrderByUserDto
-import com.ssafy.smartstore.data.entitiy.RecentOrder
 import com.ssafy.smartstore.databinding.ItemRecentOrderBinding
 
 class RecentOrderAdapter : RecyclerView.Adapter<RecentOrderAdapter.RecentOrderViewHolder>() {

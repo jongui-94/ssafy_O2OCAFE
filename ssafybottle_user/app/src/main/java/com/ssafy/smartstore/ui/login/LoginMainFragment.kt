@@ -44,8 +44,8 @@ class LoginMainFragment : Fragment() {
     }
 
     private fun registerObserver() {
-        binding.progressbarLoginmainLoading.isVisible = false
         isSuccess.observe(viewLifecycleOwner) {
+            binding.progressbarLoginmainLoading.isVisible = false
             if (it) {
                 user?.let {
                     saveUserId(user!![USER_ID]!!)

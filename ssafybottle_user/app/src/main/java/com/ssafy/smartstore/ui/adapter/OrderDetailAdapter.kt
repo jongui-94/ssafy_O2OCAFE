@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ssafy.smartstore.data.dto.order.OrderByOrderIdDto
-import com.ssafy.smartstore.data.entitiy.OrderDetailProduct
 import com.ssafy.smartstore.databinding.ItemOrderDetailBinding
 
 class OrderDetailAdapter : RecyclerView.Adapter<OrderDetailAdapter.OrderDetailViewHolder>() {
