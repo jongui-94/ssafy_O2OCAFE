@@ -9,12 +9,14 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ssafy.smartstore.R
 import com.ssafy.smartstore.application.MainViewModel
 import com.ssafy.smartstore.application.SmartStoreApplication.Companion.tableName
 import com.ssafy.smartstore.data.dto.order.OrderRequestDto
 import com.ssafy.smartstore.databinding.FragmentShoppingListBinding
+import com.ssafy.smartstore.ui.adapter.OnItemClickListener
 import com.ssafy.smartstore.ui.adapter.ShoppingListAdapter
 import com.ssafy.smartstore.utils.getUserId
 import com.ssafy.smartstore.utils.toMoney
@@ -69,10 +71,22 @@ class ShoppingListFragment : Fragment() {
     private fun initAdapter() {
         adapter = ShoppingListAdapter().apply {
             shoppingList = mainViewModel.orderList
+            itemClickListener = onItemClickListener
         }
         binding.recyclerShoppinglistOrder.apply {
             this.adapter = this@ShoppingListFragment.adapter
             layoutManager = LinearLayoutManager(requireContext())
+        }
+    }
+
+    private val onItemClickListener = object : OnItemClickListener {
+        override fun onItemClick(view: View, position: Int) {
+            mainViewModel.orderList.removeAt(position)
+            adapter.apply {
+                shoppingList = mainViewModel.orderList
+                notifyDataSetChanged()
+            }
+            initViews()
         }
     }
 
@@ -82,6 +96,7 @@ class ShoppingListFragment : Fragment() {
                 Toast.makeText(requireContext(), "주문을 완료하였습니다.", Toast.LENGTH_SHORT).show()
                 mainViewModel.orderList = mutableListOf()
                 tableName = ""
+                mainViewModel.isComplete = MutableLiveData()
                 requireActivity().onBackPressed()
             } else {
                 Toast.makeText(requireContext(), "주문에 실패했습니다.", Toast.LENGTH_SHORT).show()
@@ -159,6 +174,21 @@ class ShoppingListFragment : Fragment() {
                     )
                 )
             }
+        }
+        binding.textShoppinglistRemoveall.setOnClickListener {
+            initCart()
+        }
+    }
+
+    private fun initCart() {
+        mainViewModel.orderList = mutableListOf()
+        adapter.apply {
+            shoppingList = mainViewModel.orderList
+            notifyDataSetChanged()
+        }
+        binding.apply {
+            textShoppinglistTotalquantity.text = "0개"
+            textShoppinglistTotalprice.text = "0원"
         }
     }
 

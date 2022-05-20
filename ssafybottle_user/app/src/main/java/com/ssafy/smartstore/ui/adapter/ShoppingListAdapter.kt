@@ -9,6 +9,7 @@ import com.ssafy.smartstore.databinding.ItemShoppingListBinding
 class ShoppingListAdapter : RecyclerView.Adapter<ShoppingListAdapter.ShoppingViewHolder>() {
 
     var shoppingList: List<OrderDetailDto> = emptyList()
+    lateinit var itemClickListener: OnItemClickListener
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -20,7 +21,9 @@ class ShoppingListAdapter : RecyclerView.Adapter<ShoppingListAdapter.ShoppingVie
                 parent,
                 false
             )
-        )
+        ).apply {
+            bindOnItemClickListener(itemClickListener)
+        }
     }
 
     override fun onBindViewHolder(holder: ShoppingViewHolder, position: Int) {
@@ -34,6 +37,12 @@ class ShoppingListAdapter : RecyclerView.Adapter<ShoppingListAdapter.ShoppingVie
 
         fun bind(orderDetail: OrderDetailDto) {
             binding.item = orderDetail
+        }
+
+        fun bindOnItemClickListener(itemClickListener: OnItemClickListener) {
+            binding.imgItemShoppinglistCancel.setOnClickListener {
+                itemClickListener.onItemClick(it, adapterPosition)
+            }
         }
     }
 }
