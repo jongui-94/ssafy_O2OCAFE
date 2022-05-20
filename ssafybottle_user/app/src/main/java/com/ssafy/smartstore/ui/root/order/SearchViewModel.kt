@@ -9,18 +9,20 @@ import com.ssafy.smartstore.data.repository.Repository
 import kotlinx.coroutines.launch
 
 class SearchViewModel : BaseViewModel() {
-    private val repository : Repository = Repository.get()
+    private val repository: Repository = Repository.get()
 
-    private val _product = MutableLiveData<List<ProductDto>>()
-    val product : LiveData<List<ProductDto>> get() = _product
+    private val _products = MutableLiveData<List<ProductDto>>()
+    val products: LiveData<List<ProductDto>> get() = _products
 
     val isSuccess = MutableLiveData<Boolean>()
 
-    fun searchProducts(name: String) {
+    fun searchProduct(productName: String) {
         viewModelScope.launch(exceptionHandler) {
-            repository.getBeverage().let{
-                if(it.isSuccessful) {
+            repository.searchProduct(productName).let {
+                if (it.isSuccessful) {
+                    _products.postValue(it.body())
                 } else {
+                    isSuccess.postValue(false)
                 }
             }
         }

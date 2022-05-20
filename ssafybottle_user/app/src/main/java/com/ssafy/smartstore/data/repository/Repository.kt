@@ -51,6 +51,7 @@ class Repository private constructor(context: Context) {
     suspend fun getProductDetail(productId: Int) = productApi.getProductDetail(productId)
     suspend fun getProductRecommend() = productApi.getProductRecommend()
     suspend fun getProductTop10() = productApi.getProductTop10()
+    suspend fun searchProduct(productName: String) = productApi.searchProduct(productName)
 
     /**
     User

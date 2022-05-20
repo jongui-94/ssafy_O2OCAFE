@@ -2,7 +2,6 @@ package com.ssafy.smartstore.ui.root.order
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -16,8 +15,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ssafy.smartstore.R
 import com.ssafy.smartstore.databinding.FragmentMenuDetailBinding
 import com.ssafy.smartstore.ui.adapter.MenuDetailAdapter
-import com.ssafy.smartstore.utils.retrofit.FetchState
 import com.ssafy.smartstore.utils.PRODUCT_ID
+import com.ssafy.smartstore.utils.retrofit.FetchState
 
 class MenuDetailFragment : Fragment() {
 
@@ -100,17 +99,21 @@ class MenuDetailFragment : Fragment() {
             }
         }
         viewModel.isSuccess.observe(viewLifecycleOwner) {
-            if(!it) {
+            if (!it) {
                 Toast.makeText(requireContext(), "상품정보를 받아오는데 실패했습니다.", Toast.LENGTH_SHORT).show()
             }
         }
         viewModel.fetchState.observe(viewLifecycleOwner) {
             Toast.makeText(requireContext(), "상품정보를 받아오는데 실패했습니다.", Toast.LENGTH_SHORT).show()
-            when(it) {
-                FetchState.BAD_INTERNET -> { }
-                FetchState.PARSE_ERROR -> {}
-                FetchState.WRONG_CONNECTION -> {}
-                FetchState.FAIL -> {}
+            when (it) {
+                FetchState.BAD_INTERNET -> {
+                }
+                FetchState.PARSE_ERROR -> {
+                }
+                FetchState.WRONG_CONNECTION -> {
+                }
+                FetchState.FAIL -> {
+                }
             }
         }
     }
@@ -123,6 +126,10 @@ class MenuDetailFragment : Fragment() {
         binding.imgMenudetailLocation.setOnClickListener {
             requireParentFragment().findNavController()
                 .navigate(R.id.action_rootFragment_to_mapFragment)
+        }
+        binding.imgMenudetailSearch.setOnClickListener {
+            requireParentFragment().findNavController()
+                .navigate(R.id.action_rootFragment_to_searchFragment)
         }
     }
 

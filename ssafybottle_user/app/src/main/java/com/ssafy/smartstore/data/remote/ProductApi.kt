@@ -5,6 +5,7 @@ import com.ssafy.smartstore.data.dto.product.ProductDto
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface ProductApi {
     @GET("product")
@@ -24,5 +25,8 @@ interface ProductApi {
 
     @GET("product/recommendBySell")
     suspend fun getProductTop10() : Response<List<ProductDto>>
+
+    @GET("product/searchProduct")
+    suspend fun searchProduct(@Query("productName")productName : String) : Response<List<ProductDto>>
 }
 

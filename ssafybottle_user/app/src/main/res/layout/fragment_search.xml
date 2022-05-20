@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.root.order.SearchFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
@@ -36,5 +36,84 @@
             android:text="상품검색" />
 
     </com.google.android.material.appbar.MaterialToolbar>
+
+    <View
+        android:id="@+id/view_search_edtcontainer"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/edittext_shape"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_search" />
+
+    <ImageView
+        android:id="@+id/img_search_search"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="12dp"
+        android:src="@drawable/ic_search_default"
+        app:layout_constraintBottom_toBottomOf="@+id/view_search_edtcontainer"
+        app:layout_constraintStart_toStartOf="@+id/view_search_edtcontainer"
+        app:layout_constraintTop_toTopOf="@+id/view_search_edtcontainer"
+        app:tint="@color/dark_gray" />
+
+    <EditText
+        android:id="@+id/edt_search_search"
+        style="@style/SubHead"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="16dp"
+        android:background="@null"
+        android:hint="상품명을 입력해주세요."
+        android:imeOptions="actionSearch"
+        android:inputType="text"
+        android:maxLines="1"
+        app:layout_constraintBottom_toBottomOf="@+id/view_search_edtcontainer"
+        app:layout_constraintEnd_toEndOf="@+id/view_search_edtcontainer"
+        app:layout_constraintStart_toEndOf="@id/img_search_search"
+        app:layout_constraintTop_toTopOf="@+id/view_search_edtcontainer" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_search"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="16dp"
+        android:clipToPadding="false"
+        android:paddingTop="16dp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view_search_edtcontainer"
+        app:spanCount="2"
+        tools:listitem="@layout/item_search" />
+
+    <TextView
+        android:id="@+id/nocontent_search"
+        style="@style/SubHead"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="검색결과가 없습니다.🤷‍♂️"
+        android:textColor="@color/dark_gray"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+
+    <ProgressBar
+        android:id="@+id/progressbar_search_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
