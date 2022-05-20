@@ -57,5 +57,21 @@
 		WHERE p.id = #{productId}
 		ORDER BY c.id DESC
 	</select>
+	
+	<select id="recommendByRating" parameterType="String" resultType="map">
+		SELECT cm.rating, cm.product_id, p.name, p.price, p.img
+		FROM t_comment cm, t_product p
+		WHERE cm.product_id = p.id
+		ORDER BY cm.rating DESC
+		LIMIT 10;
+	</select>
+	
+	<select id="recommendBySell" parameterType="String" resultType="map">
+		SELECT od.quantity, od.product_id, p.name, p.price, p.img
+		FROM t_order_detail od, t_product p
+		WHERE od.product_id = p.id
+		ORDER BY od.quantity DESC
+		LIMIT 10;
+	</select>
 
 </mapper>

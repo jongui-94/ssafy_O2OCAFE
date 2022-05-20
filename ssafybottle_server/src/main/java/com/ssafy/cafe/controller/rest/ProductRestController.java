@@ -47,4 +47,16 @@ public class ProductRestController {
 	public List<Map<String, Object>> getProductWithComments(@PathVariable Integer productId) {
 		return pService.selectWithComment(productId);
 	}
+	
+	@GetMapping("/recommendBySell")
+	@ApiOperation(value = "판매량 순위로 추천한다.", response = List.class)
+	public List<Map<String, Object>> recommendBySell() {
+		return pService.recommendBySell();
+	}
+	
+	@GetMapping("/recommendByRating")
+	@ApiOperation(value = "별점 순위로 추천한다.", response = List.class)
+	public List<Map<String, Object>> recommendByRating() {
+		return pService.recommendByRating();
+	}
 }
