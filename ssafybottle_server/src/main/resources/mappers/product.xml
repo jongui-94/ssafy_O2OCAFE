@@ -65,7 +65,7 @@
 	</select>
 	
 	<select id="recommendByRating" parameterType="String" resultType="map">
-		SELECT AVG(cm.rating), cm.product_id, p.name, p.price, p.img
+		SELECT AVG(cm.rating) as 'rating', cm.product_id as 'id', p.name, p.price, p.img
 		FROM t_comment cm, t_product p
 		WHERE cm.product_id = p.id
 		GROUP BY p.id
@@ -74,7 +74,7 @@
 	</select>
 	
 	<select id="recommendBySell" parameterType="String" resultType="map">
-		SELECT SUM(od.quantity), od.product_id, p.name, p.price, p.img
+		SELECT SUM(od.quantity) as 'sells', od.product_id as 'id', p.name, p.price, p.img
 		FROM t_order_detail od, t_product p
 		WHERE od.product_id = p.id
 		GROUP BY p.id

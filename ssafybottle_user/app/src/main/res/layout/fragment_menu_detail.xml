@@ -31,8 +31,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
-                    android:textSize="24sp"
                     android:text="Order"
+                    android:textSize="24sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -59,6 +59,43 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/text_menudetail_store" />
 
+                <TextView
+                    android:id="@+id/text_menudetail_search"
+                    style="@style/HeadTitleBold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="32dp"
+                    android:text="상품 검색"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/text_menudetail_store_description" />
+
+                <ImageView
+                    android:id="@+id/img_menudetail_search"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/ripple_effect"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:paddingTop="2dp"
+                    android:src="@drawable/ic_search"
+                    app:layout_constraintBottom_toBottomOf="@id/text_menudetail_search"
+                    app:layout_constraintStart_toEndOf="@id/text_menudetail_search"
+                    app:layout_constraintTop_toTopOf="@id/text_menudetail_search" />
+
+                <TextView
+                    android:id="@+id/text_menudetail_search_description"
+                    style="@style/Body"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="4dp"
+                    android:text="찾고자 하는 상품을 검색해보세요!"
+                    android:textColor="@color/dark_gray"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/text_menudetail_search" />
+
                 <ImageView
                     android:id="@+id/img_menudetail_location"
                     android:layout_width="32dp"
@@ -82,7 +119,7 @@
                     android:layout_marginTop="32dp"
                     android:text="인기 TOP10 메뉴 🔥"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/text_menudetail_store_description" />
+                    app:layout_constraintTop_toBottomOf="@id/text_menudetail_search_description" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_menudetail_top10"
