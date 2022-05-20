@@ -1,5 +1,6 @@
 package com.ssafy.cafe.model.service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -7,12 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ssafy.cafe.firebase.FirebaseCloudMessageService;
 import com.ssafy.cafe.model.dao.OrderDao;
 import com.ssafy.cafe.model.dao.OrderDetailDao;
+import com.ssafy.cafe.model.dao.ProductDao;
 import com.ssafy.cafe.model.dao.StampDao;
 import com.ssafy.cafe.model.dao.UserDao;
 import com.ssafy.cafe.model.dto.Order;
 import com.ssafy.cafe.model.dto.OrderDetail;
+import com.ssafy.cafe.model.dto.Product;
 import com.ssafy.cafe.model.dto.Stamp;
 import com.ssafy.cafe.model.dto.User;
 
@@ -30,6 +34,12 @@ public class OrderServiceImpl implements OrderService {
 
 	@Autowired
 	UserDao uDao;
+	
+	@Autowired
+	ProductDao pDao;
+	
+	@Autowired
+	private FirebaseCloudMessageService fService;
 
 	@Override
 	@Transactional
@@ -51,6 +61,19 @@ public class OrderServiceImpl implements OrderService {
 		// 사용자 정보 업데이트
 		User user = User.builder().id(order.getUserId()).stamps(stamp.getQuantity()).build();
 		uDao.updateStamp(user);
+		
+				
+		// 사용자에게 푸시 알림
+		
+		Product product = pDao.select(details.get(0).getProductId());
+		User user2 = uDao.select(order.getUserId());
+		System.out.println("FCM Token: " + user2.getFtoken());
+		
+		try {
+			fService.sendMessageTo(user2.getFtoken(), "주문완료", user2.getName() + "님의 주문 " + product.getName() + "포함 " + quantitySum + "잔이 접수되었습니다.");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 	}
 

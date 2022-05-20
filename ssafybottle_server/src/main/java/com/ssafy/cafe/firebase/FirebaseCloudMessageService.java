@@ -58,7 +58,7 @@ public class FirebaseCloudMessageService {
      * @throws JsonProcessingException
      */
     private String makeMessage(String targetToken, String title, String body) throws JsonProcessingException {
-    	Notification noti = new FcmMessage.Notification(title, body, "https://ibb.co/6YK2KZ0");
+    	Notification noti = new FcmMessage.Notification(title, body, null);
         Message message = new FcmMessage.Message(noti, targetToken);
         FcmMessage fcmMessage = new FcmMessage(false, message);
         
