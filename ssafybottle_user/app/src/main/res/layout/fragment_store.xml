@@ -42,9 +42,9 @@
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar_store">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -67,8 +67,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:text="구미점"
+                android:layout_marginTop="24dp"
+                android:text="구미 황상동점"
+                android:textColor="@color/primaryColor"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/img_store_store" />
 
@@ -78,148 +79,157 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:text="경상북도 구미시 인동가산로 9-3"
+                android:textColor="@color/dark_gray"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/text_store_branch" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                style="@style/BodyItem"
-                android:layout_width="64dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:backgroundTint="@color/primaryColor"
-                android:clickable="false"
-                android:minWidth="0dp"
-                android:minHeight="0dp"
-                android:stateListAnimator="@null"
-                android:text="황상동"
-                android:textColor="@color/white"
-                android:textSize="10sp"
-                app:layout_constraintBottom_toBottomOf="@id/text_store_address"
-                app:layout_constraintStart_toEndOf="@id/text_store_address"
-                app:layout_constraintTop_toTopOf="@id/text_store_address" />
-
-            <ImageView
-                android:id="@+id/img_store_location"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_marginStart="48dp"
-                android:layout_marginTop="32dp"
-                android:background="@drawable/ripple_effect"
-                android:clickable="true"
-                android:focusable="true"
-                android:src="@drawable/ic_location"
+            <View
+                android:id="@+id/view_store_divider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="24dp"
+                android:background="@color/divider"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/text_store_address" />
 
-            <ImageView
-                android:id="@+id/img_store_call"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_marginStart="48dp"
-                android:background="@drawable/ripple_effect"
-                android:clickable="true"
-                android:focusable="true"
-                android:src="@drawable/ic_call"
-                app:layout_constraintBottom_toBottomOf="@id/img_store_location"
-                app:layout_constraintStart_toEndOf="@id/img_store_location"
-                app:layout_constraintTop_toTopOf="@id/img_store_location" />
+            <TextView
+                android:id="@+id/text_store_time"
+                style="@style/HeadTitleBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:text="영업시간"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/view_store_divider" />
 
-            <ImageView
-                android:id="@+id/img_store_sms"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_marginStart="48dp"
-                android:background="@drawable/ripple_effect"
-                android:clickable="true"
-                android:focusable="true"
-                android:padding="2dp"
-                android:src="@drawable/ic_sms"
-                app:layout_constraintBottom_toBottomOf="@id/img_store_location"
-                app:layout_constraintStart_toEndOf="@id/img_store_call"
-                app:layout_constraintTop_toTopOf="@id/img_store_location" />
+            <TextView
+                android:id="@+id/text_store_weekday"
+                style="@style/Body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="평일"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/text_store_time"
+                app:layout_constraintTop_toBottomOf="@id/text_store_time" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                style="@style/BodyItem"
-                android:layout_width="80dp"
+            <TextView
+                android:id="@+id/text_store_weekday_openinghours"
+                style="@style/Body"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginEnd="24dp"
-                android:backgroundTint="@color/button_gray"
-                android:clickable="false"
-                android:stateListAnimator="@null"
-                android:text="1.5km"
-                app:layout_constraintBottom_toBottomOf="@id/img_store_location"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/img_store_location" />
+                android:text="오전 10시 ~ 오후 8시"
+                android:textColor="@color/dark_gray"
+                app:layout_constraintBottom_toBottomOf="@id/text_store_weekday"
+                app:layout_constraintStart_toEndOf="@id/text_store_weekday"
+                app:layout_constraintTop_toTopOf="@id/text_store_weekday" />
+
+            <TextView
+                android:id="@+id/text_store_weekend"
+                style="@style/Body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="주말"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/text_store_time"
+                app:layout_constraintTop_toBottomOf="@id/text_store_weekday" />
+
+            <TextView
+                android:id="@+id/text_store_weekend_openinghours"
+                style="@style/Body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="오전 10시 ~ 오후 11시"
+                android:textColor="@color/dark_gray"
+                app:layout_constraintBottom_toBottomOf="@id/text_store_weekend"
+                app:layout_constraintStart_toEndOf="@id/text_store_weekend"
+                app:layout_constraintTop_toTopOf="@id/text_store_weekend" />
 
             <View
                 android:id="@+id/view_store_divider1"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="24dp"
                 android:background="@color/divider"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/img_store_location" />
+                app:layout_constraintTop_toBottomOf="@id/text_store_weekend" />
 
-            <ImageView
-                android:id="@+id/img_store_time"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="32dp"
-                android:src="@drawable/ic_time"
+            <TextView
+                android:id="@+id/text_store_location"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
+                android:background="@drawable/ripple_effect"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:paddingTop="56dp"
+                android:paddingBottom="24dp"
+                android:text="길찾기"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/text_store_call"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/view_store_divider1" />
 
-            <TextView
-                style="@style/SubHeadBold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="영업시간"
-                app:layout_constraintBottom_toBottomOf="@id/img_store_time"
-                app:layout_constraintStart_toEndOf="@id/img_store_time"
-                app:layout_constraintTop_toTopOf="@id/img_store_time" />
-
-            <TextView
-                android:id="@+id/text_store_openinghours"
-                style="@style/SubHead"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:text="매일 오전 10시 ~ 오후 8시"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/img_store_time" />
-
             <View
                 android:id="@+id/view_store_divider2"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="32dp"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:layout_marginVertical="16dp"
                 android:background="@color/divider"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_store_openinghours" />
+                app:layout_constraintBottom_toBottomOf="@id/text_store_location"
+                app:layout_constraintEnd_toStartOf="@id/text_store_call"
+                app:layout_constraintStart_toEndOf="@id/text_store_location"
+                app:layout_constraintTop_toTopOf="@id/text_store_location" />
 
             <TextView
-                style="@style/Body"
-                android:layout_width="wrap_content"
+                android:id="@+id/text_store_call"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="32dp"
-                android:layout_marginBottom="32dp"
-                android:lineHeight="30dp"
-                android:text="싸피커피의 맛있는 커피와 함께 매력적인 구미점을\n 즐겨보세요!"
-                android:textColor="@color/dark_gray"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
+                android:background="@drawable/ripple_effect"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:paddingTop="56dp"
+                android:paddingBottom="24dp"
+                android:text="전화걸기"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/view_store_divider2" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/text_store_location"
+                app:layout_constraintTop_toBottomOf="@id/view_store_divider1" />
+
+            <ImageView
+                android:id="@+id/img_store_location"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_location"
+                app:layout_constraintEnd_toEndOf="@id/text_store_location"
+                app:layout_constraintStart_toStartOf="@id/text_store_location"
+                app:layout_constraintTop_toTopOf="@id/text_store_location" />
+
+            <ImageView
+                android:id="@+id/img_store_call"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_call"
+                app:layout_constraintEnd_toEndOf="@id/text_store_call"
+                app:layout_constraintStart_toStartOf="@id/text_store_call"
+                app:layout_constraintTop_toTopOf="@id/text_store_call" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

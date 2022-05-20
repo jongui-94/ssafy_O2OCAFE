@@ -36,7 +36,7 @@ class StoreFragment : Fragment() {
     }
 
     private fun setOnClickListeners() {
-        binding.imgStoreCall.setOnClickListener {
+        binding.textStoreCall.setOnClickListener {
             requestPermission(Manifest.permission.CALL_PHONE, object : PermissionListener {
                 override fun onPermissionGranted() {
                     callStore()
@@ -44,7 +44,7 @@ class StoreFragment : Fragment() {
                 override fun onPermissionDenied(deniedPermissions: MutableList<String>?) { }
             })
         }
-        binding.imgStoreLocation.setOnClickListener {
+        binding.textStoreLocation.setOnClickListener {
             findDirection()
         }
         binding.imgStoreBack.setOnClickListener {
