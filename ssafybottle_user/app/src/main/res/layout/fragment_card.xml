@@ -1,212 +1,220 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.root.card.CardFragment">
 
-    <TextView
-        android:id="@+id/text_card_title"
-        style="@style/HeadTitleBold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="Pay"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/text_card_description"
-        style="@style/Body"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="카드를 터치하면 결제가 진행됩니다."
-        android:textColor="@color/dark_gray"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_card_title" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="24dp"
-        android:background="@color/background"
-        android:elevation="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_card_description">
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/card_card_card"
-            android:layout_width="0dp"
-            android:layout_height="180dp"
-            android:layout_marginHorizontal="24dp"
-            android:layout_marginTop="32dp"
-            android:backgroundTint="@color/primaryColor"
-            android:orientation="vertical"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="1dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/text_card_text1"
-                    style="@style/HeadTitleBold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:letterSpacing="0.1"
-                    android:text="SSAFY"
-                    android:textColor="@color/white"
-                    android:textSize="36sp"
-                    app:layout_constraintBottom_toTopOf="@id/text_card_text2"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_chainStyle="packed" />
-
-                <TextView
-                    android:id="@+id/text_card_text2"
-                    style="@style/HeadTitleBold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:letterSpacing="0.1"
-                    android:text="BOTTLE"
-                    android:textColor="@color/white"
-                    android:textSize="36sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/text_card_text1" />
-
-                <ImageView
-                    android:id="@+id/img_card_logo"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="10dp"
-                    android:src="@drawable/ic_logo"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:tint="@color/white" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.cardview.widget.CardView>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/text_card_name"
-            style="@style/SubHead"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="싸피보틀 e카드"
-            android:textColor="@color/dark_gray"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/card_card_card" />
-
-        <TextView
-            android:id="@+id/text_card_cash"
+            android:id="@+id/text_card_title"
             style="@style/HeadTitleBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="50,000원"
-            android:textSize="28sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="Pay"
+            android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_card_name" />
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/img_card_barcode"
-            android:layout_width="340dp"
-            android:layout_height="56dp"
+        <TextView
+            android:id="@+id/text_card_description"
+            style="@style/Body"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="카드를 터치하면 결제가 진행됩니다."
+            android:textColor="@color/dark_gray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_card_title" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
             android:layout_marginTop="24dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_card_cash"
-            tools:background="@color/black" />
-
-        <TextView
-            android:id="@+id/text_card_history"
-            style="@style/BodyItem"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:layout_marginBottom="16dp"
-            android:gravity="center"
-            android:paddingTop="48dp"
-            android:paddingBottom="24dp"
-            android:text="이용내역 조회"
-            android:background="@drawable/ripple_effect"
-            android:clickable="true"
-            android:focusable="true"
-            android:textColor="@color/dark_gray"
+            android:layout_marginBottom="24dp"
+            android:background="@color/background"
+            android:elevation="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/text_card_charge"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/img_card_barcode" />
-
-        <ImageView
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:layout_marginTop="8dp"
-            android:src="@drawable/ic_history"
-            app:layout_constraintEnd_toEndOf="@id/text_card_history"
-            app:layout_constraintStart_toStartOf="@id/text_card_history"
-            app:layout_constraintTop_toTopOf="@id/text_card_history"
-            app:tint="@color/dark_gray" />
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="0dp"
-            android:layout_marginVertical="16dp"
-            android:background="@color/divider"
-            app:layout_constraintBottom_toBottomOf="@id/text_card_history"
-            app:layout_constraintEnd_toStartOf="@id/text_card_charge"
-            app:layout_constraintStart_toEndOf="@id/text_card_history"
-            app:layout_constraintTop_toTopOf="@id/text_card_history" />
-
-        <ImageView
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:layout_marginTop="8dp"
-            android:src="@drawable/ic_charge"
-            app:layout_constraintEnd_toEndOf="@id/text_card_charge"
-            app:layout_constraintStart_toStartOf="@id/text_card_charge"
-            app:layout_constraintTop_toTopOf="@id/text_card_charge"
-            app:tint="@color/dark_gray" />
-
-        <TextView
-            android:id="@+id/text_card_charge"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:paddingTop="48dp"
-            android:paddingBottom="24dp"
-            style="@style/BodyItem"
-            android:text="충전하기"
-            android:background="@drawable/ripple_effect"
-            android:clickable="true"
-            android:focusable="true"
-            android:textColor="@color/dark_gray"
-            app:layout_constraintBottom_toBottomOf="@id/text_card_history"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/text_card_history"
-            app:layout_constraintTop_toTopOf="@id/text_card_history" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_card_description">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_card_card"
+                android:layout_width="0dp"
+                android:layout_height="180dp"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="32dp"
+                android:backgroundTint="@color/primaryColor"
+                android:orientation="vertical"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="1dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/text_card_text1"
+                        style="@style/HeadTitleBold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:letterSpacing="0.1"
+                        android:text="SSAFY"
+                        android:textColor="@color/white"
+                        android:textSize="36sp"
+                        app:layout_constraintBottom_toTopOf="@id/text_card_text2"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_chainStyle="packed" />
+
+                    <TextView
+                        android:id="@+id/text_card_text2"
+                        style="@style/HeadTitleBold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:letterSpacing="0.1"
+                        android:text="BOTTLE"
+                        android:textColor="@color/white"
+                        android:textSize="36sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/text_card_text1" />
+
+                    <ImageView
+                        android:id="@+id/img_card_logo"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="10dp"
+                        android:src="@drawable/ic_logo"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/white" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/text_card_name"
+                style="@style/SubHead"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="싸피보틀 e카드"
+                android:textColor="@color/dark_gray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/card_card_card" />
+
+            <TextView
+                android:id="@+id/text_card_cash"
+                style="@style/HeadTitleBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="50,000원"
+                android:textSize="28sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_card_name" />
+
+            <ImageView
+                android:id="@+id/img_card_barcode"
+                android:layout_width="340dp"
+                android:layout_height="56dp"
+                android:layout_marginTop="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_card_cash"
+                tools:background="@color/black" />
+
+            <TextView
+                android:id="@+id/text_card_history"
+                style="@style/BodyItem"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/ripple_effect"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:paddingTop="48dp"
+                android:paddingBottom="24dp"
+                android:text="이용내역 조회"
+                android:textColor="@color/dark_gray"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/text_card_charge"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/img_card_barcode" />
+
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/ic_history"
+                app:layout_constraintEnd_toEndOf="@id/text_card_history"
+                app:layout_constraintStart_toStartOf="@id/text_card_history"
+                app:layout_constraintTop_toTopOf="@id/text_card_history"
+                app:tint="@color/dark_gray" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:layout_marginVertical="16dp"
+                android:background="@color/divider"
+                app:layout_constraintBottom_toBottomOf="@id/text_card_history"
+                app:layout_constraintEnd_toStartOf="@id/text_card_charge"
+                app:layout_constraintStart_toEndOf="@id/text_card_history"
+                app:layout_constraintTop_toTopOf="@id/text_card_history" />
+
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/ic_charge"
+                app:layout_constraintEnd_toEndOf="@id/text_card_charge"
+                app:layout_constraintStart_toStartOf="@id/text_card_charge"
+                app:layout_constraintTop_toTopOf="@id/text_card_charge"
+                app:tint="@color/dark_gray" />
+
+            <TextView
+                android:id="@+id/text_card_charge"
+                style="@style/BodyItem"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ripple_effect"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:paddingTop="48dp"
+                android:paddingBottom="24dp"
+                android:text="충전하기"
+                android:textColor="@color/dark_gray"
+                app:layout_constraintBottom_toBottomOf="@id/text_card_history"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/text_card_history"
+                app:layout_constraintTop_toTopOf="@id/text_card_history" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

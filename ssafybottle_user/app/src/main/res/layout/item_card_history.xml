@@ -7,8 +7,8 @@
     <data>
 
         <variable
-            name="cardHistory"
-            type="com.ssafy.smartstore.data.dto.card.CardHistory" />
+            name="card"
+            type="com.ssafy.smartstore.data.dto.card.CardDto" />
 
         <import type="com.ssafy.smartstore.utils.StringUtilKt" />
     </data>
@@ -23,7 +23,7 @@
             style="@style/Body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{cardHistory.content}"
+            android:text="@{card.content}"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -35,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="@{cardHistory.date}"
+            android:text="@{card.payTime}"
             android:textColor="@color/dark_gray"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_item_cardhistory_content"
@@ -45,8 +45,8 @@
             style="@style/Body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text='@{cardHistory.isCharge? StringUtilKt.toMoney(cardHistory.price) + "원" : "-" + StringUtilKt.toMoney(cardHistory.price) + "원"}'
-            android:textColor="@{cardHistory.isCharge? @color/primaryColor: @color/black }"
+            android:text='@{StringUtilKt.toMoney(card.payment) + "원"}'
+            android:textColor="@{card.payment >=0 ? @color/primaryColor: @color/black }"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

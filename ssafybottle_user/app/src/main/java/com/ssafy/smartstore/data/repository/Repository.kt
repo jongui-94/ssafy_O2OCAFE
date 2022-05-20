@@ -3,17 +3,21 @@ package com.ssafy.smartstore.data.repository
 import android.content.Context
 import androidx.room.Room
 import androidx.room.withTransaction
+import com.ssafy.smartstore.data.dto.card.CardDto
 import com.ssafy.smartstore.data.dto.comment.CommentDto
+import com.ssafy.smartstore.data.dto.order.OrderByUserDto
 import com.ssafy.smartstore.data.dto.order.OrderRequestDto
 import com.ssafy.smartstore.data.dto.user.UserDto
 import com.ssafy.smartstore.data.entitiy.*
 import com.ssafy.smartstore.data.local.AppDatabase
-import com.ssafy.smartstore.data.remote.CommentApi
-import com.ssafy.smartstore.data.remote.OrderApi
-import com.ssafy.smartstore.data.remote.ProductApi
-import com.ssafy.smartstore.data.remote.UserApi
+import com.ssafy.smartstore.data.remote.*
 import com.ssafy.smartstore.utils.DATABASE
 import com.ssafy.smartstore.utils.retrofit.RetrofitBuilder
+import retrofit2.Response
+import retrofit2.http.Body
+import retrofit2.http.GET
+import retrofit2.http.POST
+import retrofit2.http.Path
 
 class Repository private constructor(context: Context) {
     private val database: AppDatabase = Room.databaseBuilder(
@@ -25,12 +29,6 @@ class Repository private constructor(context: Context) {
     /**
     Dao
      */
-    private val stampDao = database.stampDao()
-    private val commentDao = database.commentDao()
-    private val orderDao = database.orderDao()
-    private val orderDetailDao = database.orderDetailDao()
-    private val productDao = database.productDao()
-    private val userDao = database.userDao()
     private val notificationDao = database.notificationDao()
 
     /**
@@ -39,7 +37,8 @@ class Repository private constructor(context: Context) {
     private val productApi = RetrofitBuilder.retrofit.create(ProductApi::class.java)
     private val orderApi = RetrofitBuilder.retrofit.create(OrderApi::class.java)
     private val userApi = RetrofitBuilder.retrofit.create(UserApi::class.java)
-    private val commentApi = RetrofitBuilder.retrofit.create((CommentApi::class.java))
+    private val commentApi = RetrofitBuilder.retrofit.create(CommentApi::class.java)
+    private val cardApi = RetrofitBuilder.retrofit.create(CardApi::class.java)
 
     /**
     Product
@@ -75,18 +74,6 @@ class Repository private constructor(context: Context) {
     suspend fun getOrderByOrderId(orderId: Int) = orderApi.getOrderByOrderId(orderId)
     suspend fun postOrder(order: OrderRequestDto) = orderApi.postOrder(order)
 
-    // Room
-    suspend fun insertOrder(order: Order) = database.withTransaction { orderDao.insertOrder(order) }
-    suspend fun getOrder(orderId : Int) = orderDao.getOrder(orderId)
-    suspend fun getLastOrderId() = orderDao.getLastOrderId()
-
-    /**
-    OrderDetail
-     */
-    suspend fun insertOrderDetail(orderDetail: OrderDetail) =
-        database.withTransaction { orderDetailDao.insertOrderDetail(orderDetail) }
-    suspend fun getOrderDetails(orderId: Int) = orderDetailDao.getOrderDetails(orderId)
-
     /**
     Notification
      */
@@ -96,6 +83,12 @@ class Repository private constructor(context: Context) {
 
     suspend fun deleteNotification(notification: Notification) =
         database.withTransaction { notificationDao.deleteNotification(notification) }
+
+    /**
+    Card
+     */
+    suspend fun getCardHistory(userId : String) = cardApi.getCardHistory(userId)
+    suspend fun postcard(card: CardDto) = cardApi.postcard(card)
 
     /**
     Singleton

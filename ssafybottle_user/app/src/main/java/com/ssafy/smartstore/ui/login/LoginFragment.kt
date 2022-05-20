@@ -51,6 +51,7 @@ class LoginFragment : Fragment() {
                 saveUserId(binding.edtLoginId.text.toString())
                 navigateToRootFragment()
             } else {
+                binding.progressbarLoginLoading.isVisible = false
                 Toast.makeText(requireContext(), "로그인 실패", Toast.LENGTH_SHORT).show()
             }
         }
