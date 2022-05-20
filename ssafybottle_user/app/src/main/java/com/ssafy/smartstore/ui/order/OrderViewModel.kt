@@ -21,7 +21,6 @@ class OrderViewModel : BaseViewModel() {
     private val _isDeleted = MutableLiveData<Boolean>()
     val isDeleted: LiveData<Boolean> get() = _isDeleted
 
-
     fun getProduct(productId: Int) {
         viewModelScope.launch(exceptionHandler) {
             repository.getProductDetail(productId).let { response ->

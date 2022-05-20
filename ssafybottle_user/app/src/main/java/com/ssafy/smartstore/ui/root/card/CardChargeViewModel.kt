@@ -29,6 +29,4 @@ class CardChargeViewModel : BaseViewModel() {
             }
         }
     }
-
-
 }

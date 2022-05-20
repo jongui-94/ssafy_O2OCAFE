@@ -52,6 +52,7 @@ class ShoppingListFragment : Fragment() {
 
     private fun initData() {
         userId = getUserId()
+        mainViewModel.checkCash(userId)
     }
 
     private fun initViews() {
@@ -100,6 +101,12 @@ class ShoppingListFragment : Fragment() {
                 requireActivity().onBackPressed()
             } else {
                 Toast.makeText(requireContext(), "주문에 실패했습니다.", Toast.LENGTH_SHORT).show()
+            }
+        }
+        mainViewModel.lackOfBalance.observe(viewLifecycleOwner) {
+            if(it) {
+                Toast.makeText(requireContext(), "카드 잔액이 부족합니다.", Toast.LENGTH_SHORT).show()
+                mainViewModel.lackOfBalance.value = false
             }
         }
     }
