@@ -41,6 +41,12 @@
 		SELECT * FROM t_product WHERE type = "dessert"
 		ORDER BY id DESC
 	</select>
+	
+	<select id="searchProduct" parameterType="String" resultType="Product">
+		SELECT *
+		FROM t_product
+		WHERE name LIKE CONCAT('%',#{name},'%')
+	</select>
 
 
 	<!-- backend 관통 과정에서 추가됨 -->
@@ -59,18 +65,20 @@
 	</select>
 	
 	<select id="recommendByRating" parameterType="String" resultType="map">
-		SELECT cm.rating, cm.product_id, p.name, p.price, p.img
+		SELECT AVG(cm.rating), cm.product_id, p.name, p.price, p.img
 		FROM t_comment cm, t_product p
 		WHERE cm.product_id = p.id
-		ORDER BY cm.rating DESC
+		GROUP BY p.id
+		ORDER BY AVG(cm.rating) DESC
 		LIMIT 10;
 	</select>
 	
 	<select id="recommendBySell" parameterType="String" resultType="map">
-		SELECT od.quantity, od.product_id, p.name, p.price, p.img
+		SELECT SUM(od.quantity), od.product_id, p.name, p.price, p.img
 		FROM t_order_detail od, t_product p
 		WHERE od.product_id = p.id
-		ORDER BY od.quantity DESC
+		GROUP BY p.id
+		ORDER BY SUM(od.quantity) DESC
 		LIMIT 10;
 	</select>
 

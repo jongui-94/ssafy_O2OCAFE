@@ -31,6 +31,11 @@ public class ProductServiceImpl implements ProductService {
 	public List<Product> getBeverage() {
 		return pDao.selectBeverage();
 	}
+	
+	@Override
+	public List<Product> searchProduct(String productName) {
+		return pDao.searchProduct(productName);
+	}
 
 
 	@Override

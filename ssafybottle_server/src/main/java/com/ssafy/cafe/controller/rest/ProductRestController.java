@@ -40,6 +40,12 @@ public class ProductRestController {
 	public List<Product> getDessert() {
 		return pService.getDessert();
 	}
+	
+	@GetMapping("/searchProduct")
+	@ApiOperation(value = "원하는 상품 검색", response = List.class)
+	public List<Product> searchProduct(String productName) {
+		return pService.searchProduct(productName);
+	}
 
 	@GetMapping("/{productId}")
 	@ApiOperation(value = "{productId}에 해당하는 상품의 정보를 comment와 함께 반환한다."

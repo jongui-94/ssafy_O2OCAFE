@@ -16,6 +16,8 @@ public interface ProductService {
 	List<Product> getBeverage();
 	
 	List<Product> getDessert();
+	
+	List<Product> searchProduct(String productName);
 
 	/**
 	 * backend 관통 과정에서 추가됨

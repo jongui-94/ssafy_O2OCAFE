@@ -11,6 +11,7 @@
 	<select id="selectUserCard" parameterType="String" resultType="Card">
 		SELECT * FROM t_card
 		WHERE user_id = #{userId}
+		ORDER BY pay_time DESC
 	</select>
 	
 	
