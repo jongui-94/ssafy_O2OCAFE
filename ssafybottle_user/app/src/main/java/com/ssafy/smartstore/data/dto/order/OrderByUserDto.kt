@@ -1,7 +1,5 @@
 package com.ssafy.smartstore.data.dto.order
 
-import java.sql.Timestamp
-
 data class OrderByUserDto(
     val completed: String,
     val img: String,
@@ -13,4 +11,12 @@ data class OrderByUserDto(
     val quantity: Int,
     val type: String,
     val user_id: String
-)
+) {
+    fun toOrderDetailDto() = OrderDetailDto(
+        productId = p_id,
+        quantity = quantity,
+        img = img,
+        name = name,
+        price = price
+    )
+}

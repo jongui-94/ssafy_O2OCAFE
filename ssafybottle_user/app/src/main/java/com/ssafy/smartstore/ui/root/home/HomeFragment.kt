@@ -3,6 +3,7 @@ package com.ssafy.smartstore.ui.root.home
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,11 +11,14 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ssafy.smartstore.R
+import com.ssafy.smartstore.application.MainViewModel
+import com.ssafy.smartstore.data.dto.order.OrderDetailDto
 import com.ssafy.smartstore.databinding.FragmentHomeBinding
 import com.ssafy.smartstore.ui.adapter.OnItemClickListener
 import com.ssafy.smartstore.ui.adapter.PromotionAdapter
@@ -29,6 +33,7 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: HomeViewModel by viewModels()
+    private val mainViewModel: MainViewModel by activityViewModels()
     private lateinit var recentOrderAdapter: RecentOrderAdapter
     private lateinit var promotionAdapter: PromotionAdapter
     private lateinit var recommendMenuAdapter: RecommendMenuAdapter
@@ -87,13 +92,22 @@ class HomeFragment : Fragment() {
     private val itemRecentOrderClickListener = object : OnItemClickListener {
         override fun onItemClick(view: View, position: Int) {
             showShippingListDialog { dialog, _ ->
-                viewModel.recentOrders.value!![position].let {
-                    viewModel.insertRecentOrder(
-                        it.o_id,
-                        it.user_id
-                    )
+                mainViewModel.orderList = mutableListOf()
+
+                viewModel.recentOrders.value!![position].let { selectOrder ->
+                    viewModel.recentOrders.value?.forEach {
+                        if(it.o_id == selectOrder.o_id) {
+                            mainViewModel.orderList.add(it.toOrderDetailDto())
+                        }
+                    }
                 }
+
+                Toast.makeText(requireContext(), "최근 주문을 장바구니에 담았습니다.", Toast.LENGTH_SHORT).show()
+
                 dialog.dismiss()
+
+                requireParentFragment().findNavController()
+                    .navigate(R.id.action_rootFragment_to_shoppingListFragment)
             }
         }
     }
@@ -127,14 +141,6 @@ class HomeFragment : Fragment() {
             recentOrderAdapter.apply {
                 recentOrders = it
                 notifyDataSetChanged()
-            }
-        }
-        viewModel.isSuccess.observe(viewLifecycleOwner) {
-            if (it) {
-                Toast.makeText(requireContext(), "최근 주문을 장바구니에 담았습니다.", Toast.LENGTH_SHORT).show()
-                requireParentFragment().findNavController()
-                    .navigate(R.id.action_rootFragment_to_shoppingListFragment)
-                viewModel.isSuccess.value = false
             }
         }
         viewModel.user.observe(viewLifecycleOwner) {

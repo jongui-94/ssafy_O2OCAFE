@@ -10,11 +10,13 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ssafy.smartstore.R
+import com.ssafy.smartstore.application.MainViewModel
 import com.ssafy.smartstore.data.dto.user.UserInfoResponseDto
 import com.ssafy.smartstore.databinding.FragmentMyPageBinding
 import com.ssafy.smartstore.ui.adapter.OnItemClickListener
@@ -28,6 +30,7 @@ class MyPageFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: MyPageViewModel by viewModels()
+    private val mainViewModel : MainViewModel by activityViewModels()
     private lateinit var adapter: OrderHistoryAdapter
 
     private lateinit var userId: String
@@ -118,6 +121,7 @@ class MyPageFragment : Fragment() {
             showLogoutDialog { dialog, _ ->
                 unSetAutoLogin()
                 clearUserId()
+                mainViewModel.orderList = mutableListOf()
                 findNavController().navigate(R.id.action_rootFragment_to_loginMainFragment)
                 dialog.dismiss()
             }
