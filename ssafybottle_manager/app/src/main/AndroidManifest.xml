@@ -18,6 +18,7 @@
         <activity
             android:name=".application.MainActivity"
             android:exported="true"
+            android:screenOrientation="landscape"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
