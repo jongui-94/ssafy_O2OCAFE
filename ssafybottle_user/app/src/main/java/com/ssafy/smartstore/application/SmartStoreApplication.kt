@@ -16,8 +16,8 @@ class SmartStoreApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        initFCMMessageAccept()
         initRepository()
+        initFCMMessageAccept()
     }
 
     private fun initRepository() {
@@ -38,6 +38,7 @@ class SmartStoreApplication : Application() {
             createNotificationChannel("smart_store", "smart_store")
         }
     }
+
     @RequiresApi(Build.VERSION_CODES.O)
     private fun createNotificationChannel(id: String, name: String) {
         (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager)

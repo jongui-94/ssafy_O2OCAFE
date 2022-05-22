@@ -3,11 +3,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.root.RootFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="RootFragment" />
+    <androidx.slidingpanelayout.widget.SlidingPaneLayout
+        android:id="@+id/slidingpane_root"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
 
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_root_pane"
+            android:layout_width="280dp"
+            android:layout_height="match_parent"
+            android:elevation="10dp"
+            tools:listitem="@layout/item_pane"
+            android:overScrollMode="never"/>
+
+        <androidx.fragment.app.FragmentContainerView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:background="@color/bg_gray"/>
+
+
+    </androidx.slidingpanelayout.widget.SlidingPaneLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

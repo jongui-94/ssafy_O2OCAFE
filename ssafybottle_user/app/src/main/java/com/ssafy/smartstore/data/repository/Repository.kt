@@ -115,7 +115,7 @@ class Repository private constructor(context: Context) {
         }
 
         fun get(): Repository {
-            return instance ?: throw IllegalStateException("GalleryRepository must be initialized")
+            return instance ?: throw IllegalStateException("Repository must be initialized")
         }
     }
 }

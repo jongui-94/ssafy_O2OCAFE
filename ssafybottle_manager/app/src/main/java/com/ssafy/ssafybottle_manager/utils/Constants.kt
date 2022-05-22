@@ -1,6 +1,17 @@
 package com.ssafy.ssafybottle_manager.utils
 
 /**
+ Pane Menu
+ */
+const val MENU_ORDER = 101
+const val MENU_ORDER_MANAGEMENT = 102
+const val MENU_SALES_MANAGEMENT = 103
+const val MENU_NOTIFICATION = 104
+const val MENU_SETTING = 105
+
+
+
+/**
  Fragment
  */
 const val FRAGMENT_HOME = "HomeFragment"

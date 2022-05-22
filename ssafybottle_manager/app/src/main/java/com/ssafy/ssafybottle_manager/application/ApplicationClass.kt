@@ -8,6 +8,7 @@ import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
 import com.google.firebase.messaging.FirebaseMessaging
+import com.ssafy.ssafybottle_manager.data.repository.Repository
 
 class ApplicationClass : Application() {
 
@@ -15,7 +16,12 @@ class ApplicationClass : Application() {
     override fun onCreate() {
         super.onCreate()
 
+        initRepository()
         initFCMMessageAccept()
+    }
+
+    private fun initRepository() {
+        Repository.initialize(this)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -32,6 +38,7 @@ class ApplicationClass : Application() {
             createNotificationChannel("smart_store", "smart_store")
         }
     }
+
     @RequiresApi(Build.VERSION_CODES.O)
     private fun createNotificationChannel(id: String, name: String) {
         (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager)
