@@ -9,13 +9,15 @@ import com.ssafy.ssafybottle_manager.utils.view.getResourceId
 
 @BindingAdapter("imageUrl")
 fun loadImage(view: ImageView, url: String?) {
-    view.setImageResource(view.getResourceId(url))
+    Glide.with(view)
+        .load(view.getResourceId(url))
+        .into(view)
 }
 
 @BindingAdapter("imgResId")
 fun bindImageFromResource(view: ImageView, resId: Int) {
     Glide.with(view)
-        .load("")
+        .load(resId)
         .placeholder(resId)
         .into(view)
 }

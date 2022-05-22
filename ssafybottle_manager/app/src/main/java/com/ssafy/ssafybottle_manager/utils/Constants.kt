@@ -33,6 +33,18 @@ const val BASE_URL = "http://175.198.147.122:9999/rest/"
 //const val BASE_URL = "http://118.37.203.111:9999/rest/"
 
 /**
+ Retrofit Response Status
+ */
+const val DEFAULT = 0
+const val SUCCESS = 1
+const val FAILURE = 2
+
+/**
+ ViewPager2
+ */
+const val NUM_TABS = 3
+
+/**
  Id
  */
 const val PRODUCT_ID = "product_id"

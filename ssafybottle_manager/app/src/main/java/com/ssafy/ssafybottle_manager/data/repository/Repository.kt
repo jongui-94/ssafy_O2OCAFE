@@ -1,8 +1,24 @@
 package com.ssafy.ssafybottle_manager.data.repository
 
 import android.content.Context
+import com.ssafy.ssafybottle_manager.data.remote.ProductApi
+import com.ssafy.ssafybottle_manager.utils.retrofit.RetrofitBuilder
 
 class Repository private constructor(context: Context) {
+
+    /**
+     API
+     */
+    private val productApi = RetrofitBuilder.retrofit.create(ProductApi::class.java)
+
+
+    /**
+     Product
+     */
+    suspend fun getProducts() = productApi.getProducts()
+    suspend fun getBeverage() = productApi.getBeverage()
+    suspend fun getDessert() = productApi.getDessert()
+
 
 
     companion object {
