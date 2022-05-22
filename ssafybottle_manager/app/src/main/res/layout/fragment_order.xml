@@ -15,59 +15,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                style="@style/HeadBold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="주문"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <View
-                android:id="@+id/view_order_edtcontainer"
-                android:layout_width="320dp"
-                android:layout_height="48dp"
-                android:layout_marginEnd="16dp"
-                android:background="@drawable/edittext_shape"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/img_order_search"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginStart="12dp"
-                android:src="@drawable/ic_search_default"
-                app:layout_constraintBottom_toBottomOf="@+id/view_order_edtcontainer"
-                app:layout_constraintStart_toStartOf="@+id/view_order_edtcontainer"
-                app:layout_constraintTop_toTopOf="@+id/view_order_edtcontainer"
-                app:tint="@color/dark_gray" />
-
-            <EditText
-                android:id="@+id/edt_order_search"
-                style="@style/SubHead"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="16dp"
-                android:background="@null"
-                android:hint="상품명을 입력해주세요."
-                android:imeOptions="actionSearch"
-                android:inputType="text"
-                android:maxLines="1"
-                app:layout_constraintBottom_toBottomOf="@+id/view_order_edtcontainer"
-                app:layout_constraintEnd_toEndOf="@+id/view_order_edtcontainer"
-                app:layout_constraintStart_toEndOf="@id/img_order_search"
-                app:layout_constraintTop_toTopOf="@+id/view_order_edtcontainer" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            style="@style/HeadTitleBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="카테고리" />
 
     </com.google.android.material.appbar.MaterialToolbar>
 
@@ -90,6 +43,86 @@
         app:layout_constraintEnd_toEndOf="@id/guideline_order"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tab_order" />
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar_order_bill"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        app:contentInsetStart="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/guideline_order"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            style="@style/HeadTitleBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:gravity="center"
+            android:text="주문서" />
+
+        <TextView
+            android:id="@+id/text_order_removeall"
+            style="body"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:background="@drawable/ripple_effect"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="전체 지우기"
+            android:textColor="@color/dark_gray" />
+
+    </com.google.android.material.appbar.MaterialToolbar>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_bill"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="16dp"
+        android:clipToPadding="false"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@id/text_order_label_totalcost"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/guideline_order"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_order_bill"
+        tools:listitem="@layout/item_bill" />
+
+    <TextView
+        android:id="@+id/text_order_label_totalcost"
+        style="@style/HeadTitleBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="16dp"
+        android:text="총"
+        app:layout_constraintBottom_toTopOf="@id/btn_order_order"
+        app:layout_constraintStart_toStartOf="@id/guideline_order" />
+
+    <TextView
+        android:id="@+id/text_order_totalcost"
+        style="@style/HeadTitleBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        android:text="0원"
+        app:layout_constraintBottom_toTopOf="@id/btn_order_order"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/btn_order_order"
+        style="@style/SubHeadWhite"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/button_regular"
+        android:text="주문하기"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/guideline_order" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_order"

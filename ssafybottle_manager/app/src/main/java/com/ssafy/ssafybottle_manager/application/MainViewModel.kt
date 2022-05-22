@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.ssafy.ssafybottle_manager.R
 import com.ssafy.ssafybottle_manager.base.BaseViewModel
+import com.ssafy.ssafybottle_manager.data.dto.order.OrderDetailDto
 import com.ssafy.ssafybottle_manager.data.dto.pane.PaneMenu
 import com.ssafy.ssafybottle_manager.data.dto.product.ProductDto
 import com.ssafy.ssafybottle_manager.data.repository.Repository
@@ -29,10 +30,14 @@ class MainViewModel : BaseViewModel() {
     val beverage: LiveData<List<ProductDto>> get() = _beverage
     var isBeverageSuccess = MutableLiveData<Int>()
 
+    var liveOrderList = MutableLiveData<MutableList<OrderDetailDto>>()
+    var orderList : MutableList<OrderDetailDto> = mutableListOf()
+    var totalCost = MutableLiveData(0)
+
 
     init {
         menus = mutableListOf(
-            PaneMenu(MENU_TITLE, "싸피보틀 관리", null, false),
+            PaneMenu(MENU_TITLE, "SSAFYBOTTLE\nMANAGER", null, false),
             PaneMenu(MENU_ORDER, "주문", R.drawable.ic_cart, true),
             PaneMenu(MENU_ORDER_MANAGEMENT, "주문 관리", R.drawable.ic_order, false),
             PaneMenu(MENU_SALES_MANAGEMENT, "매출 관리", R.drawable.ic_dollar, false),

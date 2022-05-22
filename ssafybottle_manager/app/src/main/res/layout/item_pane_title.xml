@@ -19,13 +19,14 @@
             style="@style/HeadTitleBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:letterSpacing="0.05"
             android:text="@{menu.name}"
+            android:textColor="@color/primaryColor"
             android:textSize="28sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:letterSpacing="0.07"
-            tools:text="싸피보틀 관리" />
+            tools:text="SSAFYBOTTLE\nMANAGER" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

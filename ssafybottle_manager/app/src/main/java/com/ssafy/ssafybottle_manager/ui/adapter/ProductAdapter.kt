@@ -38,7 +38,7 @@ class ProductAdapter : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() 
 
         fun bindOnItemClickListener(onItemClickListener: (View, Int) -> Unit ) {
             binding.root.setOnClickListener {
-                onItemClickListener(it, binding.product!!.id)
+                onItemClickListener(it, adapterPosition)
             }
         }
     }

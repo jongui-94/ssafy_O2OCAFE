@@ -8,10 +8,10 @@
     tools:context=".ui.root.RootFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:background="@color/bg_gray"
         android:id="@+id/recycler_root_pane"
-        android:layout_width="260dp"
+        android:layout_width="270dp"
         android:layout_height="match_parent"
+        android:background="@color/bg_gray"
         android:elevation="10dp"
         android:overScrollMode="never"
         tools:listitem="@layout/item_pane" />

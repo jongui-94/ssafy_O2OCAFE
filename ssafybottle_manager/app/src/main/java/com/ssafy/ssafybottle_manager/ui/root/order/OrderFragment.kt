@@ -6,23 +6,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import com.google.android.material.tabs.TabLayoutMediator
-import com.ssafy.ssafybottle_manager.R
 import com.ssafy.ssafybottle_manager.application.MainViewModel
 import com.ssafy.ssafybottle_manager.databinding.FragmentOrderBinding
-import com.ssafy.ssafybottle_manager.databinding.FragmentOrderManagementBinding
+import com.ssafy.ssafybottle_manager.ui.adapter.BillAdapter
 import com.ssafy.ssafybottle_manager.ui.adapter.OrderViewPagerAdapter
-import com.ssafy.ssafybottle_manager.utils.DEFAULT
-import com.ssafy.ssafybottle_manager.utils.FAILURE
+import com.ssafy.ssafybottle_manager.utils.toMoney
 
 class OrderFragment : Fragment() {
     private var _binding: FragmentOrderBinding? = null
     private val binding get() = _binding!!
 
-    private val mainViewModel : MainViewModel by activityViewModels()
+    private val mainViewModel: MainViewModel by activityViewModels()
+    private lateinit var billAdapter: BillAdapter
 
     private val tabTitle = arrayOf("전체", "음료", "디저트")
 
@@ -37,12 +34,30 @@ class OrderFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initData()
+        initAdapter()
         initView()
         observeData()
+        setOnClickListeners()
     }
 
-    private fun initData() {
+    private fun initAdapter() {
+        billAdapter = BillAdapter().apply {
+            onItemClickListener = billItemClickListener
+            onItemChangeListener = billItemChangeListener
+        }
+        binding.recyclerBill.apply {
+            adapter = billAdapter
+        }
+    }
+
+    private val billItemClickListener: (View, Int) -> Unit = { _, position ->
+        mainViewModel.orderList.removeAt(position)
+        mainViewModel.liveOrderList.value = mainViewModel.orderList
+    }
+
+    private val billItemChangeListener: (View, Int, Int) -> Unit = { _, position, quantity ->
+        mainViewModel.orderList[position].quantity = quantity
+        mainViewModel.liveOrderList.value = mainViewModel.orderList
     }
 
     private fun initView() {
@@ -53,8 +68,29 @@ class OrderFragment : Fragment() {
         }.attach()
     }
 
-
     private fun observeData() {
+        mainViewModel.liveOrderList.observe(viewLifecycleOwner) {
+            billAdapter.apply {
+                orderList = it
+                notifyDataSetChanged()
+            }
+
+            var sum = 0
+            it.forEach { detail ->
+                sum += detail.price * detail.quantity
+            }
+            mainViewModel.totalCost.value = sum
+        }
+        mainViewModel.totalCost.observe(viewLifecycleOwner) {
+            binding.textOrderTotalcost.text = "${toMoney(it)}원"
+        }
+    }
+
+    private fun setOnClickListeners() {
+        binding.textOrderRemoveall.setOnClickListener {
+            mainViewModel.orderList = mutableListOf()
+            mainViewModel.liveOrderList.value = mainViewModel.orderList
+        }
     }
 
     override fun onDestroyView() {
