@@ -1,10 +1,27 @@
 package com.ssafy.ssafybottle_manager.ui.adapter
 
 import android.widget.ImageView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
+import com.bumptech.glide.Glide
+import com.ssafy.ssafybottle_manager.R
 import com.ssafy.ssafybottle_manager.utils.view.getResourceId
 
 @BindingAdapter("imageUrl")
 fun loadImage(view: ImageView, url: String?) {
     view.setImageResource(view.getResourceId(url))
 }
+
+@BindingAdapter("imgResId")
+fun bindImageFromResource(view: ImageView, resId: Int) {
+    Glide.with(view)
+        .load("")
+        .placeholder(resId)
+        .into(view)
+}
+
+@BindingAdapter("backColor")
+fun bindBackgroundBySelected(layout: ConstraintLayout, isSelected: Boolean) {
+    layout.setBackgroundResource(if(isSelected) R.drawable.bg_pane_item_select else R.drawable.ripple_pane_item)
+}
+

@@ -21,6 +21,8 @@ class FCMService : FirebaseMessagingService() {
 
     override fun onNewToken(token: String) {
         super.onNewToken(token)
+
+        Log.d("FCMService_싸피", "onNewToken: 토큰 갱신: $token")
     }
 
     override fun onMessageReceived(message: RemoteMessage) {

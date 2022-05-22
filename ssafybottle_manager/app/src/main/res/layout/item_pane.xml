@@ -1,38 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="menu"
             type="com.ssafy.ssafybottle_manager.data.dto.pane.PaneMenu" />
     </data>
 
-
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:padding="8dp"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:padding="16dp"
+        app:backColor="@{menu.selected}">
 
         <ImageView
             android:id="@+id/img_item_pane_icon"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="8dp"
             android:src="@drawable/ic_order"
+            app:imgResId="@{menu.icon}"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            android:tint="@{menu.isSelected ? @color/white : @color/black}" />
 
         <TextView
-            style="@style/SubHead"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/img_item_pane_icon"
-            android:layout_marginStart="8dp"
+            style="@style/Body"
+            android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="주문"/>
-
+            android:layout_marginStart="16dp"
+            android:text="@{menu.name}"
+            android:textColor="@{menu.isSelected ? @color/white : @color/black}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/img_item_pane_icon"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="주문" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

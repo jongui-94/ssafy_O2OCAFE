@@ -3,6 +3,7 @@ package com.ssafy.ssafybottle_manager.utils
 /**
  Pane Menu
  */
+const val MENU_TITLE = 100
 const val MENU_ORDER = 101
 const val MENU_ORDER_MANAGEMENT = 102
 const val MENU_SALES_MANAGEMENT = 103
@@ -14,10 +15,11 @@ const val MENU_SETTING = 105
 /**
  Fragment
  */
-const val FRAGMENT_HOME = "HomeFragment"
-const val FRAGMENT_MY_PAGE = "MyPageFragment"
-const val FRAGMENT_MENU_DETAIL = "MenuDetailFragment"
-const val FRAGMENT_CARD = "CardFragment"
+const val FRAGMENT_ORDER = "OrderFragment"
+const val FRAGMENT_ORDER_MANAGEMENT = "OrderManagementFragment"
+const val FRAGMENT_SALES = "SalesFragment"
+const val FRAGMENT_NOTIFICATION = "NotificationFragment"
+const val FRAGMENT_SETTING = "SettingFragment"
 
 /**
  Dialog
