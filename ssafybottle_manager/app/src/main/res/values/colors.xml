@@ -20,6 +20,7 @@
     <color name="divider">#D3D3D3</color>
     <color name="bottom_sheet_background">#FBFBFB</color>
 
+    <color name="bg_gray">#f7f7f7</color>
     <color name="lightGray">#E0E0E0</color>
     <color name="edt_gray">#DBDBDB</color>
     <color name="transparent">#00000000</color>
