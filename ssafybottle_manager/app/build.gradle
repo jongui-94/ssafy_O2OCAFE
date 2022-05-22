@@ -25,6 +25,7 @@ android {
         }
     }
     compileOptions {
+        coreLibraryDesugaringEnabled true
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
@@ -94,4 +95,8 @@ dependencies {
 
     // FCM
     implementation 'com.google.firebase:firebase-messaging-ktx:23.0.3'
+
+    // zxing 바코드 앱앱
+    implementation 'com.journeyapps:zxing-android-embedded:4.3.0'
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
 }

@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.tabs.TabLayoutMediator
+import com.ssafy.ssafybottle_manager.application.MainActivity
 import com.ssafy.ssafybottle_manager.application.MainViewModel
 import com.ssafy.ssafybottle_manager.databinding.FragmentOrderBinding
 import com.ssafy.ssafybottle_manager.ui.adapter.BillAdapter
@@ -90,6 +91,9 @@ class OrderFragment : Fragment() {
         binding.textOrderRemoveall.setOnClickListener {
             mainViewModel.orderList = mutableListOf()
             mainViewModel.liveOrderList.value = mainViewModel.orderList
+        }
+        binding.btnOrderOrder.setOnClickListener {
+            (requireActivity() as MainActivity).startBarcodeReader()
         }
     }
 
