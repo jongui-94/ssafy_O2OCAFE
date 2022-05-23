@@ -118,5 +118,10 @@ public class OrderServiceImpl implements OrderService {
 	public List<Order> getOrderList() {
 		return oDao.getOrderList();
 	}
+	
+	@Override
+	public int setOrderCompleted(Integer orderId) {		
+		return oDao.completeOrder(orderId);
+	}
 
 }

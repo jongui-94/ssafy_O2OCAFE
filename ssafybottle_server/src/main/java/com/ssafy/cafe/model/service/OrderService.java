@@ -56,4 +56,6 @@ public interface OrderService {
 	List<Map<String, Object>> getLastMonthOrder(String id);
 	
 	List<Order> getOrderList();
+	
+	public int setOrderCompleted(Integer orderId);
 }

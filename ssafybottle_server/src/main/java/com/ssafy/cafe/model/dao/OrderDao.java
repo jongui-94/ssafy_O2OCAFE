@@ -33,5 +33,7 @@ public interface OrderDao {
 	List<Map<String, Object>> getLastMonthOrder(String id);
 	
 	List<Order> getOrderList();
+	
+	int completeOrder(int id);
 
 }

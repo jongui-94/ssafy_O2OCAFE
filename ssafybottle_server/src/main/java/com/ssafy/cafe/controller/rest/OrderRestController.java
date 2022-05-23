@@ -54,4 +54,11 @@ public class OrderRestController {
 	public List<Order> getOrderList() {
 		return oService.getOrderList();
 	}
+	
+	@GetMapping("/completed/{orderId}")
+	@ApiOperation(value = "{orderId}에 해당하는 주문을 완료 상태로 변경한다.", response = Integer.class)
+	public Integer setOrderCompleted(@PathVariable Integer orderId) {
+		return oService.setOrderCompleted(orderId);
+	}
+	
 }

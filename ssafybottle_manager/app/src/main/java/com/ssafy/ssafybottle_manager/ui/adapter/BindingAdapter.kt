@@ -27,3 +27,9 @@ fun bindBackgroundBySelected(layout: ConstraintLayout, isSelected: Boolean) {
     layout.setBackgroundResource(if(isSelected) R.drawable.bg_pane_item_select else R.drawable.ripple_pane_item)
 }
 
+@BindingAdapter("itemColor")
+fun bindBackgroundBySelectedItem(layout: ConstraintLayout, isSelected: Boolean) {
+    layout.setBackgroundResource(if(isSelected) R.drawable.bg_pane_item_select else R.drawable.ripple_pane_item)
+}
+
+

@@ -16,6 +16,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:backColor="@{menu.selected}"
         android:padding="24dp">
 
         <androidx.cardview.widget.CardView
@@ -42,40 +43,41 @@
 
         <TextView
             android:id="@+id/text_item_orderlist_title"
+            style="@style/SubHeadBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/HeadTitleBold"
-            tools:text="아메리카노 포함 3잔"
+            android:layout_marginStart="16dp"
             android:text='@{item.productName + " 포함 " + String.valueOf(item.totalQuantity) + "잔"}'
-            app:layout_constraintTop_toTopOf="parent"
+            android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/card_item_orderlist_img"
-            android:layout_marginStart="16dp"/>
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="아메리카노 포함 3잔" />
 
         <TextView
             android:id="@+id/text_item_orderlist_price"
+            style="@style/Body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/SubHead"
-            android:textColor="@color/dark_gray"
-            tools:text="총 15,000원"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="4dp"
             android:text='@{StringUtilKt.toMoney(item.totalPrice) + "원"}'
-            app:layout_constraintTop_toBottomOf="@id/text_item_orderlist_title"
+            android:textColor="@color/dark_gray"
             app:layout_constraintStart_toEndOf="@id/card_item_orderlist_img"
-            android:layout_marginStart="16dp"/>
+            app:layout_constraintTop_toBottomOf="@id/text_item_orderlist_title"
+            tools:text="총 15,000원" />
 
         <TextView
             android:id="@+id/text_item_orderlist_date"
+            style="@style/Body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/SubHead"
-            android:textColor="@color/dark_gray"
-            tools:text="2022년 5월 23일 17시 23분"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="4dp"
             android:text='@{StringUtilKt.toDateString(item.orderTime)}'
+            android:textColor="@color/dark_gray"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/card_item_orderlist_img"
-            android:layout_marginStart="16dp"/>
+            tools:text="2022년 5월 23일 17시 23분" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

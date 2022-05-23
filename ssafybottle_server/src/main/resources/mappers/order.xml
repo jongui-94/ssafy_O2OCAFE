@@ -95,4 +95,10 @@
     	ORDER BY o.order_time DESC;
 	</select>
 	
+	<update id="completeOrder" parameterType="int">
+		UPDATE t_order
+		SET completed = 'Y'
+		WHERE o_id = #{id}
+	</update>
+	
 </mapper>
