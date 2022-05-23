@@ -76,6 +76,9 @@ class CardFragment : Fragment() {
             requireParentFragment().findNavController()
                 .navigate(R.id.action_rootFragment_to_cardChargeFragment)
         }
+        binding.imgCardRefresh.setOnClickListener {
+            viewModel.checkCash(userId)
+        }
     }
 
     override fun onDestroyView() {

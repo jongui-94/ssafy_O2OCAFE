@@ -5,7 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.ssafy.ssafybottle_manager.R
 import com.ssafy.ssafybottle_manager.base.BaseViewModel
+import com.ssafy.ssafybottle_manager.data.dto.card.CardDto
 import com.ssafy.ssafybottle_manager.data.dto.order.OrderDetailDto
+import com.ssafy.ssafybottle_manager.data.dto.order.OrderRequestDto
 import com.ssafy.ssafybottle_manager.data.dto.pane.PaneMenu
 import com.ssafy.ssafybottle_manager.data.dto.product.ProductDto
 import com.ssafy.ssafybottle_manager.data.repository.Repository
@@ -34,6 +36,11 @@ class MainViewModel : BaseViewModel() {
     var orderList : MutableList<OrderDetailDto> = mutableListOf()
     var totalCost = MutableLiveData(0)
 
+    var userId = MutableLiveData<String>()
+    var isBarcodeScanSuccess = MutableLiveData<Int>()
+
+    var isLackOfBalance = MutableLiveData<Int>()
+    var isOrderSuccess = MutableLiveData<Int>()
 
     init {
         menus = mutableListOf(
@@ -86,6 +93,51 @@ class MainViewModel : BaseViewModel() {
                     isBeverageSuccess.postValue(SUCCESS)
                 } else {
                     isBeverageSuccess.postValue(FAILURE)
+                }
+            }
+        }
+    }
+
+    fun completeOrder(userId: String) {
+        viewModelScope.launch(exceptionHandler) {
+            // 유저의 잔액 확인
+            var cash = 0
+            launch(exceptionHandler) {
+                repository.checkCash(userId).let {
+                    if(it.isSuccessful) {
+                        cash = it.body()!!
+                    }
+                }
+            }.join()
+
+            // 잔액 부족하면 결제 취소
+            if(cash < totalCost.value!!) {
+                isLackOfBalance.postValue(FAILURE)
+                return@launch
+            }
+
+            // 카드 사용내역 삽입
+            repository.postcard(
+                CardDto(
+                    content = "매장에서 결제",
+                    orderId = -1,
+                    payment = -totalCost.value!!,
+                    userId = userId,
+                    payTime = "",
+                    id = 0
+                )
+            )
+
+            // 주문 삽입
+            repository.postOrder(OrderRequestDto(
+                details = orderList,
+                userId = userId,
+                orderTable = "1번"
+            )).let {
+                if(it.isSuccessful) {
+                    isOrderSuccess.postValue(SUCCESS)
+                } else {
+                    isOrderSuccess.postValue(FAILURE)
                 }
             }
         }

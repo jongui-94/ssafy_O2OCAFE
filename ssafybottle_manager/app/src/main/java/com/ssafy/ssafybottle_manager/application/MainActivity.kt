@@ -4,10 +4,15 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.viewModels
 import com.google.zxing.integration.android.IntentIntegrator
 import com.ssafy.ssafybottle_manager.R
+import com.ssafy.ssafybottle_manager.utils.FAILURE
+import com.ssafy.ssafybottle_manager.utils.SUCCESS
 
 class MainActivity : AppCompatActivity() {
+
+    private val viewModel : MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,9 +30,10 @@ class MainActivity : AppCompatActivity() {
         val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
         if (result != null) {
             if (result.contents != null) {
-                Toast.makeText(this, result.contents, Toast.LENGTH_SHORT).show()
+                viewModel.userId.value = result.contents
+                viewModel.isBarcodeScanSuccess.value = SUCCESS
             } else {
-                Toast.makeText(this, "결제가 취소되었습니다.", Toast.LENGTH_SHORT).show()
+                viewModel.isBarcodeScanSuccess.value = FAILURE
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data)

@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.tabs.TabLayoutMediator
 import com.ssafy.ssafybottle_manager.application.MainActivity
@@ -13,6 +15,8 @@ import com.ssafy.ssafybottle_manager.application.MainViewModel
 import com.ssafy.ssafybottle_manager.databinding.FragmentOrderBinding
 import com.ssafy.ssafybottle_manager.ui.adapter.BillAdapter
 import com.ssafy.ssafybottle_manager.ui.adapter.OrderViewPagerAdapter
+import com.ssafy.ssafybottle_manager.utils.FAILURE
+import com.ssafy.ssafybottle_manager.utils.SUCCESS
 import com.ssafy.ssafybottle_manager.utils.toMoney
 
 class OrderFragment : Fragment() {
@@ -84,6 +88,41 @@ class OrderFragment : Fragment() {
         }
         mainViewModel.totalCost.observe(viewLifecycleOwner) {
             binding.textOrderTotalcost.text = "${toMoney(it)}원"
+        }
+        mainViewModel.userId.observe(viewLifecycleOwner) {
+            binding.progressbarOrderLoading.isVisible = true
+            mainViewModel.completeOrder(it)
+        }
+        mainViewModel.isBarcodeScanSuccess.observe(viewLifecycleOwner) {
+            when(it) {
+                FAILURE -> {
+                    Toast.makeText(requireContext(), "바코드 결제를 취소하였습니다.", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+        mainViewModel.isLackOfBalance.observe(viewLifecycleOwner) {
+            binding.progressbarOrderLoading.isVisible = false
+            when(it) {
+                FAILURE -> {
+                    Toast.makeText(requireContext(), "카드 잔액이 부족합니다.", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+        mainViewModel.isOrderSuccess.observe(viewLifecycleOwner) {
+            binding.progressbarOrderLoading.isVisible = false
+            when(it) {
+                FAILURE -> {
+                    Toast.makeText(requireContext(), "결제를 실패했습니다.", Toast.LENGTH_SHORT).show()
+                }
+                SUCCESS -> {
+                    Toast.makeText(requireContext(), "결제되었습니다.", Toast.LENGTH_SHORT).show()
+                    mainViewModel.apply {
+                        orderList = mutableListOf()
+                        liveOrderList.value = orderList
+                        totalCost.value = 0
+                    }
+                }
+            }
         }
     }
 
