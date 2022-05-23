@@ -119,7 +119,7 @@ class MainViewModel : BaseViewModel() {
             // 카드 사용내역 삽입
             repository.postcard(
                 CardDto(
-                    content = "매장에서 결제",
+                    content = "구미 황상동점",
                     orderId = -1,
                     payment = -totalCost.value!!,
                     userId = userId,

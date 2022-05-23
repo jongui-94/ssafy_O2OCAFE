@@ -85,6 +85,7 @@
             android:background="@drawable/edittext_shape"
             android:hint="관리자 코드를 입력해주세요"
             android:padding="14dp"
+            android:text="0000"
             android:imeOptions="actionSend"
             android:inputType="textPassword"
             app:layout_constraintEnd_toEndOf="parent"

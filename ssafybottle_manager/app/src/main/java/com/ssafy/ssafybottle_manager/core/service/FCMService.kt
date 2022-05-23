@@ -7,22 +7,27 @@ import androidx.core.app.NotificationManagerCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.ssafy.ssafybottle_manager.application.MainActivity
+import com.ssafy.ssafybottle_manager.data.repository.Repository
+import com.ssafy.ssafybottle_manager.utils.ADMIN_ID
 import com.ssafy.ssafybottle_manager.utils.getNotificationBuilder
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class FCMService : FirebaseMessagingService() {
 
-    //private lateinit var repository: Repository
-
-    override fun onCreate() {
-        super.onCreate()
-
-        //repository = Repository.get()
+    private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
+        throwable.printStackTrace()
     }
 
     override fun onNewToken(token: String) {
         super.onNewToken(token)
 
         Log.d("FCMService_싸피", "onNewToken: 토큰 갱신: $token")
+        CoroutineScope(Dispatchers.IO).launch(exceptionHandler) {
+            Repository.get().postToken(mapOf("userId" to ADMIN_ID, "token" to token))
+        }
     }
 
     override fun onMessageReceived(message: RemoteMessage) {
@@ -46,18 +51,6 @@ class FCMService : FirebaseMessagingService() {
                     pIntent
                 ).build()
             )
-            //val userId = getUserId()
-            //insertNotification(userId, it.title ?: "", it.body ?: "")
         }
     }
-
-//    private fun insertNotification(userId: String, title: String, content: String) {
-//        CoroutineScope(Dispatchers.Main).launch {
-//            repository.insertNotification(
-//                Notification(
-//                    userId, title, content
-//                )
-//            )
-//        }
-//    }
 }

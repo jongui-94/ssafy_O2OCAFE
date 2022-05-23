@@ -6,11 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import com.ssafy.ssafybottle_manager.application.MainViewModel
 import com.ssafy.ssafybottle_manager.databinding.FragmentNotificationBinding
+import com.ssafy.ssafybottle_manager.ui.adapter.NotificationAdapter
 
 class NotificationFragment : Fragment() {
     private var _binding: FragmentNotificationBinding? = null
     private val binding get() = _binding!!
+
+    private val mainViewModel : MainViewModel by activityViewModels()
+    private lateinit var notificationAdapter : NotificationAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -22,6 +28,38 @@ class NotificationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        initData()
+        initAdapter()
+        observeData()
+        setOnClickListeners()
+    }
+
+    private fun initData() {
+
+    }
+
+    private fun initAdapter() {
+        notificationAdapter = NotificationAdapter().apply {
+            onItemClickListener = notificationRemoveItemClickListener
+        }
+        binding.recyclerNotification.apply {
+            adapter = notificationAdapter
+        }
+    }
+
+    private val notificationRemoveItemClickListener : (View, Int) -> Unit = { _, position ->
+
+    }
+
+    private fun observeData() {
+
+    }
+
+    private fun setOnClickListeners() {
+        binding.textNotificationRemoveall.setOnClickListener {
+
+        }
     }
 
     override fun onDestroyView() {

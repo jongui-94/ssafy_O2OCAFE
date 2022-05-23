@@ -15,6 +15,7 @@ import com.ssafy.ssafybottle_manager.application.MainViewModel
 import com.ssafy.ssafybottle_manager.databinding.FragmentOrderBinding
 import com.ssafy.ssafybottle_manager.ui.adapter.BillAdapter
 import com.ssafy.ssafybottle_manager.ui.adapter.OrderViewPagerAdapter
+import com.ssafy.ssafybottle_manager.utils.DEFAULT
 import com.ssafy.ssafybottle_manager.utils.FAILURE
 import com.ssafy.ssafybottle_manager.utils.SUCCESS
 import com.ssafy.ssafybottle_manager.utils.toMoney
@@ -138,6 +139,14 @@ class OrderFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        mainViewModel.apply {
+            orderList = mutableListOf()
+            liveOrderList.value = orderList
+            totalCost.value = 0
+            isOrderSuccess.value = DEFAULT
+            isLackOfBalance.value = DEFAULT
+            isBarcodeScanSuccess.value = DEFAULT
+        }
         _binding = null
     }
 }

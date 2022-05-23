@@ -9,8 +9,17 @@ import android.util.Log
 import androidx.annotation.RequiresApi
 import com.google.firebase.messaging.FirebaseMessaging
 import com.ssafy.ssafybottle_manager.data.repository.Repository
+import com.ssafy.ssafybottle_manager.utils.ADMIN_ID
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class ApplicationClass : Application() {
+
+    private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
+        throwable.printStackTrace()
+    }
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate() {
@@ -34,7 +43,11 @@ class ApplicationClass : Application() {
             }
             // 새로운 FCM 등록 토큰을 얻음
             Log.d("Application_싸피", "onCreate: 새로운 등록 토큰: ${it.result}")
-            //saveToken(it.result)
+
+            CoroutineScope(Dispatchers.IO).launch(exceptionHandler) {
+                Repository.get().postToken(mapOf("userId" to ADMIN_ID, "token" to it.result))
+            }
+
             createNotificationChannel("smart_store", "smart_store")
         }
     }

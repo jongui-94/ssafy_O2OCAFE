@@ -10,8 +10,6 @@ const val MENU_SALES_MANAGEMENT = 103
 const val MENU_NOTIFICATION = 104
 const val MENU_SETTING = 105
 
-
-
 /**
  Fragment
  */
@@ -47,6 +45,7 @@ const val NUM_TABS = 3
 /**
  Id
  */
+const val ADMIN_ID = "admin"
 const val PRODUCT_ID = "product_id"
 const val ORDER_ID = "order_id"
 const val USER_ID = "user_id"
