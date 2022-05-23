@@ -113,5 +113,10 @@ public class OrderServiceImpl implements OrderService {
 	public List<Map<String, Object>> getLastMonthOrder(String id) {
 		return oDao.getLastMonthOrder(id);
 	}
+	
+	@Override
+	public List<Order> getOrderList() {
+		return oDao.getOrderList();
+	}
 
 }

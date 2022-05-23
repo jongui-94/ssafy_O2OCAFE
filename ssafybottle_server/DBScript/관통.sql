@@ -132,6 +132,7 @@ INSERT INTO t_order (user_id, order_table) VALUES ('ssafy07', 'order_table 07');
 INSERT INTO t_order (user_id, order_table) VALUES ('ssafy08', 'order_table 08');
 INSERT INTO t_order (user_id, order_table) VALUES ('ssafy09', 'order_table 09');
 INSERT INTO t_order (user_id, order_table) VALUES ('ssafy10', 'order_table 10');
+INSERT INTO t_order (user_id, order_table, completed) VALUES ('ssafy07', 'order_table 11', 'Y');
 
 INSERT INTO t_order_detail (order_id, product_id, quantity) VALUES (1, 1, 1);
 INSERT INTO t_order_detail (order_id, product_id, quantity) VALUES (1, 2, 3);
@@ -145,6 +146,7 @@ INSERT INTO t_order_detail (order_id, product_id, quantity) VALUES (8, 8, 8);
 INSERT INTO t_order_detail (order_id, product_id, quantity) VALUES (9, 9, 9);
 INSERT INTO t_order_detail (order_id, product_id, quantity) VALUES (10, 8, 10);
 INSERT INTO t_order_detail (order_id, product_id, quantity) VALUES (10, 10, 10);
+INSERT INTO t_order_detail (order_id, product_id, quantity) VALUES (11, 13, 7);
 
 
 INSERT INTO t_stamp (user_id, order_id, quantity) VALUES ('ssafy01', 1, 4);
@@ -157,6 +159,7 @@ INSERT INTO t_stamp (user_id, order_id, quantity) VALUES ('ssafy07', 7, 7);
 INSERT INTO t_stamp (user_id, order_id, quantity) VALUES ('ssafy08', 8, 8);
 INSERT INTO t_stamp (user_id, order_id, quantity) VALUES ('ssafy09', 9, 9);
 INSERT INTO t_stamp (user_id, order_id, quantity) VALUES ('ssafy10', 10, 20);
+INSERT INTO t_stamp (user_id, order_id, quantity) VALUES ('ssafy07', 11, 7);
 
 INSERT INTO t_notification (user_id, title, content) VALUES('user','테스트용','테스트입니다~~');
 INSERT INTO t_notification (user_id, title, content) VALUES('user', '테스트2','이것도 나와야댕');
@@ -164,3 +167,8 @@ INSERT INTO t_notification (user_id, title, content) VALUES('user', '테3','마�
 
 
 commit;
+
+select o.o_id, o.user_id, p.name, sum(od.quantity) as 주문량, o.order_time, p.img, o.completed
+from t_order_detail as od LEFT JOIN t_order as o ON od.order_id = o.o_id LEFT JOIN t_product as p ON od.product_id = p.id
+group by o.o_id
+order by o.order_time desc;
