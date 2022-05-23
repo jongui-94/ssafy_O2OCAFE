@@ -9,6 +9,7 @@ import com.ssafy.ssafybottle_manager.base.BaseViewModel
 import com.ssafy.ssafybottle_manager.data.dto.card.CardDto
 import com.ssafy.ssafybottle_manager.data.dto.notification.NotificationDto
 import com.ssafy.ssafybottle_manager.data.dto.order.OrderDetailDto
+import com.ssafy.ssafybottle_manager.data.dto.order.OrderIdDetailDto
 import com.ssafy.ssafybottle_manager.data.dto.order.OrderListDto
 import com.ssafy.ssafybottle_manager.data.dto.order.OrderRequestDto
 import com.ssafy.ssafybottle_manager.data.dto.pane.PaneMenu
@@ -49,8 +50,12 @@ class MainViewModel : BaseViewModel() {
     val notifications : LiveData<List<NotificationDto>> get() = _notifications
     var isNotificationDeleteSuccess = MutableLiveData<Int>()
 
-    private val _orders = MutableLiveData<List<OrderListDto>>()
-    val orders : LiveData<List<OrderListDto>> get() = _orders
+    var liveOrders = MutableLiveData<List<OrderListDto>>()
+
+    private val _orderDetail = MutableLiveData<List<OrderIdDetailDto>>()
+    val orderDetail : LiveData<List<OrderIdDetailDto>> get() = _orderDetail
+
+    var isCompleteOrder = MutableLiveData<Int>()
 
     init {
         menus = mutableListOf(
@@ -191,7 +196,35 @@ class MainViewModel : BaseViewModel() {
         viewModelScope.launch(exceptionHandler) {
             repository.getOrderList().let {
                 if(it.isSuccessful) {
-                    _orders.postValue(it.body())
+                    liveOrders.postValue(it.body())
+                }
+            }
+        }
+    }
+    var prevItem = 0
+    fun changeOrder(idx: Int) {
+        liveOrders.value?.forEachIndexed { index, item ->
+            item.isSelected = index == idx
+        }
+    }
+
+    fun getOrder(orderId : Int) {
+        viewModelScope.launch(exceptionHandler) {
+            repository.getOrder(orderId).let {
+                if(it.isSuccessful) {
+                    _orderDetail.postValue(it.body())
+                }
+            }
+        }
+    }
+
+    fun completeOrder(orderId : Int) {
+        viewModelScope.launch(exceptionHandler) {
+            repository.completeOrder(orderId).let {
+                if(it.isSuccessful) {
+                    if(it.body()!! > 0) {
+                        isCompleteOrder.postValue(SUCCESS)
+                    }
                 }
             }
         }

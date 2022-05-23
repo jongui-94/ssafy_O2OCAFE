@@ -8,7 +8,7 @@
 
         <variable
             name="item"
-            type="com.ssafy.ssafybottle_manager.data.dto.order.OrderListDto" />
+            type="com.ssafy.ssafybottle_manager.data.dto.order.OrderIdDetailDto" />
 
         <import type="com.ssafy.ssafybottle_manager.utils.StringUtilKt" />
     </data>
@@ -16,11 +16,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="24dp"
-        app:itemColor="@{item.selected}">
+        android:padding="16dp">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/card_item_orderlist_img"
+            android:id="@+id/card_item_orderdetail_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:cardCornerRadius="8dp"
@@ -30,9 +29,9 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/img_item_orderlist_coffee"
-                android:layout_width="124dp"
-                android:layout_height="124dp"
+                android:id="@+id/img_item_orderdetail_coffee"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 app:imageUrl="@{item.img}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -42,53 +41,46 @@
         </androidx.cardview.widget.CardView>
 
         <TextView
-            android:id="@+id/text_item_orderlist_title"
-            style="@style/SubHeadBold"
+            android:id="@+id/text_item_bill_name"
+            style="@style/BodyItemBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text='@{item.productName + " 포함 " + String.valueOf(item.totalQuantity) + "잔"}'
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@id/card_item_orderlist_img"
+            android:text="@{item.name}"
+            app:layout_constraintStart_toEndOf="@id/card_item_orderdetail_img"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="아메리카노 포함 3잔" />
+            tools:text="아메리카노" />
 
         <TextView
-            android:id="@+id/text_item_orderlist_price"
-            style="@style/Body"
+            android:id="@+id/text_item_orderdetail_quantity"
+            style="@style/BodyItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text='@{item.quantity + "개"}'
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="4개" />
+
+        <TextView
+            android:id="@+id/text_item_orderdetail_price"
+            style="@style/BodyItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="4dp"
-            android:text='@{"총 " + StringUtilKt.toMoney(item.totalPrice) + "원"}'
-            app:layout_constraintStart_toEndOf="@id/card_item_orderlist_img"
-            app:layout_constraintTop_toBottomOf="@id/text_item_orderlist_title"
-            tools:text="총 15,000원" />
-
-        <TextView
-            android:id="@+id/text_item_orderlist_date"
-            style="@style/Body"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="4dp"
-            android:text='@{StringUtilKt.toDateString(item.orderTime)}'
-            android:textColor="@color/dark_gray"
+            android:text='@{StringUtilKt.toMoney(item.unitprice) + "원"}'
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/card_item_orderlist_img"
-            tools:text="2022년 5월 23일 17시 23분" />
+            app:layout_constraintStart_toEndOf="@id/card_item_orderdetail_img"
+            tools:text="4000원" />
 
-        <Button
-            android:id="@+id/btn_item_orderlist_completed"
-            style="@style/BodyWhite"
+        <TextView
+            android:id="@+id/text_item_orderdetail_totalprice"
+            style="@style/BodyItemBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint='@{item.completed.equals("Y") ? @color/lightGray : @color/primaryColor}'
-            android:clickable="false"
-            android:text='@{item.completed.equals("Y") ? "준비완료" : "주문접수"}'
+            android:text='@{StringUtilKt.toMoney(item.totalprice) + "원"}'
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:text="준비완료" />
+            tools:text="8,000원" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

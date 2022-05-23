@@ -44,6 +44,8 @@ class Repository private constructor(context: Context) {
      */
     suspend fun postOrder(order: OrderRequestDto) = orderApi.postOrder(order)
     suspend fun getOrderList() = orderApi.getOrderList()
+    suspend fun getOrder(orderId : Int) = orderApi.getOrder(orderId)
+    suspend fun completeOrder(orderId: Int) = orderApi.completeOrder(orderId)
 
     /**
     Notification

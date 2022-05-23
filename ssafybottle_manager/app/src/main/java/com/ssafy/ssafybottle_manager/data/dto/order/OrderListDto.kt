@@ -27,5 +27,7 @@ data class OrderListDto(
     @SerializedName("order_time")
     val orderTime: Date,
 
-    val completed: String
+    val completed: String,
+
+    var isSelected : Boolean = false
 )

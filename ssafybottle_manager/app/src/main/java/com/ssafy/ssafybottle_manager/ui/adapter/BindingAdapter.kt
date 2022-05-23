@@ -1,5 +1,6 @@
 package com.ssafy.ssafybottle_manager.ui.adapter
 
+import android.graphics.Color
 import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
@@ -24,12 +25,12 @@ fun bindImageFromResource(view: ImageView, resId: Int) {
 
 @BindingAdapter("backColor")
 fun bindBackgroundBySelected(layout: ConstraintLayout, isSelected: Boolean) {
-    layout.setBackgroundResource(if(isSelected) R.drawable.bg_pane_item_select else R.drawable.ripple_pane_item)
+    layout.setBackgroundResource(if (isSelected) R.drawable.bg_pane_item_select else R.drawable.ripple_pane_item)
 }
 
 @BindingAdapter("itemColor")
 fun bindBackgroundBySelectedItem(layout: ConstraintLayout, isSelected: Boolean) {
-    layout.setBackgroundResource(if(isSelected) R.drawable.bg_pane_item_select else R.drawable.ripple_pane_item)
+    layout.setBackgroundColor(if (isSelected) Color.parseColor("#E0E0E0") else Color.parseColor("#FFFFFF"))
 }
 
 

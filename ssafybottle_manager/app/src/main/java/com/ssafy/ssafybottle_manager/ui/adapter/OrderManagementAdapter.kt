@@ -5,9 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ssafy.ssafybottle_manager.data.dto.order.OrderListDto
-import com.ssafy.ssafybottle_manager.data.dto.product.ProductDto
 import com.ssafy.ssafybottle_manager.databinding.ItemOrderListBinding
-import com.ssafy.ssafybottle_manager.databinding.ItemProductBinding
 
 class OrderManagementAdapter :
     RecyclerView.Adapter<OrderManagementAdapter.OrderManagementViewHolder>() {
@@ -15,13 +13,12 @@ class OrderManagementAdapter :
     lateinit var onItemClickListener: (View, Int) -> Unit
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrderManagementViewHolder {
-        return OrderManagementViewHolder(
-            ItemOrderListBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
-        ).apply {
+        var binding = ItemOrderListBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
+        return OrderManagementViewHolder(binding).apply {
             bindOnItemClickListener(onItemClickListener)
         }
     }

@@ -39,7 +39,7 @@
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guideline_ordermanagement"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar_ordermanagement"
             tools:listitem="@layout/item_order_list" />
@@ -49,7 +49,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.5" />
+            app:layout_constraintGuide_percent="0.7" />
 
         <View
             android:layout_width="2dp"
@@ -78,6 +78,55 @@
                 android:text="주문 상세" />
 
         </com.google.android.material.appbar.MaterialToolbar>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_orderdetail"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="16dp"
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@id/text_orderdetail_label_totalcost"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guideline_ordermanagement"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_ordermanagement_detail"
+            tools:listitem="@layout/item_bill" />
+
+        <TextView
+            android:id="@+id/text_orderdetail_label_totalcost"
+            style="@style/HeadTitleBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="총"
+            app:layout_constraintBottom_toTopOf="@id/btn_ordermanagement_orderdetail"
+            app:layout_constraintStart_toStartOf="@id/guideline_ordermanagement" />
+
+        <TextView
+            android:id="@+id/text_orderdetail_totalcost"
+            style="@style/HeadTitleBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="0원"
+            app:layout_constraintBottom_toTopOf="@id/btn_ordermanagement_orderdetail"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <Button
+            android:id="@+id/btn_ordermanagement_orderdetail"
+            style="@style/SubHeadWhite"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/button_regular"
+            android:text="상품 준비 완료"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guideline_ordermanagement" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
