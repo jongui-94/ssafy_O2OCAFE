@@ -31,7 +31,7 @@ public interface ProductService {
 	
 	List<Map<String, Object>> recommendBySell();
 	
-	List<Product> getSalesAll();
+	int getSalesAll();
 	
 	List<Product> getSalesOne();
 

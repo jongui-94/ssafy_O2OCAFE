@@ -54,7 +54,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	@Override
-	public List<Product> getSalesAll(){
+	public int getSalesAll(){
 		return pDao.getSalesAll();
 	}
 	

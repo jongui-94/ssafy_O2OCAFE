@@ -82,7 +82,7 @@
 		LIMIT 10;
 	</select>
 	
-	<select id="getSalesAll" resultType="map">
+	<select id="getSalesAll" resultType="int">
     	SELECT sum(p.price * od.quantity) as salesAll
 		FROM t_order_detail as od, t_product as p
 		WHERE p.id = od.product_id;

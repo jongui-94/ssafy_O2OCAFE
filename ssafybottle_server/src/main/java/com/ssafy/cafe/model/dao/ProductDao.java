@@ -30,7 +30,7 @@ public interface ProductDao {
 	
 	List<Map<String, Object>> recommendBySell();
 	
-	List<Product> getSalesAll();
+	int getSalesAll();
 	
 	List<Product> getSalesOne();
 

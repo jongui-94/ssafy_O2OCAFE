@@ -69,7 +69,7 @@ public class ProductRestController {
 	
 	@GetMapping("/salesAll")
 	@ApiOperation(value = "총 매출을 반환한다.", response = List.class)
-	public List<Product> getSalesAll() {
+	public Integer getSalesAll() {
 		return pService.getSalesAll();
 	}
 	
