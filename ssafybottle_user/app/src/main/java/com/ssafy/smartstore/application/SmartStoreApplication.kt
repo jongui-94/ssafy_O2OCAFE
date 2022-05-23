@@ -52,6 +52,7 @@ class SmartStoreApplication : Application() {
     }
 
     companion object {
+        var isCoupon = false
         var isOrder = false
         var orderId = 0
         var tableName = ""

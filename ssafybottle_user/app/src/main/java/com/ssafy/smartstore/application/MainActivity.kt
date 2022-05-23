@@ -9,8 +9,10 @@ import android.nfc.NfcAdapter
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.ssafy.smartstore.R
+import com.ssafy.smartstore.application.SmartStoreApplication.Companion.isCoupon
 import com.ssafy.smartstore.application.SmartStoreApplication.Companion.tableName
 import com.ssafy.smartstore.databinding.ActivityMainBinding
 import com.ssafy.smartstore.ui.login.LoginMainFragment
@@ -20,6 +22,7 @@ class MainActivity : AppCompatActivity() {
     
     private lateinit var binding : ActivityMainBinding
 
+    private val mainViewModel : MainViewModel by viewModels()
     private var nfcAdapter: NfcAdapter? = null
     private lateinit var pIntent: PendingIntent
     private lateinit var filters: Array<IntentFilter>
@@ -81,6 +84,11 @@ class MainActivity : AppCompatActivity() {
                 "t" ->{
                     Toast.makeText(this, "${messages[1]}번 테이블 번호가 등록되었습니다.", Toast.LENGTH_SHORT).show()
                     tableName = messages[1]
+                }
+                "c" -> {
+                    if(isCoupon) {
+                        mainViewModel.coupon.value = messages[1].toInt()
+                    }
                 }
             }
         }

@@ -18,6 +18,8 @@ class MainViewModel : BaseViewModel() {
 
     var lackOfBalance = MutableLiveData<Boolean>()
 
+    var coupon = MutableLiveData<Int>()
+
     private var cash: Int = 0
 
     fun postOrder(orderRequestDto: OrderRequestDto) {

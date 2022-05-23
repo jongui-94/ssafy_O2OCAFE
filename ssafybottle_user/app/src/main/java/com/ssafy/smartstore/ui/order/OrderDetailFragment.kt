@@ -1,16 +1,24 @@
 package com.ssafy.smartstore.ui.order
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.ssafy.smartstore.application.MainViewModel
+import com.ssafy.smartstore.application.SmartStoreApplication.Companion.isCoupon
 import com.ssafy.smartstore.databinding.FragmentOrderDetailBinding
 import com.ssafy.smartstore.ui.adapter.OrderDetailAdapter
 import com.ssafy.smartstore.utils.ORDER_ID
+import com.ssafy.smartstore.utils.toDateString
 import com.ssafy.smartstore.utils.toMoney
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
 
 class OrderDetailFragment : Fragment() {
 
@@ -18,6 +26,7 @@ class OrderDetailFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: OrderDetailViewModel by viewModels()
+
     private lateinit var adapter: OrderDetailAdapter
 
     override fun onCreateView(
@@ -62,6 +71,7 @@ class OrderDetailFragment : Fragment() {
                 totalCost += orderDetail.totalprice
             }
             binding.textOrderdetailTotalprice.text = "${toMoney(totalCost)}원"
+            binding.textOrderdetailDate.text = toDateString(it[0].order_time)
         }
     }
 
