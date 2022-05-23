@@ -49,7 +49,7 @@ public class OrderRestController {
 		return oService.getLastMonthOrder(id);
 	}
 	
-	@GetMapping("/{orderList}")
+	@GetMapping("/orderList")
 	@ApiOperation(value = "주문 전체 리스트를 시간순으로 반환한다.", response = List.class)
 	public List<Order> getOrderList() {
 		return oService.getOrderList();
