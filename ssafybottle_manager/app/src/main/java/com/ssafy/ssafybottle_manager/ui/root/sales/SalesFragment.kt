@@ -1,5 +1,6 @@
 package com.ssafy.ssafybottle_manager.ui.root.sales
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -17,6 +18,7 @@ import com.github.mikephil.charting.utils.ColorTemplate
 import com.ssafy.ssafybottle_manager.application.MainViewModel
 import com.ssafy.ssafybottle_manager.data.dto.product.ProductSalesDto
 import com.ssafy.ssafybottle_manager.databinding.FragmentSalesBinding
+import com.ssafy.ssafybottle_manager.ui.adapter.ProductSalesAdapter
 import com.ssafy.ssafybottle_manager.utils.toMoney
 
 class SalesFragment : Fragment() {
@@ -24,6 +26,7 @@ class SalesFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val mainViewModel: MainViewModel by activityViewModels()
+    private lateinit var productSalesAdapter: ProductSalesAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,6 +42,7 @@ class SalesFragment : Fragment() {
         initPieChart()
         initBarChart()
         initData()
+        initAdapter()
         observeData()
         otherListeners()
     }
@@ -48,12 +52,29 @@ class SalesFragment : Fragment() {
         mainViewModel.getProductSales()
     }
 
+    private fun initAdapter() {
+        productSalesAdapter = ProductSalesAdapter().apply {
+            onItemClickListener = productSalesItemClickListener
+        }
+        binding.recyclerSales.apply {
+            adapter = productSalesAdapter
+        }
+    }
+
+    private val productSalesItemClickListener: (View, Int) -> Unit = { _, position ->
+
+    }
+
     private fun observeData() {
         mainViewModel.totalSales.observe(viewLifecycleOwner) {
             binding.textSalesCost.text = "${toMoney(it)}원"
         }
         mainViewModel.productSalesList.observe(viewLifecycleOwner) {
             analyzeData(it)
+            productSalesAdapter.apply {
+                productSales = it
+                notifyDataSetChanged()
+            }
         }
     }
 
@@ -118,6 +139,7 @@ class SalesFragment : Fragment() {
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private fun otherListeners() {
         binding.refreshSales.setOnRefreshListener {
             initData()
@@ -133,6 +155,17 @@ class SalesFragment : Fragment() {
                 }
             }
 //            v.parent.requestDisallowInterceptTouchEvent(true)
+            false
+        }
+        binding.piechartSales.setOnTouchListener { v, event ->
+            when(event.action) {
+                MotionEvent.ACTION_DOWN, MotionEvent.ACTION_MOVE -> {
+                    binding.refreshSales.isEnabled = false
+                }
+                MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+                    binding.refreshSales.isEnabled = true
+                }
+            }
             false
         }
     }
