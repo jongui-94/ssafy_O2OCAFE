@@ -30,4 +30,10 @@
 		<result column="quantity" property="quantity"/>
 	</resultMap>
 	
+	<select id="selectOrderDetail" parameterType="int" resultType = "OrderDetailByOrderId">
+		select sum(d.quantity) as quantity, p.name as name
+		from t_order_detail d, t_product p
+		where d.order_id = #{id} AND d.product_id = p.id;
+	</select>
+	
 </mapper>

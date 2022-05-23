@@ -18,6 +18,7 @@ import com.ssafy.cafe.model.dao.UserDao;
 import com.ssafy.cafe.model.dto.Notification;
 import com.ssafy.cafe.model.dto.Order;
 import com.ssafy.cafe.model.dto.OrderDetail;
+import com.ssafy.cafe.model.dto.OrderDetailByOrderId;
 import com.ssafy.cafe.model.dto.Product;
 import com.ssafy.cafe.model.dto.Stamp;
 import com.ssafy.cafe.model.dto.User;
@@ -76,8 +77,8 @@ public class OrderServiceImpl implements OrderService {
 		System.out.println("FCM Token: " + user2.getFtoken());
 		
 		try {
-			fService.sendMessageTo(user2.getFtoken(), "주문완료", user2.getName() + "님의 주문 " + product.getName() + "포함 " + quantitySum + "잔이 완료되었습니다.");
-			fService.sendMessageTo(admin.getFtoken(), "주문접수", user2.getName() + "님의 주문 " + product.getName() + "포함 " + quantitySum + "잔이 접수되었습니다.");
+			fService.sendMessageTo(user2.getFtoken(), "주문완료", user2.getName() + "님의 주문 " + product.getName() + " 포함 " + quantitySum + "잔이 완료되었습니다.");
+			fService.sendMessageTo(admin.getFtoken(), "주문접수", user2.getName() + "님의 주문 " + product.getName() + " 포함 " + quantitySum + "잔이 접수되었습니다.");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -121,7 +122,21 @@ public class OrderServiceImpl implements OrderService {
 	
 	@Override
 	public int setOrderCompleted(Integer orderId) {		
-		return oDao.completeOrder(orderId);
+		int result = oDao.completeOrder(orderId);
+		if(result > 0) {
+			Order order = oDao.select(orderId);
+			User user = uDao.select(order.getUserId());
+			OrderDetailByOrderId orderDetail= dDao.selectOrderDetail(orderId);
+			
+			try {
+				fService.sendMessageTo(user.getFtoken(), "상품 준비완료", user.getName() + "님의 주문 " + orderDetail.getName() + " 포함 " + orderDetail.getQuantity() + "잔이 준비 완료되었습니다.");
+			} catch(IOException e) {
+				e.printStackTrace();
+			}
+			return result;
+		} else {
+			return 0;
+		}		
 	}
 
 }
