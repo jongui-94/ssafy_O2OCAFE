@@ -11,7 +11,7 @@ create table t_user(
     pass varchar(100) not null,
     cash Integer default 0,
     stamps integer default 0,
-    ftoken varchar(512) default "",
+    ftoken varchar(100) default "",
     admin integer default 0
 );
 
@@ -69,6 +69,13 @@ create table t_comment(
     constraint fk_comment_user foreign key(user_id) references t_user(id) on delete cascade,
     constraint fk_comment_product foreign key(product_id) references t_product(id) on delete cascade
 );
+
+create table t_notification(
+id integer auto_increment primary key,
+user_id varchar(100) not null,
+title varchar(100) not null,
+content varchar(100) not null,
+time timestamp default CURRENT_TIMESTAMP);
 
 
 INSERT INTO t_user (id, name, pass, stamps) VALUES ('ssafy01', '김싸피', 'pass01', 5);
@@ -151,13 +158,9 @@ INSERT INTO t_stamp (user_id, order_id, quantity) VALUES ('ssafy08', 8, 8);
 INSERT INTO t_stamp (user_id, order_id, quantity) VALUES ('ssafy09', 9, 9);
 INSERT INTO t_stamp (user_id, order_id, quantity) VALUES ('ssafy10', 10, 20);
 
+INSERT INTO t_notification (user_id, title, content) VALUES('user','테스트용','테스트입니다~~');
+INSERT INTO t_notification (user_id, title, content) VALUES('user', '테스트2','이것도 나와야댕');
+INSERT INTO t_notification (user_id, title, content) VALUES('user', '테3','마지막 테스트');
+
 
 commit;
-
-INSERT INTO t_card (user_id, order_id, payment, content) VALUES('ssafy01', 1, -12000, "구미 황상동점"); 
-
-SELECT *
-from t_user;
-
-SELECT *
-from t_card;
