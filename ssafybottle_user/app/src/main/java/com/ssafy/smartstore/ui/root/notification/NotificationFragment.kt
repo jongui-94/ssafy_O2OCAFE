@@ -56,7 +56,7 @@ class NotificationFragment : Fragment() {
 
     private val onItemClickListener = object : OnItemClickListener {
         override fun onItemClick(view: View, position: Int) {
-            viewModel.deleteNotification(viewModel.notifications.value?.get(position)!!)
+            viewModel.deleteNotification(viewModel.notifications.value!![position].id)
         }
     }
 
@@ -79,7 +79,7 @@ class NotificationFragment : Fragment() {
     private fun setOnClickListeners() {
         binding.imgNotificationBack.setOnClickListener { requireActivity().onBackPressed() }
         binding.imgNotificationDelete.setOnClickListener {
-            viewModel.deleteAll(userId)
+            viewModel.deleteAllNotification(userId)
         }
     }
 

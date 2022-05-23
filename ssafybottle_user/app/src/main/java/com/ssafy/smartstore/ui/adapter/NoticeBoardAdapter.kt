@@ -3,12 +3,12 @@ package com.ssafy.smartstore.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.ssafy.smartstore.data.entitiy.Notification
+import com.ssafy.smartstore.data.dto.notification.NotificationDto
 import com.ssafy.smartstore.databinding.ItemNoticeBoardBinding
 
 class NoticeBoardAdapter : RecyclerView.Adapter<NoticeBoardAdapter.NoticeBoardViewHolder>() {
 
-    var notifications: List<Notification> = emptyList()
+    var notifications: List<NotificationDto> = emptyList()
     lateinit var itemClickListener: OnItemClickListener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoticeBoardViewHolder {
@@ -33,7 +33,7 @@ class NoticeBoardAdapter : RecyclerView.Adapter<NoticeBoardAdapter.NoticeBoardVi
     class NoticeBoardViewHolder(private val binding: ItemNoticeBoardBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(notification: Notification) {
+        fun bind(notification: NotificationDto) {
             binding.notification = notification
         }
 

@@ -8,7 +8,7 @@
 
         <variable
             name="notification"
-            type="com.ssafy.smartstore.data.entitiy.Notification" />
+            type="com.ssafy.smartstore.data.dto.notification.NotificationDto" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

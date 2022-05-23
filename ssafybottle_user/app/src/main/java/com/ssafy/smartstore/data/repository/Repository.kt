@@ -28,11 +28,6 @@ class Repository private constructor(context: Context) {
     ).build()
 
     /**
-    Dao
-     */
-    private val notificationDao = database.notificationDao()
-
-    /**
     Api
      */
     private val productApi = RetrofitBuilder.retrofit.create(ProductApi::class.java)
@@ -41,6 +36,7 @@ class Repository private constructor(context: Context) {
     private val commentApi = RetrofitBuilder.retrofit.create(CommentApi::class.java)
     private val cardApi = RetrofitBuilder.retrofit.create(CardApi::class.java)
     private val tokenApi = RetrofitBuilder.retrofit.create(TokenApi::class.java)
+    private val notificationApi = RetrofitBuilder.retrofit.create(NotificationApi::class.java)
 
     /**
     Product
@@ -83,13 +79,10 @@ class Repository private constructor(context: Context) {
     /**
     Notification
      */
-    suspend fun getNotifications(userId: String) = notificationDao.getNotifications(userId)
-    suspend fun insertNotification(notification: Notification) =
-        database.withTransaction { notificationDao.insertNotification(notification) }
-    suspend fun deleteNotification(notification: Notification) =
-        database.withTransaction { notificationDao.deleteNotification(notification) }
-    suspend fun deleteAllNotifications(userId: String) =
-        database.withTransaction { notificationDao.deleteAllNotifications(userId) }
+    suspend fun getNotifications(userId: String) = notificationApi.getNotifications(userId)
+    suspend fun deleteNotification(notificationId: Int) = notificationApi.deleteNotification(notificationId)
+    suspend fun deleteAllNotification(userId: String) = notificationApi.deleteAllNotification(userId)
+
 
     /**
     Card
