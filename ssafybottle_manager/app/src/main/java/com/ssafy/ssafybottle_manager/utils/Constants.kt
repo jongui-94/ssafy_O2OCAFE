@@ -18,6 +18,7 @@ const val FRAGMENT_ORDER_MANAGEMENT = "OrderManagementFragment"
 const val FRAGMENT_SALES = "SalesFragment"
 const val FRAGMENT_NOTIFICATION = "NotificationFragment"
 const val FRAGMENT_SETTING = "SettingFragment"
+const val FRAGMENT_PRODUCT_DETAIL = "productDetailFragment"
 
 /**
  Dialog

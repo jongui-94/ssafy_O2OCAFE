@@ -3,22 +3,24 @@ package com.ssafy.ssafybottle_manager.ui.root.sales
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.MotionEvent
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.findFragment
+import androidx.transition.Slide
+import androidx.transition.TransitionManager
 import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
+import com.ssafy.ssafybottle_manager.R
 import com.ssafy.ssafybottle_manager.application.MainViewModel
 import com.ssafy.ssafybottle_manager.data.dto.product.ProductSalesDto
 import com.ssafy.ssafybottle_manager.databinding.FragmentSalesBinding
 import com.ssafy.ssafybottle_manager.ui.adapter.ProductSalesAdapter
+import com.ssafy.ssafybottle_manager.utils.FRAGMENT_PRODUCT_DETAIL
 import com.ssafy.ssafybottle_manager.utils.toMoney
 
 class SalesFragment : Fragment() {
@@ -27,6 +29,8 @@ class SalesFragment : Fragment() {
 
     private val mainViewModel: MainViewModel by activityViewModels()
     private lateinit var productSalesAdapter: ProductSalesAdapter
+
+    private var productDetailFragment : ProductDetailFragment? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,12 +43,30 @@ class SalesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+        initChildFragment()
         initPieChart()
         initBarChart()
         initData()
         initAdapter()
         observeData()
         otherListeners()
+    }
+
+    private fun initChildFragment() {
+        childFragmentManager.let {
+            productDetailFragment = it.findFragmentByTag(FRAGMENT_PRODUCT_DETAIL) as ProductDetailFragment?
+        }
+
+        childFragmentManager.beginTransaction().apply {
+            if(productDetailFragment == null) {
+                productDetailFragment = ProductDetailFragment()
+                add(R.id.fragmentcontainer_sales_productdetail, productDetailFragment!!, FRAGMENT_PRODUCT_DETAIL)
+            }
+
+            hide(productDetailFragment!!)
+            commit()
+        }
     }
 
     private fun initData() {
@@ -62,7 +84,10 @@ class SalesFragment : Fragment() {
     }
 
     private val productSalesItemClickListener: (View, Int) -> Unit = { _, position ->
-
+        childFragmentManager.beginTransaction().apply {
+            show(productDetailFragment!!)
+            commit()
+        }
     }
 
     private fun observeData() {
@@ -145,7 +170,7 @@ class SalesFragment : Fragment() {
             initData()
             binding.refreshSales.isRefreshing = false
         }
-        binding.barchartSales.setOnTouchListener { v, event ->
+        binding.barchartSales.setOnTouchListener { _, event ->
             when(event.action) {
                 MotionEvent.ACTION_DOWN, MotionEvent.ACTION_MOVE -> {
                     binding.refreshSales.isEnabled = false
@@ -157,7 +182,7 @@ class SalesFragment : Fragment() {
 //            v.parent.requestDisallowInterceptTouchEvent(true)
             false
         }
-        binding.piechartSales.setOnTouchListener { v, event ->
+        binding.piechartSales.setOnTouchListener { _, event ->
             when(event.action) {
                 MotionEvent.ACTION_DOWN, MotionEvent.ACTION_MOVE -> {
                     binding.refreshSales.isEnabled = false
