@@ -1,18 +1,22 @@
 package com.ssafy.ssafybottle_manager.application
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import com.google.zxing.integration.android.IntentIntegrator
 import com.ssafy.ssafybottle_manager.R
+import com.ssafy.ssafybottle_manager.ui.login.LoginFragment
+import com.ssafy.ssafybottle_manager.ui.root.RootFragment
 import com.ssafy.ssafybottle_manager.utils.FAILURE
 import com.ssafy.ssafybottle_manager.utils.SUCCESS
 
 class MainActivity : AppCompatActivity() {
 
-    private val viewModel : MainViewModel by viewModels()
+    private val viewModel: MainViewModel by viewModels()
+
+    private var backPressedTime = 0L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +41,24 @@ class MainActivity : AppCompatActivity() {
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data)
+        }
+    }
+
+    override fun onBackPressed() {
+        val curFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host)!!.childFragmentManager.fragments[0]
+        if (curFragment is RootFragment || curFragment is LoginFragment) {
+            val currentTime = System.currentTimeMillis()
+            val elapsedTime = currentTime - backPressedTime
+            backPressedTime = currentTime
+
+            if (elapsedTime in 0..2000) {
+                finish()
+            } else {
+                Toast.makeText(this, "뒤로가기 버튼을 한 번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show()
+            }
+        } else {
+            super.onBackPressed()
         }
     }
 }

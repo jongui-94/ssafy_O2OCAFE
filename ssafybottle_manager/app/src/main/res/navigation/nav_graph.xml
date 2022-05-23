@@ -15,6 +15,8 @@
             app:destination="@id/rootFragment"
             app:enterAnim="@anim/from_right"
             app:exitAnim="@anim/to_left"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true"
             app:popEnterAnim="@anim/form_left"
             app:popExitAnim="@anim/to_right" />
     </fragment>
