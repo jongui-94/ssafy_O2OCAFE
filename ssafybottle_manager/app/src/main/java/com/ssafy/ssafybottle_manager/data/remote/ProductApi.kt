@@ -1,6 +1,7 @@
 package com.ssafy.ssafybottle_manager.data.remote
 
 import com.ssafy.ssafybottle_manager.data.dto.product.ProductDto
+import com.ssafy.ssafybottle_manager.data.dto.product.ProductSalesDto
 import retrofit2.Response
 import retrofit2.http.GET
 
@@ -13,4 +14,10 @@ interface ProductApi {
 
     @GET("product/dessert")
     suspend fun getDessert() : Response<List<ProductDto>>
+
+    @GET("product/salesAll")
+    suspend fun getTotalSales() : Response<Int>
+
+    @GET("product/salesOne")
+    suspend fun getProductSales() : Response<List<ProductSalesDto>>
 }

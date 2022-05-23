@@ -89,9 +89,10 @@
     </select>
     
     <select id="getSalesOne" resultType="map">
-		SELECT p.id, p.name, p.img, p.price * od.quantity as salesOne
+		SELECT p.id, p.name, p.img, p.price * sum(od.quantity) as sales, p.type
 		FROM t_order_detail as od, t_product as p
-		WHERE p.id = od.product_id;
+		WHERE p.id = od.product_id
+        GROUP BY p.id;
     </select>
 
 </mapper>

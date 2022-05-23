@@ -14,6 +14,7 @@ import com.ssafy.ssafybottle_manager.data.dto.order.OrderListDto
 import com.ssafy.ssafybottle_manager.data.dto.order.OrderRequestDto
 import com.ssafy.ssafybottle_manager.data.dto.pane.PaneMenu
 import com.ssafy.ssafybottle_manager.data.dto.product.ProductDto
+import com.ssafy.ssafybottle_manager.data.dto.product.ProductSalesDto
 import com.ssafy.ssafybottle_manager.data.repository.Repository
 import com.ssafy.ssafybottle_manager.utils.*
 import kotlinx.coroutines.launch
@@ -56,6 +57,12 @@ class MainViewModel : BaseViewModel() {
     val orderDetail : LiveData<List<OrderIdDetailDto>> get() = _orderDetail
 
     var isCompleteOrder = MutableLiveData<Int>()
+
+    private val _totalSales = MutableLiveData<Int>()
+    val totalSales : LiveData<Int> get() = _totalSales
+
+    private val _productSalesList = MutableLiveData<List<ProductSalesDto>>()
+    val productSalesList : LiveData<List<ProductSalesDto>> get() = _productSalesList
 
     init {
         menus = mutableListOf(
@@ -225,6 +232,25 @@ class MainViewModel : BaseViewModel() {
                     if(it.body()!! > 0) {
                         isCompleteOrder.postValue(SUCCESS)
                     }
+                }
+            }
+        }
+    }
+
+    fun getTotalSales() {
+        viewModelScope.launch(exceptionHandler) {
+            repository.getTotalSales().let {
+                if(it.isSuccessful) {
+                    _totalSales.postValue(it.body())
+                }
+            }
+        }
+    }
+    fun getProductSales() {
+        viewModelScope.launch(exceptionHandler) {
+            repository.getProductSales().let {
+                if(it.isSuccessful) {
+                    _productSalesList.postValue(it.body())
                 }
             }
         }

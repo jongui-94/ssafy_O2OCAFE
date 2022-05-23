@@ -3,9 +3,12 @@ package com.ssafy.ssafybottle_manager.data.repository
 import android.content.Context
 import com.ssafy.ssafybottle_manager.data.dto.card.CardDto
 import com.ssafy.ssafybottle_manager.data.dto.order.OrderRequestDto
+import com.ssafy.ssafybottle_manager.data.dto.product.ProductSalesDto
 import com.ssafy.ssafybottle_manager.data.dto.user.UserLoginDto
 import com.ssafy.ssafybottle_manager.data.remote.*
 import com.ssafy.ssafybottle_manager.utils.retrofit.RetrofitBuilder
+import retrofit2.Response
+import retrofit2.http.GET
 
 class Repository private constructor(context: Context) {
 
@@ -26,6 +29,8 @@ class Repository private constructor(context: Context) {
     suspend fun getProducts() = productApi.getProducts()
     suspend fun getBeverage() = productApi.getBeverage()
     suspend fun getDessert() = productApi.getDessert()
+    suspend fun getTotalSales() = productApi.getTotalSales()
+    suspend fun getProductSales() = productApi.getProductSales()
 
     /**
     Card
