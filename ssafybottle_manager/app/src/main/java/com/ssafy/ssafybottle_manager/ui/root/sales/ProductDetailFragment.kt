@@ -31,10 +31,19 @@ class ProductDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setTopLayoutTouch()
+        observeData()
         setOnClickListeners()
     }
 
-    
+    fun getProductDetail(productId: Int) {
+        mainViewModel.getProductDetail(productId)
+    }
+
+    private fun observeData() {
+        mainViewModel.productDetail.observe(viewLifecycleOwner) {
+            Log.d("DetailFragment_싸피", it.toString())
+        }
+    }
 
     @SuppressLint("ClickableViewAccessibility")
     private fun setTopLayoutTouch() {

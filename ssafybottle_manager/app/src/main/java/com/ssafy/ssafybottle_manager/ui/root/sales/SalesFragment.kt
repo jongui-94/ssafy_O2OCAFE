@@ -88,6 +88,7 @@ class SalesFragment : Fragment() {
             show(productDetailFragment!!)
             commit()
         }
+        productDetailFragment!!.getProductDetail(mainViewModel.productSalesList.value!![position].productId)
     }
 
     private fun observeData() {

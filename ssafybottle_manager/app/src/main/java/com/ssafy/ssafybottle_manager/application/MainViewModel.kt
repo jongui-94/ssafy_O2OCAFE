@@ -13,6 +13,7 @@ import com.ssafy.ssafybottle_manager.data.dto.order.OrderIdDetailDto
 import com.ssafy.ssafybottle_manager.data.dto.order.OrderListDto
 import com.ssafy.ssafybottle_manager.data.dto.order.OrderRequestDto
 import com.ssafy.ssafybottle_manager.data.dto.pane.PaneMenu
+import com.ssafy.ssafybottle_manager.data.dto.product.ProductDetailResponseDto
 import com.ssafy.ssafybottle_manager.data.dto.product.ProductDto
 import com.ssafy.ssafybottle_manager.data.dto.product.ProductSalesDto
 import com.ssafy.ssafybottle_manager.data.repository.Repository
@@ -63,6 +64,9 @@ class MainViewModel : BaseViewModel() {
 
     private val _productSalesList = MutableLiveData<List<ProductSalesDto>>()
     val productSalesList : LiveData<List<ProductSalesDto>> get() = _productSalesList
+
+    private val _productDetail = MutableLiveData<List<ProductDetailResponseDto>>()
+    val productDetail : LiveData<List<ProductDetailResponseDto>> get() = _productDetail
 
     init {
         menus = mutableListOf(
@@ -251,6 +255,16 @@ class MainViewModel : BaseViewModel() {
             repository.getProductSales().let {
                 if(it.isSuccessful) {
                     _productSalesList.postValue(it.body())
+                }
+            }
+        }
+    }
+
+    fun getProductDetail(productId : Int) {
+        viewModelScope.launch(exceptionHandler) {
+            repository.getProductDetail(productId).let {
+                if(it.isSuccessful) {
+                    _productDetail.postValue(it.body())
                 }
             }
         }

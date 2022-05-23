@@ -31,6 +31,7 @@ class Repository private constructor(context: Context) {
     suspend fun getDessert() = productApi.getDessert()
     suspend fun getTotalSales() = productApi.getTotalSales()
     suspend fun getProductSales() = productApi.getProductSales()
+    suspend fun getProductDetail(productId: Int) = productApi.getProductDetail(productId)
 
     /**
     Card
