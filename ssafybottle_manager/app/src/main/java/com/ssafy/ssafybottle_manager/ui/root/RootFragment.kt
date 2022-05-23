@@ -118,7 +118,9 @@ class RootFragment : Fragment() {
             MENU_ORDER -> { curFragment = FRAGMENT_ORDER }
             MENU_ORDER_MANAGEMENT -> { curFragment = FRAGMENT_ORDER_MANAGEMENT }
             MENU_SALES_MANAGEMENT -> { curFragment = FRAGMENT_SALES }
-            MENU_NOTIFICATION -> { curFragment = FRAGMENT_NOTIFICATION }
+            MENU_NOTIFICATION -> { curFragment = FRAGMENT_NOTIFICATION
+                notificationFragment!!.initData()
+            }
             MENU_SETTING -> { curFragment = FRAGMENT_SETTING }
         }
         showHideFragment(curFragment)

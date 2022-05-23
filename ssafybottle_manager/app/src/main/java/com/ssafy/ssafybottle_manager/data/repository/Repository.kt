@@ -10,7 +10,7 @@ import com.ssafy.ssafybottle_manager.utils.retrofit.RetrofitBuilder
 class Repository private constructor(context: Context) {
 
     /**
-     API
+    API
      */
     private val productApi = RetrofitBuilder.retrofit.create(ProductApi::class.java)
     private val cardApi = RetrofitBuilder.retrofit.create(CardApi::class.java)
@@ -21,36 +21,38 @@ class Repository private constructor(context: Context) {
 
 
     /**
-     Product
+    Product
      */
     suspend fun getProducts() = productApi.getProducts()
     suspend fun getBeverage() = productApi.getBeverage()
     suspend fun getDessert() = productApi.getDessert()
 
     /**
-     Card
+    Card
      */
-    suspend fun getCardHistory(userId : String) = cardApi.getCardHistory(userId)
+    suspend fun getCardHistory(userId: String) = cardApi.getCardHistory(userId)
     suspend fun postcard(card: CardDto) = cardApi.postcard(card)
 
     /**
-     User
+    User
      */
     suspend fun checkCash(userId: String) = userApi.checkCash(userId)
     suspend fun loginAdmin(user: UserLoginDto) = userApi.loginAdmin(user)
 
     /**
-     Order
+    Order
      */
     suspend fun postOrder(order: OrderRequestDto) = orderApi.postOrder(order)
 
     /**
-     Notification
+    Notification
      */
     suspend fun getNotifications(userId: String) = notificationApi.getNotifications(userId)
+    suspend fun deleteNotification(notificationId: Int) = notificationApi.deleteNotification(notificationId)
+    suspend fun deleteAllNotification(userId: String) = notificationApi.deleteAllNotification(userId)
 
     /**
-     Token
+    Token
      */
     suspend fun postToken(tokenRequest: Map<String, String>) = tokenApi.postToken(tokenRequest)
 

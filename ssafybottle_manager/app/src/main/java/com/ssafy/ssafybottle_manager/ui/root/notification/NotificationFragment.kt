@@ -11,6 +11,7 @@ import androidx.fragment.app.activityViewModels
 import com.ssafy.ssafybottle_manager.application.MainViewModel
 import com.ssafy.ssafybottle_manager.databinding.FragmentNotificationBinding
 import com.ssafy.ssafybottle_manager.ui.adapter.NotificationAdapter
+import com.ssafy.ssafybottle_manager.utils.SUCCESS
 
 class NotificationFragment : Fragment() {
     private var _binding: FragmentNotificationBinding? = null
@@ -36,7 +37,7 @@ class NotificationFragment : Fragment() {
         setOnClickListeners()
     }
 
-    private fun initData() {
+    fun initData() {
         mainViewModel.getNotifications()
     }
 
@@ -50,7 +51,7 @@ class NotificationFragment : Fragment() {
     }
 
     private val notificationRemoveItemClickListener : (View, Int) -> Unit = { _, position ->
-
+        mainViewModel.deleteNotification(mainViewModel.notifications.value!![position].id)
     }
 
     private fun observeData() {
@@ -61,11 +62,18 @@ class NotificationFragment : Fragment() {
                 notifyDataSetChanged()
             }
         }
+        mainViewModel.isNotificationDeleteSuccess.observe(viewLifecycleOwner) {
+            when(it) {
+                SUCCESS -> {
+                    initData()
+                }
+            }
+        }
     }
 
     private fun setOnClickListeners() {
         binding.textNotificationRemoveall.setOnClickListener {
-
+            mainViewModel.deleteAllNotification()
         }
     }
 

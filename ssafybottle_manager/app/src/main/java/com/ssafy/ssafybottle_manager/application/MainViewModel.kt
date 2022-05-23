@@ -1,5 +1,6 @@
 package com.ssafy.ssafybottle_manager.application
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -45,6 +46,7 @@ class MainViewModel : BaseViewModel() {
 
     private val _notifications = MutableLiveData<List<NotificationDto>>()
     val notifications : LiveData<List<NotificationDto>> get() = _notifications
+    var isNotificationDeleteSuccess = MutableLiveData<Int>()
 
     init {
         menus = mutableListOf(
@@ -152,6 +154,30 @@ class MainViewModel : BaseViewModel() {
             repository.getNotifications(ADMIN_ID).let {
                 if(it.isSuccessful) {
                     _notifications.postValue(it.body())
+                }
+            }
+        }
+    }
+
+    fun deleteNotification(notificationId: Int) {
+        viewModelScope.launch(exceptionHandler) {
+            repository.deleteNotification(notificationId).let {
+                if(it.isSuccessful) {
+                    if(it.body()!! > 0) {
+                        isNotificationDeleteSuccess.postValue(SUCCESS)
+                    }
+                }
+            }
+        }
+    }
+
+    fun deleteAllNotification() {
+        viewModelScope.launch(exceptionHandler) {
+            repository.deleteAllNotification(ADMIN_ID).let {
+                if(it.isSuccessful) {
+                    if(it.body()!! > 0) {
+                        isNotificationDeleteSuccess.postValue(SUCCESS)
+                    }
                 }
             }
         }
