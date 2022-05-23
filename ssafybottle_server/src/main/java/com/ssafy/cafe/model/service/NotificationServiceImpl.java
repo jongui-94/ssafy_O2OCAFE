@@ -22,4 +22,14 @@ public class NotificationServiceImpl implements NotificationService {
 		return nDao.showNoti(userId);
 	}
 
+	@Override
+	public int deleteAll(String userId) {
+		return nDao.deleteAll(userId);
+	}
+
+	@Override
+	public int delete(Integer notificationId) {
+		return nDao.delete(notificationId);
+	}
+
 }

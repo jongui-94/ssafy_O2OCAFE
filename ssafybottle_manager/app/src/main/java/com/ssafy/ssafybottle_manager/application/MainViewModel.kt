@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.ssafy.ssafybottle_manager.R
 import com.ssafy.ssafybottle_manager.base.BaseViewModel
 import com.ssafy.ssafybottle_manager.data.dto.card.CardDto
+import com.ssafy.ssafybottle_manager.data.dto.notification.NotificationDto
 import com.ssafy.ssafybottle_manager.data.dto.order.OrderDetailDto
 import com.ssafy.ssafybottle_manager.data.dto.order.OrderRequestDto
 import com.ssafy.ssafybottle_manager.data.dto.pane.PaneMenu
@@ -41,6 +42,9 @@ class MainViewModel : BaseViewModel() {
 
     var isLackOfBalance = MutableLiveData<Int>()
     var isOrderSuccess = MutableLiveData<Int>()
+
+    private val _notifications = MutableLiveData<List<NotificationDto>>()
+    val notifications : LiveData<List<NotificationDto>> get() = _notifications
 
     init {
         menus = mutableListOf(
@@ -138,6 +142,16 @@ class MainViewModel : BaseViewModel() {
                     isOrderSuccess.postValue(SUCCESS)
                 } else {
                     isOrderSuccess.postValue(FAILURE)
+                }
+            }
+        }
+    }
+
+    fun getNotifications() {
+        viewModelScope.launch(exceptionHandler) {
+            repository.getNotifications(ADMIN_ID).let {
+                if(it.isSuccessful) {
+                    _notifications.postValue(it.body())
                 }
             }
         }

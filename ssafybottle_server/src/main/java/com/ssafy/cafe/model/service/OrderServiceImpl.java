@@ -9,11 +9,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ssafy.cafe.firebase.FirebaseCloudMessageService;
+import com.ssafy.cafe.model.dao.NotificationDao;
 import com.ssafy.cafe.model.dao.OrderDao;
 import com.ssafy.cafe.model.dao.OrderDetailDao;
 import com.ssafy.cafe.model.dao.ProductDao;
 import com.ssafy.cafe.model.dao.StampDao;
 import com.ssafy.cafe.model.dao.UserDao;
+import com.ssafy.cafe.model.dto.Notification;
 import com.ssafy.cafe.model.dto.Order;
 import com.ssafy.cafe.model.dto.OrderDetail;
 import com.ssafy.cafe.model.dto.Product;
@@ -37,6 +39,9 @@ public class OrderServiceImpl implements OrderService {
 	
 	@Autowired
 	ProductDao pDao;
+	
+	@Autowired
+	NotificationDao nDao;
 	
 	@Autowired
 	private FirebaseCloudMessageService fService;
@@ -76,7 +81,12 @@ public class OrderServiceImpl implements OrderService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		
+		// 알림 테이블에 저장
+		Notification noti1 = new Notification(user2.getId(),  "주문완료", user2.getName() + "님의 주문 " + product.getName() + "포함 " + quantitySum + "잔이 완료되었습니다.");
+		Notification noti2 = new Notification("admin", "주문접수", user2.getName() + "님의 주문 " + product.getName() + "포함 " + quantitySum + "잔이 접수되었습니다.");
+		nDao.insert(noti1);
+		nDao.insert(noti2);
 	}
 
 	@Override

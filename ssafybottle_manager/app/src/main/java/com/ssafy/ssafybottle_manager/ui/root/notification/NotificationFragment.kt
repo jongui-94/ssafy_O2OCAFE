@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.ssafy.ssafybottle_manager.application.MainViewModel
@@ -36,7 +37,7 @@ class NotificationFragment : Fragment() {
     }
 
     private fun initData() {
-
+        mainViewModel.getNotifications()
     }
 
     private fun initAdapter() {
@@ -53,7 +54,13 @@ class NotificationFragment : Fragment() {
     }
 
     private fun observeData() {
-
+        mainViewModel.notifications.observe(viewLifecycleOwner) {
+            binding.nocontentNotification.isVisible = it.isEmpty()
+            notificationAdapter.apply {
+                notifications = it
+                notifyDataSetChanged()
+            }
+        }
     }
 
     private fun setOnClickListeners() {

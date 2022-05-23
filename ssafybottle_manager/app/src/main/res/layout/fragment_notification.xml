@@ -50,4 +50,18 @@
         app:layout_constraintTop_toBottomOf="@id/toolbar_notification"
         tools:listitem="@layout/item_notification" />
 
+    <TextView
+        android:id="@+id/nocontent_notification"
+        style="@style/SubHead"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="알림 내역이 없습니다.🤷‍♂️"
+        android:textColor="@color/dark_gray"
+        android:visibility="invisible"
+        tools:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

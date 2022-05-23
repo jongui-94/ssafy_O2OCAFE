@@ -8,5 +8,21 @@
 		WHERE user_id = #{userId}
 		ORDER BY time DESC	
 	</select>
+	
+	<insert id="insert" parameterType="Notification">
+		INSERT INTO t_notification (user_id, title, content)
+		VALUES (#{userId}, #{title}, #{content})
+	</insert>
+	
+	
+	<delete id="delete" parameterType="int">
+		DELETE FROM t_notification
+		WHERE id = #{id}
+	</delete>
+	
+		<delete id="deleteAll" parameterType="String">
+		DELETE FROM t_notification
+		WHERE user_id = #{userId}
+	</delete>
 </mapper>
 	

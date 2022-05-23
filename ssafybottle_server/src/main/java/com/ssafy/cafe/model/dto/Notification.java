@@ -24,5 +24,12 @@ public class Notification {
 		this.content = content;
 		this.time = time;
 	}
+	
+	public Notification(String userId, String title, String content) {
+		super();
+		this.userId = userId;
+		this.title = title;
+		this.content = content;
+	}
 
 }
