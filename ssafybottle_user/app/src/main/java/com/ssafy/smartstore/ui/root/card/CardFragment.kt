@@ -1,10 +1,13 @@
 package com.ssafy.smartstore.ui.root.card
 
 import android.graphics.Bitmap
+import android.graphics.Paint
 import android.os.Bundle
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -54,6 +57,7 @@ class CardFragment : Fragment() {
             true
         )
         binding.imgCardBarcode.setImageBitmap(barcode)
+        binding.textCardHistory.paintFlags = Paint.UNDERLINE_TEXT_FLAG;
     }
 
     private fun observeData() {

@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="카드를 터치하면 결제가 진행됩니다."
+            android:text="바코드를 결제를 사용해보세요."
             android:textColor="@color/dark_gray"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_card_title" />
@@ -138,11 +138,11 @@
                 android:id="@+id/img_card_refresh"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:padding="4dp"
                 android:layout_marginEnd="24dp"
                 android:background="@drawable/ripple_effect"
                 android:clickable="true"
                 android:focusable="true"
+                android:padding="4dp"
                 android:src="@drawable/ic_refresh"
                 app:layout_constraintBottom_toBottomOf="@id/text_card_cash"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -160,10 +160,23 @@
 
             <TextView
                 android:id="@+id/text_card_history"
+                style="@style/Body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:padding="4dp"
+                android:text="이용내역 조회"
+                android:textColor="@color/dark_gray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/img_card_barcode" />
+
+            <TextView
+                android:id="@+id/text_card_coupon"
                 style="@style/BodyItem"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="24dp"
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/ripple_effect"
                 android:clickable="true"
@@ -171,21 +184,21 @@
                 android:gravity="center"
                 android:paddingTop="48dp"
                 android:paddingBottom="24dp"
-                android:text="이용내역 조회"
+                android:text="쿠폰등록"
                 android:textColor="@color/dark_gray"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/text_card_charge"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/img_card_barcode" />
+                app:layout_constraintTop_toBottomOf="@id/text_card_history" />
 
             <ImageView
                 android:layout_width="28dp"
                 android:layout_height="28dp"
                 android:layout_marginTop="8dp"
-                android:src="@drawable/ic_history"
-                app:layout_constraintEnd_toEndOf="@id/text_card_history"
-                app:layout_constraintStart_toStartOf="@id/text_card_history"
-                app:layout_constraintTop_toTopOf="@id/text_card_history"
+                android:src="@drawable/ic_coupon"
+                app:layout_constraintEnd_toEndOf="@id/text_card_coupon"
+                app:layout_constraintStart_toStartOf="@id/text_card_coupon"
+                app:layout_constraintTop_toTopOf="@id/text_card_coupon"
                 app:tint="@color/dark_gray" />
 
             <View
@@ -193,10 +206,10 @@
                 android:layout_height="0dp"
                 android:layout_marginVertical="16dp"
                 android:background="@color/divider"
-                app:layout_constraintBottom_toBottomOf="@id/text_card_history"
+                app:layout_constraintBottom_toBottomOf="@id/text_card_coupon"
                 app:layout_constraintEnd_toStartOf="@id/text_card_charge"
-                app:layout_constraintStart_toEndOf="@id/text_card_history"
-                app:layout_constraintTop_toTopOf="@id/text_card_history" />
+                app:layout_constraintStart_toEndOf="@id/text_card_coupon"
+                app:layout_constraintTop_toTopOf="@id/text_card_coupon" />
 
             <ImageView
                 android:layout_width="28dp"
@@ -221,10 +234,10 @@
                 android:paddingBottom="24dp"
                 android:text="충전하기"
                 android:textColor="@color/dark_gray"
-                app:layout_constraintBottom_toBottomOf="@id/text_card_history"
+                app:layout_constraintBottom_toBottomOf="@id/text_card_coupon"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/text_card_history"
-                app:layout_constraintTop_toTopOf="@id/text_card_history" />
+                app:layout_constraintStart_toEndOf="@id/text_card_coupon"
+                app:layout_constraintTop_toTopOf="@id/text_card_coupon" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

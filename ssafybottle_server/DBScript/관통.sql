@@ -11,7 +11,7 @@ create table t_user(
     pass varchar(100) not null,
     cash Integer default 0,
     stamps integer default 0,
-    ftoken varchar(100) default "",
+    ftoken varchar(1024) default "",
     admin integer default 0
 );
 
@@ -122,7 +122,7 @@ INSERT INTO t_comment (user_id, product_id, rating, comment) VALUES ('ssafy08', 
 INSERT INTO t_comment (user_id, product_id, rating, comment) VALUES ('ssafy09', 8, 9, '수제 자몽에이드라 그런지 맛나요.');
 INSERT INTO t_comment (user_id, product_id, rating, comment) VALUES ('ssafy10', 10, 10, '초코칩 쿠키 먹으로 여기 옵니다.');
 
-INSERT INTO t_order (user_id, order_table) VALUES ('ssafy01', 'order_table 01');
+INSERT INTO t_order (user_id, order_table, completed) VALUES ('ssafy01', 'order_table 01', 'Y');
 INSERT INTO t_order (user_id, order_table) VALUES ('ssafy01', 'order_table 02');
 INSERT INTO t_order (user_id, order_table) VALUES ('ssafy03', 'order_table 03');
 INSERT INTO t_order (user_id, order_table) VALUES ('ssafy04', 'order_table 04');

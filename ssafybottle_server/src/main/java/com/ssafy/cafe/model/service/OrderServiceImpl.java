@@ -63,14 +63,16 @@ public class OrderServiceImpl implements OrderService {
 		uDao.updateStamp(user);
 		
 				
-		// 사용자에게 푸시 알림
+		// 사용자, 관리자에게 푸시 알림
 		
 		Product product = pDao.select(details.get(0).getProductId());
 		User user2 = uDao.select(order.getUserId());
+		User admin = uDao.select("admin");
 		System.out.println("FCM Token: " + user2.getFtoken());
 		
 		try {
-			fService.sendMessageTo(user2.getFtoken(), "주문완료", user2.getName() + "님의 주문 " + product.getName() + "포함 " + quantitySum + "잔이 접수되었습니다.");
+			fService.sendMessageTo(user2.getFtoken(), "주문완료", user2.getName() + "님의 주문 " + product.getName() + "포함 " + quantitySum + "잔이 완료되었습니다.");
+			fService.sendMessageTo(admin.getFtoken(), "주문접수", user2.getName() + "님의 주문 " + product.getName() + "포함 " + quantitySum + "잔이 접수되었습니다.");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

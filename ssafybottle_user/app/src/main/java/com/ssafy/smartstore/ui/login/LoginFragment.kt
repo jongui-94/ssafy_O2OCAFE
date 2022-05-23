@@ -1,6 +1,7 @@
 package com.ssafy.smartstore.ui.login
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -100,6 +101,7 @@ class LoginFragment : Fragment() {
 
     private suspend fun postToken(userId: String) {
         val token = getToken()
+        Log.d("LoginFragment_싸피", "postToken: ${token}")
         Repository.get().postToken(mapOf("userId" to userId, "token" to token))
     }
 
