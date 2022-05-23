@@ -64,7 +64,7 @@ class MainViewModel : BaseViewModel() {
             PaneMenu(MENU_ORDER_MANAGEMENT, "주문 관리", R.drawable.ic_order, false),
             PaneMenu(MENU_SALES_MANAGEMENT, "매출 관리", R.drawable.ic_dollar, false),
             PaneMenu(MENU_NOTIFICATION, "알림", R.drawable.ic_notification, false),
-            PaneMenu(MENU_SETTING, "세팅", R.drawable.ic_setting, false),
+            PaneMenu(MENU_SETTING, "설정", R.drawable.ic_setting, false),
         )
     }
 

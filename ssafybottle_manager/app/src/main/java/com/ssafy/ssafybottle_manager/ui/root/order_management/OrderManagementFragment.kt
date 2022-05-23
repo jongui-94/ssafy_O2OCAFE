@@ -13,6 +13,7 @@ import com.ssafy.ssafybottle_manager.application.MainViewModel
 import com.ssafy.ssafybottle_manager.databinding.FragmentOrderManagementBinding
 import com.ssafy.ssafybottle_manager.ui.adapter.OrderDetailAdapter
 import com.ssafy.ssafybottle_manager.ui.adapter.OrderManagementAdapter
+import com.ssafy.ssafybottle_manager.utils.SUCCESS
 import com.ssafy.ssafybottle_manager.utils.toMoney
 import java.lang.Appendable
 
@@ -106,13 +107,20 @@ class OrderManagementFragment : Fragment() {
                 }
             }
         }
+        mainViewModel.isCompleteOrder.observe(viewLifecycleOwner) {
+            when(it) {
+                SUCCESS -> {
+                    mainViewModel.getOrder(orderId)
+                    mainViewModel.getOrderList()
+                }
+            }
+        }
     }
 
     private fun setOnClickListeners() {
         binding.btnOrdermanagementOrderdetail.setOnClickListener {
             if (orderId != -1 && completed == "N") {
-                // todo 상품 준비 완료 처리
-
+                mainViewModel.completeOrder(orderId)
             }
         }
     }
