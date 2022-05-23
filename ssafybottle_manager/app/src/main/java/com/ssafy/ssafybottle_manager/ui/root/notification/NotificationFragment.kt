@@ -35,6 +35,7 @@ class NotificationFragment : Fragment() {
         initAdapter()
         observeData()
         setOnClickListeners()
+        otherListeners()
     }
 
     fun initData() {
@@ -74,6 +75,13 @@ class NotificationFragment : Fragment() {
     private fun setOnClickListeners() {
         binding.textNotificationRemoveall.setOnClickListener {
             mainViewModel.deleteAllNotification()
+        }
+    }
+
+    private fun otherListeners() {
+        binding.refreshNotification.setOnRefreshListener {
+            initData()
+            binding.refreshNotification.isRefreshing = false
         }
     }
 

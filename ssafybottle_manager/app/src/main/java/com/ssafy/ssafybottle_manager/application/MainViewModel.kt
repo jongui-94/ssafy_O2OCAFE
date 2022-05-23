@@ -9,6 +9,7 @@ import com.ssafy.ssafybottle_manager.base.BaseViewModel
 import com.ssafy.ssafybottle_manager.data.dto.card.CardDto
 import com.ssafy.ssafybottle_manager.data.dto.notification.NotificationDto
 import com.ssafy.ssafybottle_manager.data.dto.order.OrderDetailDto
+import com.ssafy.ssafybottle_manager.data.dto.order.OrderListDto
 import com.ssafy.ssafybottle_manager.data.dto.order.OrderRequestDto
 import com.ssafy.ssafybottle_manager.data.dto.pane.PaneMenu
 import com.ssafy.ssafybottle_manager.data.dto.product.ProductDto
@@ -47,6 +48,9 @@ class MainViewModel : BaseViewModel() {
     private val _notifications = MutableLiveData<List<NotificationDto>>()
     val notifications : LiveData<List<NotificationDto>> get() = _notifications
     var isNotificationDeleteSuccess = MutableLiveData<Int>()
+
+    private val _orders = MutableLiveData<List<OrderListDto>>()
+    val orders : LiveData<List<OrderListDto>> get() = _orders
 
     init {
         menus = mutableListOf(
@@ -178,6 +182,16 @@ class MainViewModel : BaseViewModel() {
                     if(it.body()!! > 0) {
                         isNotificationDeleteSuccess.postValue(SUCCESS)
                     }
+                }
+            }
+        }
+    }
+
+    fun getOrderList() {
+        viewModelScope.launch(exceptionHandler) {
+            repository.getOrderList().let {
+                if(it.isSuccessful) {
+                    _orders.postValue(it.body())
                 }
             }
         }

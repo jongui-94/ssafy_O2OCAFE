@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.ssafy.ssafybottle_manager.data.dto.order.OrderListDto" />
+
+        <import type="com.ssafy.ssafybottle_manager.utils.StringUtilKt" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="24dp">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_item_orderlist_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/img_item_orderlist_coffee"
+                android:layout_width="180dp"
+                android:layout_height="180dp"
+                app:imageUrl="@{item.img}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/coffee1" />
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/text_item_orderlist_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/HeadTitleBold"
+            tools:text="아메리카노 포함 3잔"
+            android:text='@{item.productName + " 포함 " + String.valueOf(item.totalQuantity) + "잔"}'
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/card_item_orderlist_img"
+            android:layout_marginStart="16dp"/>
+
+        <TextView
+            android:id="@+id/text_item_orderlist_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/SubHead"
+            android:textColor="@color/dark_gray"
+            tools:text="총 15,000원"
+            android:layout_marginTop="4dp"
+            android:text='@{StringUtilKt.toMoney(item.totalPrice) + "원"}'
+            app:layout_constraintTop_toBottomOf="@id/text_item_orderlist_title"
+            app:layout_constraintStart_toEndOf="@id/card_item_orderlist_img"
+            android:layout_marginStart="16dp"/>
+
+        <TextView
+            android:id="@+id/text_item_orderlist_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/SubHead"
+            android:textColor="@color/dark_gray"
+            tools:text="2022년 5월 23일 17시 23분"
+            android:layout_marginTop="4dp"
+            android:text='@{StringUtilKt.toDateString(item.orderTime)}'
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/card_item_orderlist_img"
+            android:layout_marginStart="16dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

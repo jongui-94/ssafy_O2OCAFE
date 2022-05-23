@@ -133,6 +133,10 @@ class OrderFragment : Fragment() {
             mainViewModel.liveOrderList.value = mainViewModel.orderList
         }
         binding.btnOrderOrder.setOnClickListener {
+            if(mainViewModel.orderList.isEmpty()) {
+                Toast.makeText(requireContext(), "주문서가 비어있습니다.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             (requireActivity() as MainActivity).startBarcodeReader()
         }
     }

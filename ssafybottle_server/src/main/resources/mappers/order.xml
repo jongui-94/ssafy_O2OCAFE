@@ -88,11 +88,11 @@
 	</select>
 	
 	<select id="getOrderList" parameterType="int" resultType="map">
-    	SELECT o.o_id, o.user_id, u.name, p.name, sum(od.quantity) as total_quantity, sum(od.quantity * p.price) as total_price, o.order_time, p.img, o.completed
+    	SELECT o.o_id, o.user_id, u.name as user_name, p.name as product_name, sum(od.quantity) as total_quantity, sum(od.quantity * p.price) as total_price, o.order_time, p.img, o.completed
     	FROM t_order_detail as od LEFT JOIN t_order as o ON od.order_id = o.o_id LEFT JOIN t_product as p ON od.product_id = p.id
     	LEFT JOIN t_user as u ON o.user_id = u.id
     	GROUP BY o.o_id
-    	ORDER BY o.order_time DESC
-    </select>
+    	ORDER BY o.order_time DESC;
+	</select>
 	
 </mapper>
