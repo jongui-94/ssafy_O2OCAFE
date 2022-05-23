@@ -52,5 +52,15 @@ public class ProductServiceImpl implements ProductService {
 	public List<Map<String, Object>> recommendBySell() {
 		return pDao.recommendBySell();
 	}
+	
+	@Override
+	public List<Product> getSalesAll(){
+		return pDao.getSalesAll();
+	}
+	
+	@Override
+	public List<Product> getSalesOne(){
+		return pDao.getSalesOne();
+	}
 
 }

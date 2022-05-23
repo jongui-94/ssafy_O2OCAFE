@@ -30,5 +30,9 @@ public interface ProductService {
 	List<Map<String, Object>> recommendByRating();
 	
 	List<Map<String, Object>> recommendBySell();
+	
+	List<Product> getSalesAll();
+	
+	List<Product> getSalesOne();
 
 }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ssafy.cafe.model.dto.Order;
 import com.ssafy.cafe.model.dto.Product;
 import com.ssafy.cafe.model.service.ProductService;
 
@@ -64,5 +65,17 @@ public class ProductRestController {
 	@ApiOperation(value = "별점 순위로 추천한다.", response = List.class)
 	public List<Map<String, Object>> recommendByRating() {
 		return pService.recommendByRating();
+	}
+	
+	@GetMapping("/salesAll")
+	@ApiOperation(value = "총 매출을 반환한다.", response = List.class)
+	public List<Product> getSalesAll() {
+		return pService.getSalesAll();
+	}
+	
+	@GetMapping("/salesOne")
+	@ApiOperation(value = "상품별 매출을 반환한다.", response = List.class)
+	public List<Product> getSalesOne() {
+		return pService.getSalesOne();
 	}
 }

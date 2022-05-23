@@ -81,5 +81,17 @@
 		ORDER BY SUM(od.quantity) DESC
 		LIMIT 10;
 	</select>
+	
+	<select id="getSalesAll" resultType="map">
+    	SELECT sum(p.price * od.quantity) as salesAll
+		FROM t_order_detail as od, t_product as p
+		WHERE p.id = od.product_id;
+    </select>
+    
+    <select id="getSalesOne" resultType="map">
+		SELECT p.id, p.name, p.img, p.price * od.quantity as salesOne
+		FROM t_order_detail as od, t_product as p
+		WHERE p.id = od.product_id;
+    </select>
 
 </mapper>
