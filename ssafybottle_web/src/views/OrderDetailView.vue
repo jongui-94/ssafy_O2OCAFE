@@ -3,7 +3,7 @@
         <b-card-group deck="deck">
             <b-card class="title" header="주문상세">
                 <b-alert variant="info" show>
-                    <h5 class="content">주문일시: {{orderDetail.orders[0].order_time}} </h5>
+                    <h5 class="content">주문일시: {{  new Date(orderDetail.orders[0].order_time).toLocaleString() }} </h5>
                     <hr class="divider">
                     <div v-for="(item, idx) in orderDetail.orders" :key="idx">
                         <b-card class="item"

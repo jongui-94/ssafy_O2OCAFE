@@ -17,7 +17,7 @@
                 </p>
                 <b-list-group class="content" v-for="(item, idx) in userInfo.order" :key="idx">
                     <b-list-group-item href="#" @click="setOrderId(item.id)">
-                        언제? {{item.orderTime}}
+                        언제? {{new Date(item.orderTime).toLocaleString()}}
                     </b-list-group-item>       
                 </b-list-group>
             </b-card>
