@@ -13,9 +13,7 @@ import com.ssafy.ssafybottle_manager.data.dto.order.OrderIdDetailDto
 import com.ssafy.ssafybottle_manager.data.dto.order.OrderListDto
 import com.ssafy.ssafybottle_manager.data.dto.order.OrderRequestDto
 import com.ssafy.ssafybottle_manager.data.dto.pane.PaneMenu
-import com.ssafy.ssafybottle_manager.data.dto.product.ProductDetailResponseDto
-import com.ssafy.ssafybottle_manager.data.dto.product.ProductDto
-import com.ssafy.ssafybottle_manager.data.dto.product.ProductSalesDto
+import com.ssafy.ssafybottle_manager.data.dto.product.*
 import com.ssafy.ssafybottle_manager.data.repository.Repository
 import com.ssafy.ssafybottle_manager.utils.*
 import kotlinx.coroutines.launch
@@ -65,8 +63,11 @@ class MainViewModel : BaseViewModel() {
     private val _productSalesList = MutableLiveData<List<ProductSalesDto>>()
     val productSalesList : LiveData<List<ProductSalesDto>> get() = _productSalesList
 
-    private val _productDetail = MutableLiveData<List<ProductDetailResponseDto>>()
-    val productDetail : LiveData<List<ProductDetailResponseDto>> get() = _productDetail
+    private val _productDetail = MutableLiveData<ProductDetailDto>()
+    val productDetail : LiveData<ProductDetailDto> get() = _productDetail
+
+    //private val _comments = MutableLiveData<List<ProductCommentDto>>()
+    val comments = MutableLiveData<List<ProductCommentDto>>()
 
     init {
         menus = mutableListOf(
@@ -262,9 +263,21 @@ class MainViewModel : BaseViewModel() {
 
     fun getProductDetail(productId : Int) {
         viewModelScope.launch(exceptionHandler) {
-            repository.getProductDetail(productId).let {
-                if(it.isSuccessful) {
-                    _productDetail.postValue(it.body())
+            repository.getProductDetail(productId).let { response ->
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        val productDetail = it[0].toProductDetailDto()
+                        _productDetail.postValue(productDetail)
+
+                        // 코멘트 있으면
+                        if (productDetail.commentCnt > 0) {
+                            val productComments: List<ProductCommentDto> =
+                                it.map { productDetailResponse ->
+                                    productDetailResponse.toProductCommentDto()
+                                }
+                            comments.postValue(productComments)
+                        }
+                    }
                 }
             }
         }

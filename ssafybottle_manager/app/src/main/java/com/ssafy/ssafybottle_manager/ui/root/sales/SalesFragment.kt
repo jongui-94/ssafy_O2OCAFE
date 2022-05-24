@@ -43,7 +43,6 @@ class SalesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         initChildFragment()
         initPieChart()
         initBarChart()
@@ -84,11 +83,25 @@ class SalesFragment : Fragment() {
     }
 
     private val productSalesItemClickListener: (View, Int) -> Unit = { _, position ->
+        showProductDetailFragment()
+        productDetailFragment!!.getProductDetail(mainViewModel.productSalesList.value!![position].productId)
+        mainViewModel.comments.value = emptyList()
+    }
+
+    private fun showProductDetailFragment() {
+        binding.fragmentcontainerSalesProductdetail.visibility = View.VISIBLE
         childFragmentManager.beginTransaction().apply {
             show(productDetailFragment!!)
             commit()
         }
-        productDetailFragment!!.getProductDetail(mainViewModel.productSalesList.value!![position].productId)
+    }
+
+    fun hideProductDetailFragment() {
+        binding.fragmentcontainerSalesProductdetail.visibility = View.GONE
+        childFragmentManager.beginTransaction().apply {
+            hide(productDetailFragment!!)
+            commit()
+        }
     }
 
     private fun observeData() {
@@ -96,7 +109,6 @@ class SalesFragment : Fragment() {
             binding.textSalesCost.text = "${toMoney(it)}원"
         }
         mainViewModel.productSalesList.observe(viewLifecycleOwner) {
-            Log.d("SalesFragment_싸피", it.toString())
             analyzeData(it)
             productSalesAdapter.apply {
                 productSales = it

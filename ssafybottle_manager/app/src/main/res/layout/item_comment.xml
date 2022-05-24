@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="comment"
+            type="com.ssafy.ssafybottle_manager.data.dto.product.ProductCommentDto" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/text_item_comment_username"
+            style="@style/Body"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{comment.userName}"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="김싸피" />
+
+        <ImageView
+            android:id="@+id/img_item_comment_rating"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginStart="8dp"
+            android:src="@drawable/ic_star"
+            app:layout_constraintBottom_toBottomOf="@id/text_item_comment_username"
+            app:layout_constraintStart_toEndOf="@id/text_item_comment_username"
+            app:layout_constraintTop_toTopOf="@id/text_item_comment_username"
+            app:tint="@color/primaryColor" />
+
+        <TextView
+            android:id="@+id/text_item_comment_rating"
+            style="@style/BodyItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text='@{String.valueOf(comment.rating) + "점"}'
+            android:textColor="@color/dark_gray"
+            app:layout_constraintBottom_toBottomOf="@id/text_item_comment_username"
+            app:layout_constraintStart_toEndOf="@id/img_item_comment_rating"
+            app:layout_constraintTop_toTopOf="@id/text_item_comment_username"
+            tools:text="2점" />
+
+        <TextView
+            android:id="@+id/text_item_comment_content"
+            style="@style/Body"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
+            android:text="@{comment.comment}"
+            app:layout_constraintEnd_toStartOf="@id/img_item_comment_edit"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_item_comment_username"
+            tools:text="너무 맛있어요!" />
+
+        <ImageView
+            android:id="@+id/img_item_comment_edit"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_more"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

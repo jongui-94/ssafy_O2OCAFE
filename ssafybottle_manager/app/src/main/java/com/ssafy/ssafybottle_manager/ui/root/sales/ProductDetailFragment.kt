@@ -7,10 +7,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
+import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.ssafy.ssafybottle_manager.R
 import com.ssafy.ssafybottle_manager.application.MainViewModel
+import com.ssafy.ssafybottle_manager.data.dto.product.ProductDetailDto
 import com.ssafy.ssafybottle_manager.databinding.FragmentProductDetailBinding
+import com.ssafy.ssafybottle_manager.ui.adapter.CommentAdapter
+import com.ssafy.ssafybottle_manager.ui.adapter.loadImage
+import com.ssafy.ssafybottle_manager.utils.toMoney
+import com.ssafy.ssafybottle_manager.utils.view.getResourceId
 
 class ProductDetailFragment : Fragment() {
 
@@ -18,6 +26,7 @@ class ProductDetailFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val mainViewModel: MainViewModel by activityViewModels()
+    private lateinit var commentAdapter : CommentAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,6 +40,7 @@ class ProductDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setTopLayoutTouch()
+        initAdapter()
         observeData()
         setOnClickListeners()
     }
@@ -39,9 +49,38 @@ class ProductDetailFragment : Fragment() {
         mainViewModel.getProductDetail(productId)
     }
 
+    private fun initAdapter() {
+        commentAdapter = CommentAdapter().apply {
+            onItemClickListener = commentItemClickListener
+        }
+        binding.recyclerProductdetailComment.apply {
+            adapter = commentAdapter
+        }
+    }
+
+    private val commentItemClickListener : (View, Int) -> Unit = { view, position ->
+        showPopMenu(view, position)
+    }
+
     private fun observeData() {
         mainViewModel.productDetail.observe(viewLifecycleOwner) {
-            Log.d("DetailFragment_싸피", it.toString())
+            setProduct(it)
+        }
+        mainViewModel.comments.observe(viewLifecycleOwner) {
+            commentAdapter.apply {
+                comments = it
+                notifyDataSetChanged()
+            }
+        }
+    }
+
+    private fun setProduct(product: ProductDetailDto) {
+        binding.apply {
+            textProductdetailCoffeename.text = product.name
+            textProductdetailPrice.text = "${toMoney(product.price)}원"
+            textProductdetailRating.text = "(${product.commentCnt})"
+            ratingbarProductdetailRating.rating = product.avg / 2
+            loadImage(imgProductdetailCoffee, product.img)
         }
     }
 
@@ -54,11 +93,22 @@ class ProductDetailFragment : Fragment() {
 
     private fun setOnClickListeners() {
         binding.imgProductdetailClose.setOnClickListener {
-            parentFragmentManager.beginTransaction().apply {
-                hide(this@ProductDetailFragment)
-                commit()
-            }
+            (parentFragment as SalesFragment).hideProductDetailFragment()
         }
+    }
+
+    private fun showPopMenu(view: View, position: Int) {
+        val popupMenu = PopupMenu(requireContext(), view)
+        requireActivity().menuInflater.inflate(R.menu.popupmenu_comment_more, popupMenu.menu)
+        popupMenu.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.popup_comment_delete -> {
+                    //orderViewModel.deleteComment(orderViewModel.comments.value!![position].commentId)
+                }
+            }
+            false
+        }
+        popupMenu.show()
     }
 
     override fun onDestroyView() {

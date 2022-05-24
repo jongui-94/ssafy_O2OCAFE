@@ -24,6 +24,7 @@ import com.ssafy.smartstore.utils.COMMENT
 import com.ssafy.smartstore.utils.PRODUCT_ID
 import com.ssafy.smartstore.utils.getUserId
 import com.ssafy.smartstore.utils.retrofit.FetchState
+import com.ssafy.smartstore.utils.toMoney
 import com.ssafy.smartstore.utils.view.getResourceId
 
 class OrderFragment : Fragment() {
@@ -106,7 +107,7 @@ class OrderFragment : Fragment() {
     private fun setProduct(product: ProductDetailDto) {
         binding.apply {
             textOrderCoffeename.text = product.name
-            textOrderPrice.text = "${product.price}원"
+            textOrderPrice.text = "${toMoney(product.price)}원"
             textOrderRating.text = "(${product.commentCnt})"
             ratingbarOrderRating.rating = product.avg / 2
             imgOrderCoffee.setImageResource(requireView().getResourceId(product.img))

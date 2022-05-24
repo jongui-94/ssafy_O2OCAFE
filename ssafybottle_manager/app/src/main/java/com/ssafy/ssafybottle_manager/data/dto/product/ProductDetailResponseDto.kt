@@ -13,4 +13,25 @@ data class ProductDetailResponseDto(
     val commentId: Int = 0,
     val userName: String = "",
     val user_id: String = ""
-)
+) {
+    fun toProductDetailDto() =
+        ProductDetailDto(
+            img = img,
+            price = price,
+            name = name,
+            type = type,
+            commentCnt = commentCnt,
+            avg = avg,
+            rating = rating,
+            sells = sells
+        )
+
+    fun toProductCommentDto() =
+        ProductCommentDto(
+            comment = comment,
+            commentId = commentId,
+            userName = userName,
+            user_id = user_id,
+            rating = rating
+        )
+}
