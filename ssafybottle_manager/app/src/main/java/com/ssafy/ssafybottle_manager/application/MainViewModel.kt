@@ -277,6 +277,8 @@ class MainViewModel : BaseViewModel() {
                                     productDetailResponse.toProductCommentDto()
                                 }
                             comments.postValue(productComments)
+                        } else {
+                            comments.postValue(emptyList())
                         }
                     }
                 }

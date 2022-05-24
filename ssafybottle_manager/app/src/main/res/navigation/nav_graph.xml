@@ -17,7 +17,7 @@
             app:exitAnim="@anim/to_left"
             app:popUpTo="@id/loginFragment"
             app:popUpToInclusive="true"
-            app:popEnterAnim="@anim/form_left"
+            app:popEnterAnim="@anim/from_left"
             app:popExitAnim="@anim/to_right" />
     </fragment>
     <fragment

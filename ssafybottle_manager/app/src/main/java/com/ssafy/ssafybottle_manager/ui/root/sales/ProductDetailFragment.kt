@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.ssafy.ssafybottle_manager.R
@@ -24,11 +25,11 @@ import com.ssafy.ssafybottle_manager.utils.view.getResourceId
 
 class ProductDetailFragment : Fragment() {
 
-    private var _binding : FragmentProductDetailBinding? = null
+    private var _binding: FragmentProductDetailBinding? = null
     private val binding get() = _binding!!
 
     private val mainViewModel: MainViewModel by activityViewModels()
-    private lateinit var commentAdapter : CommentAdapter
+    private lateinit var commentAdapter: CommentAdapter
     private var productId = 0
 
     override fun onCreateView(
@@ -62,7 +63,7 @@ class ProductDetailFragment : Fragment() {
         }
     }
 
-    private val commentItemClickListener : (View, Int) -> Unit = { view, position ->
+    private val commentItemClickListener: (View, Int) -> Unit = { view, position ->
         showPopMenu(view, position)
     }
 
@@ -71,13 +72,14 @@ class ProductDetailFragment : Fragment() {
             setProduct(it)
         }
         mainViewModel.comments.observe(viewLifecycleOwner) {
+            binding.nocontentProductdetailComment.isVisible = it.isEmpty()
             commentAdapter.apply {
                 comments = it
                 notifyDataSetChanged()
             }
         }
         mainViewModel.isCommentDeleted.observe(viewLifecycleOwner) {
-            when(it) {
+            when (it) {
                 SUCCESS -> {
                     getProductDetail(productId)
                     mainViewModel.isCommentDeleted.value = DEFAULT

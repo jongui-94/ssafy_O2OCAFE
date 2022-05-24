@@ -30,7 +30,7 @@ class SalesFragment : Fragment() {
     private val mainViewModel: MainViewModel by activityViewModels()
     private lateinit var productSalesAdapter: ProductSalesAdapter
 
-    private var productDetailFragment : ProductDetailFragment? = null
+    private var productDetailFragment: ProductDetailFragment? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,13 +54,18 @@ class SalesFragment : Fragment() {
 
     private fun initChildFragment() {
         childFragmentManager.let {
-            productDetailFragment = it.findFragmentByTag(FRAGMENT_PRODUCT_DETAIL) as ProductDetailFragment?
+            productDetailFragment =
+                it.findFragmentByTag(FRAGMENT_PRODUCT_DETAIL) as ProductDetailFragment?
         }
 
         childFragmentManager.beginTransaction().apply {
-            if(productDetailFragment == null) {
+            if (productDetailFragment == null) {
                 productDetailFragment = ProductDetailFragment()
-                add(R.id.fragmentcontainer_sales_productdetail, productDetailFragment!!, FRAGMENT_PRODUCT_DETAIL)
+                add(
+                    R.id.fragmentcontainer_sales_productdetail,
+                    productDetailFragment!!,
+                    FRAGMENT_PRODUCT_DETAIL
+                )
             }
 
             hide(productDetailFragment!!)
@@ -85,20 +90,22 @@ class SalesFragment : Fragment() {
     private val productSalesItemClickListener: (View, Int) -> Unit = { _, position ->
         showProductDetailFragment()
         productDetailFragment!!.getProductDetail(mainViewModel.productSalesList.value!![position].productId)
-        mainViewModel.comments.value = emptyList()
     }
 
     private fun showProductDetailFragment() {
-        binding.fragmentcontainerSalesProductdetail.visibility = View.VISIBLE
         childFragmentManager.beginTransaction().apply {
+            if (!productDetailFragment!!.isVisible) {
+                setCustomAnimations(R.anim.from_right, R.anim.to_left)
+            }
             show(productDetailFragment!!)
             commit()
         }
+        binding.fragmentcontainerSalesProductdetail.visibility = View.VISIBLE
     }
 
     fun hideProductDetailFragment() {
-        binding.fragmentcontainerSalesProductdetail.visibility = View.GONE
         childFragmentManager.beginTransaction().apply {
+            setCustomAnimations(R.anim.from_left, R.anim.to_right)
             hide(productDetailFragment!!)
             commit()
         }
@@ -183,7 +190,7 @@ class SalesFragment : Fragment() {
             binding.refreshSales.isRefreshing = false
         }
         binding.barchartSales.setOnTouchListener { _, event ->
-            when(event.action) {
+            when (event.action) {
                 MotionEvent.ACTION_DOWN, MotionEvent.ACTION_MOVE -> {
                     binding.refreshSales.isEnabled = false
                 }
@@ -195,7 +202,7 @@ class SalesFragment : Fragment() {
             false
         }
         binding.piechartSales.setOnTouchListener { _, event ->
-            when(event.action) {
+            when (event.action) {
                 MotionEvent.ACTION_DOWN, MotionEvent.ACTION_MOVE -> {
                     binding.refreshSales.isEnabled = false
                 }
@@ -238,7 +245,7 @@ class SalesFragment : Fragment() {
         _binding = null
     }
 
-    class MyXAxisFormatter(private val productNames : List<String>) : ValueFormatter(){
+    class MyXAxisFormatter(private val productNames: List<String>) : ValueFormatter() {
         override fun getAxisLabel(value: Float, axis: AxisBase?): String {
             return productNames[value.toInt() - 1]
         }
