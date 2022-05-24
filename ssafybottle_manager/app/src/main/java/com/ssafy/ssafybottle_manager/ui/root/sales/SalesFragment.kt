@@ -74,7 +74,6 @@ class SalesFragment : Fragment() {
     }
 
     private fun initData() {
-        mainViewModel.getTotalSales()
         mainViewModel.getProductSales()
     }
 

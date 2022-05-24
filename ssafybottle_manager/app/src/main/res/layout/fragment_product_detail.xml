@@ -98,6 +98,29 @@
                     tools:text="4,000원" />
 
                 <TextView
+                    android:id="@+id/text_productdetail_label_totalprice"
+                    style="@style/Body"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="32dp"
+                    android:text="총 매출"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/text_productdetail_label_price" />
+
+                <TextView
+                    android:id="@+id/text_productdetail_totalprice"
+                    style="@style/Body"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintBottom_toBottomOf="@id/text_productdetail_label_totalprice"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/text_productdetail_label_totalprice"
+                    tools:text="50,000원" />
+
+                <TextView
                     android:id="@+id/text_productdetail_label_rating"
                     style="@style/Body"
                     android:layout_width="wrap_content"
@@ -107,7 +130,7 @@
                     android:text="평점"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/text_productdetail_label_price" />
+                    app:layout_constraintTop_toBottomOf="@id/text_productdetail_label_totalprice" />
 
                 <TextView
                     android:id="@+id/text_productdetail_rating"
@@ -178,6 +201,7 @@
                     android:text="상품평이 없습니다.🤷‍♂️"
                     android:textColor="@color/dark_gray"
                     android:visibility="invisible"
+                    android:layout_marginBottom="24dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

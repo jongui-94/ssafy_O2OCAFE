@@ -95,6 +95,13 @@ class ProductDetailFragment : Fragment() {
             textProductdetailRating.text = "(${product.commentCnt})"
             ratingbarProductdetailRating.rating = product.avg / 2
             loadImage(imgProductdetailCoffee, product.img)
+
+            mainViewModel.productSalesList.value?.forEach {
+                if(it.productId == productId) {
+                    textProductdetailTotalprice.text = "${toMoney(it.sales)}원"
+                    return@forEach
+                }
+            }
         }
     }
 
