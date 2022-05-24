@@ -43,4 +43,5 @@
 
     <color name="card_primary">#59b0e3</color>
     <color name="card_gray">#BEBEBE</color>
+    <color name="google_login">#FFFFFF</color>
 </resources>

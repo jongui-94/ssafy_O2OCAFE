@@ -110,4 +110,7 @@ dependencies {
 
     // 부트페이
     implementation 'com.github.bootpay:client_android_java:+'
+
+    // Google Login
+    implementation 'com.google.android.gms:play-services-auth:20.2.0'
 }

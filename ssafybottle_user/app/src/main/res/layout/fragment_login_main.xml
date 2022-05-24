@@ -5,12 +5,13 @@
     android:id="@+id/constraint_loginmain_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_login"
+    android:background="@drawable/bg_login2"
     tools:context=".ui.login.LoginMainFragment">
 
     <View
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="128dp"
         android:background="@drawable/overlay_gradient_login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -28,8 +29,8 @@
 
         <ImageView
             android:id="@+id/img_loginmain_logo"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
             android:layout_marginStart="12dp"
             android:src="@drawable/ic_logo"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -37,7 +38,45 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.25"
-            app:tint="@color/primaryColor" />
+            app:tint="#00B4E6" />
+
+<!--        <TextView-->
+<!--            style="@style/HeadTitleBold"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:letterSpacing="0.01"-->
+<!--            android:text="SSAFYBOTTLE"-->
+<!--            android:textColor="@color/primaryColor"-->
+<!--            android:textSize="28sp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/img_loginmain_logo" />-->
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_loginmain_google"
+            style="@style/SubHead"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_marginHorizontal="48dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/button_regular_white"
+            android:text="Google 로그인"
+            android:textAllCaps="false"
+            android:textColor="@color/dark_gray"
+            app:layout_constraintBottom_toTopOf="@id/btn_loginmain_login"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="12dp"
+            android:elevation="5dp"
+            android:src="@drawable/ic_google"
+            app:layout_constraintBottom_toBottomOf="@id/btn_loginmain_google"
+            app:layout_constraintStart_toStartOf="@id/btn_loginmain_google"
+            app:layout_constraintTop_toTopOf="@id/btn_loginmain_google" />
 
         <Button
             android:id="@+id/btn_loginmain_login"
@@ -86,11 +125,11 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:visibility="invisible"
-            tools:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

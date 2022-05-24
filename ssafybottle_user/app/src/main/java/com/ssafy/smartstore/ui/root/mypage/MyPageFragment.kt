@@ -15,6 +15,9 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.ssafy.smartstore.R
 import com.ssafy.smartstore.application.MainViewModel
 import com.ssafy.smartstore.data.dto.user.UserInfoResponseDto
@@ -35,6 +38,8 @@ class MyPageFragment : Fragment() {
 
     private lateinit var userId: String
 
+    private lateinit var mGoogleSignInClient: GoogleSignInClient
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -46,10 +51,23 @@ class MyPageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initGoogleSignIn()
         initAdapter()
         registerObserver()
         setOnClickListeners()
         otherListener()
+    }
+
+    private fun initGoogleSignIn() {
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestEmail()
+            .build()
+
+        mGoogleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
+    }
+
+    private fun signOut() {
+        mGoogleSignInClient.signOut().addOnCompleteListener(requireActivity()) { }
     }
 
     override fun onResume() {
@@ -121,6 +139,7 @@ class MyPageFragment : Fragment() {
             showLogoutDialog { dialog, _ ->
                 unSetAutoLogin()
                 clearUserId()
+                signOut()
                 mainViewModel.orderList = mutableListOf()
                 findNavController().navigate(R.id.action_rootFragment_to_loginMainFragment)
                 dialog.dismiss()
