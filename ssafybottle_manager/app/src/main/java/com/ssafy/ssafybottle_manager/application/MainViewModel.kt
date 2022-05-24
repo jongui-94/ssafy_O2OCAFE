@@ -66,8 +66,9 @@ class MainViewModel : BaseViewModel() {
     private val _productDetail = MutableLiveData<ProductDetailDto>()
     val productDetail : LiveData<ProductDetailDto> get() = _productDetail
 
-    //private val _comments = MutableLiveData<List<ProductCommentDto>>()
     val comments = MutableLiveData<List<ProductCommentDto>>()
+
+    var isCommentDeleted = MutableLiveData<Int>()
 
     init {
         menus = mutableListOf(
@@ -278,6 +279,16 @@ class MainViewModel : BaseViewModel() {
                             comments.postValue(productComments)
                         }
                     }
+                }
+            }
+        }
+    }
+
+    fun deleteComment(commentId: Int) {
+        viewModelScope.launch(exceptionHandler) {
+            repository.deleteComment(commentId).let {
+                if (it.isSuccessful) {
+                    isCommentDeleted.postValue(SUCCESS)
                 }
             }
         }

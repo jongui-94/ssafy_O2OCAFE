@@ -105,9 +105,6 @@ class SalesFragment : Fragment() {
     }
 
     private fun observeData() {
-        mainViewModel.totalSales.observe(viewLifecycleOwner) {
-            binding.textSalesCost.text = "${toMoney(it)}원"
-        }
         mainViewModel.productSalesList.observe(viewLifecycleOwner) {
             analyzeData(it)
             productSalesAdapter.apply {
@@ -138,6 +135,7 @@ class SalesFragment : Fragment() {
         binding.apply {
             textSalesBeverage.text = "${toMoney(totalBeverage)}원"
             textSalesDessert.text = "${toMoney(totalDessert)}원"
+            textSalesCost.text = "${toMoney(totalBeverage + totalDessert)}원"
         }
     }
 

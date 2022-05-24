@@ -21,6 +21,7 @@ class Repository private constructor(context: Context) {
     private val orderApi = RetrofitBuilder.retrofit.create(OrderApi::class.java)
     private val notificationApi = RetrofitBuilder.retrofit.create(NotificationApi::class.java)
     private val tokenApi = RetrofitBuilder.retrofit.create(TokenApi::class.java)
+    private val commentApi = RetrofitBuilder.retrofit.create(CommentApi::class.java)
 
 
     /**
@@ -59,6 +60,11 @@ class Repository private constructor(context: Context) {
     suspend fun getNotifications(userId: String) = notificationApi.getNotifications(userId)
     suspend fun deleteNotification(notificationId: Int) = notificationApi.deleteNotification(notificationId)
     suspend fun deleteAllNotification(userId: String) = notificationApi.deleteAllNotification(userId)
+
+    /**
+     Comment
+     */
+    suspend fun deleteComment(commentId: Int) = commentApi.deleteComment(commentId)
 
     /**
     Token

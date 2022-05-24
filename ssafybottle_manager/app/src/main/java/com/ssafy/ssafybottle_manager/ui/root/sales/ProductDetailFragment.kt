@@ -17,6 +17,8 @@ import com.ssafy.ssafybottle_manager.data.dto.product.ProductDetailDto
 import com.ssafy.ssafybottle_manager.databinding.FragmentProductDetailBinding
 import com.ssafy.ssafybottle_manager.ui.adapter.CommentAdapter
 import com.ssafy.ssafybottle_manager.ui.adapter.loadImage
+import com.ssafy.ssafybottle_manager.utils.DEFAULT
+import com.ssafy.ssafybottle_manager.utils.SUCCESS
 import com.ssafy.ssafybottle_manager.utils.toMoney
 import com.ssafy.ssafybottle_manager.utils.view.getResourceId
 
@@ -27,6 +29,7 @@ class ProductDetailFragment : Fragment() {
 
     private val mainViewModel: MainViewModel by activityViewModels()
     private lateinit var commentAdapter : CommentAdapter
+    private var productId = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,6 +49,7 @@ class ProductDetailFragment : Fragment() {
     }
 
     fun getProductDetail(productId: Int) {
+        this.productId = productId
         mainViewModel.getProductDetail(productId)
     }
 
@@ -70,6 +74,14 @@ class ProductDetailFragment : Fragment() {
             commentAdapter.apply {
                 comments = it
                 notifyDataSetChanged()
+            }
+        }
+        mainViewModel.isCommentDeleted.observe(viewLifecycleOwner) {
+            when(it) {
+                SUCCESS -> {
+                    getProductDetail(productId)
+                    mainViewModel.isCommentDeleted.value = DEFAULT
+                }
             }
         }
     }
@@ -103,6 +115,7 @@ class ProductDetailFragment : Fragment() {
         popupMenu.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.popup_comment_delete -> {
+                    mainViewModel.deleteComment(mainViewModel.comments.value!![position].commentId)
                     //orderViewModel.deleteComment(orderViewModel.comments.value!![position].commentId)
                 }
             }
