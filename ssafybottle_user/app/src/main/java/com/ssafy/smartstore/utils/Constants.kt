@@ -66,3 +66,8 @@ Time
  */
 const val UPDATE_INTERVAL = 1000 // 1초
 const val FASTEST_UPDATE_INTERVAL = 500 // 0.5초
+
+/**
+ Distance
+ */
+const val DISTANCE = "distance"

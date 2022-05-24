@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,14 +12,11 @@ import android.view.ViewGroup
 import com.gun0912.tedpermission.PermissionListener
 import com.ssafy.smartstore.R
 import com.ssafy.smartstore.databinding.FragmentStoreBinding
-import com.ssafy.smartstore.utils.DEFAULT_LATITUDE
-import com.ssafy.smartstore.utils.DEFAULT_LONGITUDE
-import com.ssafy.smartstore.utils.DEFAULT_TEL
-import com.ssafy.smartstore.utils.requestPermission
+import com.ssafy.smartstore.utils.*
 
 class StoreFragment : Fragment() {
 
-    private var _binding : FragmentStoreBinding? = null
+    private var _binding: FragmentStoreBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -32,7 +30,13 @@ class StoreFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initData()
         setOnClickListeners()
+    }
+
+    private fun initData() {
+        val distance = arguments?.getFloat(DISTANCE)!!
+        binding.btnStoreDistance.text = String.format("%.2fkm", distance / 1000)
     }
 
     private fun setOnClickListeners() {
@@ -41,7 +45,8 @@ class StoreFragment : Fragment() {
                 override fun onPermissionGranted() {
                     callStore()
                 }
-                override fun onPermissionDenied(deniedPermissions: MutableList<String>?) { }
+
+                override fun onPermissionDenied(deniedPermissions: MutableList<String>?) {}
             })
         }
         binding.textStoreLocation.setOnClickListener {
@@ -64,7 +69,8 @@ class StoreFragment : Fragment() {
     }
 
     private fun findDirection() {
-        val gmmIntentUri = Uri.parse("google.navigation:q=$DEFAULT_LATITUDE,$DEFAULT_LONGITUDE&mode=w")
+        val gmmIntentUri =
+            Uri.parse("google.navigation:q=$DEFAULT_LATITUDE,$DEFAULT_LONGITUDE&mode=w")
         requireActivity().startActivity(
             Intent(
                 Intent.ACTION_VIEW,
@@ -72,7 +78,6 @@ class StoreFragment : Fragment() {
             )
         )
     }
-
 
 
     override fun onDestroyView() {

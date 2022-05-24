@@ -7,6 +7,7 @@ import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.location.Address
 import android.location.Geocoder
+import android.location.Location
 import android.os.Bundle
 import android.os.Looper
 import android.provider.Settings
@@ -17,6 +18,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.location.*
@@ -51,6 +53,11 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
     private lateinit var locationRequest: LocationRequest
     private var needRequest = false // 위치 서비스 요청
 
+    private var myLocation = Location("MyLocation")
+    private var storeLocation = Location("StoreLocation").apply {
+        latitude = DEFAULT_LATITUDE; longitude = DEFAULT_LONGITUDE
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -84,8 +91,13 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
         map!!.setOnInfoWindowClickListener(this)
     }
 
-    override fun onInfoWindowClick(p0: Marker) {
-        findNavController().navigate(R.id.action_mapFragment_to_storeFragment)
+    override fun onInfoWindowClick(marker: Marker) {
+        if (marker == storeMarker) {
+            findNavController().navigate(
+                R.id.action_mapFragment_to_storeFragment,
+                bundleOf(DISTANCE to storeLocation.distanceTo(myLocation))
+            )
+        }
     }
 
     // 초기화
@@ -194,6 +206,10 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
                     currentPosition = LatLng(location.latitude, location.longitude)
                     var markerTitle = "내 위치"
                     var markerSnippet = getCurrentAddress(currentPosition)
+
+                    myLocation.apply {
+                        latitude = location.latitude; longitude = location.longitude
+                    }
 
                     currentMarker = drawMarker(currentPosition, markerTitle, markerSnippet)
                     moveCamera(currentPosition)
