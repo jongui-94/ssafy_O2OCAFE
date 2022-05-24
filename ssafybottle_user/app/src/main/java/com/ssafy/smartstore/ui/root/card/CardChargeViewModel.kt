@@ -14,6 +14,8 @@ class CardChargeViewModel : BaseViewModel() {
     private val _isSuccess = MutableLiveData<Boolean>()
     val isSuccess: LiveData<Boolean> get() = _isSuccess
 
+    var price = MutableLiveData(5000)
+
     fun chargeCard(card: CardDto) {
         viewModelScope.launch(exceptionHandler) {
             repository.postcard(card).let {

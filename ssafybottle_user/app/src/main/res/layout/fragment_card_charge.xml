@@ -48,18 +48,105 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar_cardcharge" />
 
-
-    <NumberPicker
-        android:id="@+id/numberpicker_cardcharge"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginHorizontal="24dp"
-        android:layout_marginVertical="128dp"
-        android:theme="@style/NumberPickerText"
-        app:layout_constraintBottom_toTopOf="@id/btn_cardcharge_charge"
+    <RadioGroup
+        android:id="@+id/radiogroup_cardcharge_money"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:paddingHorizontal="32dp"
+        android:paddingVertical="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_cardcharge" />
+        app:layout_constraintTop_toBottomOf="@id/text_cardcharge_title">
+
+        <RadioButton
+            android:id="@+id/rbt_cardcharge_5000"
+            style="@style/SubHeadBold"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/selector_radio_button"
+            android:button="@null"
+            android:checked="true"
+            android:gravity="center"
+            android:text="5,000원"
+            android:textColor="@drawable/selector_radio_text" />
+
+        <RadioButton
+            android:id="@+id/rbt_cardcharge_10000"
+            style="@style/SubHeadBold"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/selector_radio_button"
+            android:button="@null"
+            android:gravity="center"
+            android:text="10,000원"
+            android:textColor="@drawable/selector_radio_text" />
+
+        <RadioButton
+            android:id="@+id/rbt_cardcharge_30000"
+            style="@style/SubHeadBold"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/selector_radio_button"
+            android:button="@null"
+            android:gravity="center"
+            android:text="30,000원"
+            android:textColor="@drawable/selector_radio_text" />
+
+        <RadioButton
+            android:id="@+id/rbt_cardcharge_50000"
+            style="@style/SubHeadBold"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/selector_radio_button"
+            android:button="@null"
+            android:gravity="center"
+            android:text="50,000원"
+            android:textColor="@drawable/selector_radio_text" />
+
+        <RadioButton
+            android:id="@+id/rbt_cardcharge_100000"
+            style="@style/SubHeadBold"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/selector_radio_button"
+            android:button="@null"
+            android:gravity="center"
+            android:text="100,000원"
+            android:textColor="@drawable/selector_radio_text" />
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/text_chadcharge_label_price"
+        style="@style/Body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="48dp"
+        android:text="충전금액"
+        android:textColor="@color/dark_gray"
+        app:layout_constraintBottom_toTopOf="@id/btn_cardcharge_charge"
+        app:layout_constraintStart_toStartOf="@id/btn_cardcharge_charge" />
+
+    <TextView
+        android:id="@+id/text_chadcharge_price"
+        style="@style/HeadTitleBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="5,000원"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/text_chadcharge_label_price"
+        app:layout_constraintEnd_toEndOf="@+id/btn_cardcharge_charge"
+        app:layout_constraintTop_toTopOf="@+id/text_chadcharge_label_price" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_cardcharge_charge"
@@ -71,7 +158,7 @@
         android:layout_marginBottom="24dp"
         android:background="@drawable/button_regular_gray"
         android:backgroundTint="@color/primaryColor"
-        android:text="충전하기"
+        android:text="카카오 페이로 결제"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -85,6 +172,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible" />
+        tools:visibility="invisible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

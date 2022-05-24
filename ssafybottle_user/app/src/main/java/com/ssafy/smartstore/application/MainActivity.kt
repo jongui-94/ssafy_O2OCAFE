@@ -25,8 +25,10 @@ import com.ssafy.smartstore.databinding.ActivityMainBinding
 import com.ssafy.smartstore.ui.dialog.BeaconNotificationDialog
 import com.ssafy.smartstore.ui.login.LoginMainFragment
 import com.ssafy.smartstore.ui.root.RootFragment
+import com.ssafy.smartstore.utils.BOOTPAY_APPLICATION_ID
 import com.ssafy.smartstore.utils.STORE_DISTANCE
 import com.ssafy.smartstore.utils.requestPermission
+import kr.co.bootpay.BootpayAnalytics
 import org.altbeacon.beacon.*
 
 class MainActivity : AppCompatActivity(), BeaconConsumer{
@@ -52,6 +54,7 @@ class MainActivity : AppCompatActivity(), BeaconConsumer{
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        initBootPay()
         initNfcAdapter()
         initIntent()
         requestLocationPermission()
@@ -60,10 +63,14 @@ class MainActivity : AppCompatActivity(), BeaconConsumer{
         startScan()
     }
 
+    private fun initBootPay() {
+        BootpayAnalytics.init(this, BOOTPAY_APPLICATION_ID)
+    }
+
     private fun initNfcAdapter() {
         nfcAdapter = NfcAdapter.getDefaultAdapter(this)
         if (nfcAdapter == null) {
-            //inish()
+            //finish()
             Toast.makeText(this, "기기가 nfc 지원을 하지 않습니다.", Toast.LENGTH_SHORT).show()
         }
     }
