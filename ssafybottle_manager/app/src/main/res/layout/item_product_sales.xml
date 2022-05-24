@@ -16,10 +16,11 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
         android:paddingVertical="8dp">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/card_item_bill_img"
+            android:id="@+id/card_item_productsales_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:cardCornerRadius="8dp"
@@ -29,7 +30,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/img_item_bill_coffee"
+                android:id="@+id/img_item_productsales_coffee"
                 android:layout_width="56dp"
                 android:layout_height="56dp"
                 app:imageUrl="@{item.img}"
@@ -41,19 +42,46 @@
         </androidx.cardview.widget.CardView>
 
         <TextView
-            android:id="@+id/text_item_bill_name"
+            android:id="@+id/text_item_productsales_name"
             style="@style/BodyItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:text="@{item.name}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/card_item_bill_img"
+            app:layout_constraintStart_toEndOf="@id/card_item_productsales_img"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="아메리카노" />
 
+        <ImageView
+            android:id="@+id/img_item_productsales_rating"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="8dp"
+            android:src="@drawable/ic_star"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintEnd_toStartOf="@id/text_item_productsales_rating"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/primaryColor" />
+
         <TextView
-            android:id="@+id/text_item_bill_totalprice"
+            android:id="@+id/text_item_productsales_rating"
+            style="@style/BodyItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text='@{String.valueOf(item.rating) + "점"}'
+            android:textColor="@color/dark_gray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/img_item_productsales_rating"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="2.5점" />
+
+        <TextView
+            android:id="@+id/text_item_productsales_totalprice"
             style="@style/BodyItemBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

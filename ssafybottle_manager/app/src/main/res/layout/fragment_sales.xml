@@ -224,6 +224,19 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:id="@+id/text_sales_label_product_rating"
+                    style="@style/BodyItem"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="상품별 평점 평균"
+                    android:textColor="@color/dark_gray"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_sales_label_product"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/text_sales_label_product" />
+
+                <TextView
                     android:id="@+id/text_sales_label_product_total"
                     style="@style/BodyItem"
                     android:layout_width="wrap_content"

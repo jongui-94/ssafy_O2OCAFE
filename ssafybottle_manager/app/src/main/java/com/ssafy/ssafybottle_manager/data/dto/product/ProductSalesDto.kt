@@ -7,6 +7,7 @@ data class ProductSalesDto (
     val name: String,
     @SerializedName("id")
     val productId : Int,
+    val rating: Float = 0f,
     val sales: Int,
     val type: String
 )

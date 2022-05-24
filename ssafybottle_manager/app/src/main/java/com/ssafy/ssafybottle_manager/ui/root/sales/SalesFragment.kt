@@ -96,6 +96,7 @@ class SalesFragment : Fragment() {
             binding.textSalesCost.text = "${toMoney(it)}원"
         }
         mainViewModel.productSalesList.observe(viewLifecycleOwner) {
+            Log.d("SalesFragment_싸피", it.toString())
             analyzeData(it)
             productSalesAdapter.apply {
                 productSales = it
