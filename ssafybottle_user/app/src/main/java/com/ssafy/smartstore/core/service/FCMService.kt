@@ -59,18 +59,6 @@ class FCMService : FirebaseMessagingService() {
                     pIntent
                 ).build()
             )
-            val userId = getUserId()
-            //insertNotification(userId, it.title ?: "", it.body ?: "")
         }
     }
-
-//    private fun insertNotification(userId: String, title: String, content: String) {
-//        CoroutineScope(Dispatchers.Main).launch {
-//            repository.insertNotification(
-//                Notification(
-//                    userId, title, content
-//                )
-//            )
-//        }
-//    }
 }

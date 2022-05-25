@@ -9,9 +9,20 @@ import android.util.Log
 import androidx.annotation.RequiresApi
 import com.google.firebase.messaging.FirebaseMessaging
 import com.ssafy.smartstore.data.repository.*
+import com.ssafy.smartstore.utils.getUserId
 import com.ssafy.smartstore.utils.saveToken
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class SmartStoreApplication : Application() {
+    @RequiresApi(Build.VERSION_CODES.O)
+
+    private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
+        throwable.printStackTrace()
+    }
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate() {
         super.onCreate()
@@ -36,6 +47,11 @@ class SmartStoreApplication : Application() {
             Log.d("Application_싸피", "onCreate: 새로운 등록 토큰: ${it.result}")
             saveToken(it.result)
             createNotificationChannel("smart_store", "smart_store")
+
+            val userId = getUserId()
+            CoroutineScope(Dispatchers.IO).launch(exceptionHandler) {
+                Repository.get().postToken(mapOf("userId" to userId, "token" to it.result))
+            }
         }
     }
 
