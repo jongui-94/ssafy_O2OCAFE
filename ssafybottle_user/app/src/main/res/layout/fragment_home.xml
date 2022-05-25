@@ -45,6 +45,7 @@
                 style="@style/HeadTitleBold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
                 android:text="님"
                 app:layout_constraintTop_toTopOf="@id/text_home_username"
                 app:layout_constraintBottom_toBottomOf="@id/text_home_username"

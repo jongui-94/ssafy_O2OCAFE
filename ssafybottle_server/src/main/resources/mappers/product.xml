@@ -89,7 +89,7 @@
     </select>
     
     <select id="getSalesOne" resultType="map">
- 		SELECT p.id, p.name, p.img, p.price * sum(od.quantity) as sales, p.type, avg(c.rating) as rating
+ 		SELECT p.id, p.name, p.img, p.price * od.quantity as sales, p.type, avg(c.rating) as rating
 		FROM t_product as p 
         left join t_order_detail as od on p.id = od.product_id 
         left join t_comment as c on p.id = c.product_id

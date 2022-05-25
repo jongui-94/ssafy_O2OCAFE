@@ -20,11 +20,8 @@ import com.ssafy.smartstore.data.dto.product.ProductDetailDto
 import com.ssafy.smartstore.databinding.FragmentOrderBinding
 import com.ssafy.smartstore.ui.adapter.CommentAdapter
 import com.ssafy.smartstore.ui.adapter.OnItemClickListener
-import com.ssafy.smartstore.utils.COMMENT
-import com.ssafy.smartstore.utils.PRODUCT_ID
-import com.ssafy.smartstore.utils.getUserId
+import com.ssafy.smartstore.utils.*
 import com.ssafy.smartstore.utils.retrofit.FetchState
-import com.ssafy.smartstore.utils.toMoney
 import com.ssafy.smartstore.utils.view.getResourceId
 
 class OrderFragment : Fragment() {
@@ -65,6 +62,7 @@ class OrderFragment : Fragment() {
     private fun initData() {
         productId = arguments?.getInt(PRODUCT_ID)!!
         orderViewModel.getProduct(productId)
+        orderViewModel.getOrderedProductIds(userId, productId)
     }
 
     private fun initAdapter() {
@@ -132,7 +130,18 @@ class OrderFragment : Fragment() {
                 Toast.makeText(requireContext(), "상품평을 삭제하는데 실패했습니다.", Toast.LENGTH_SHORT).show()
             }
         }
-
+        orderViewModel.isOrdered.observe(viewLifecycleOwner) {
+            when(it) {
+                SUCCESS -> {
+                    binding.btnOrderReview.visibility = View.VISIBLE
+                    orderViewModel.isOrdered.value = DEFAULT
+                }
+                FAILURE -> {
+                    binding.btnOrderReview.visibility = View.INVISIBLE
+                    orderViewModel.isOrdered.value = DEFAULT
+                }
+            }
+        }
         orderViewModel.fetchState.observe(viewLifecycleOwner) {
             Toast.makeText(requireContext(), "상품정보를 받아오는데 실패했습니다.", Toast.LENGTH_SHORT).show()
             when (it) {

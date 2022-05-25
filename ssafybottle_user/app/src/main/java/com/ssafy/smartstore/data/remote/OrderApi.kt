@@ -15,4 +15,7 @@ interface OrderApi {
 
     @POST("order")
     suspend fun postOrder(@Body order: OrderRequestDto) : Response<Unit>
+
+    @GET("order/isOrdered/{userId}")
+    suspend fun getOrderedProductIds(@Path("userId") userId: String) : Response<List<Int>>
 }

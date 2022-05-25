@@ -35,5 +35,6 @@ public interface OrderDao {
 	List<Order> getOrderList();
 	
 	int completeOrder(int id);
-
+	
+	List<Integer> selectOrdedProducts(String id);
 }

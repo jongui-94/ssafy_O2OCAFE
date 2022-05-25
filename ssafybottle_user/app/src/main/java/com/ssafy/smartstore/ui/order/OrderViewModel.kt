@@ -1,5 +1,6 @@
 package com.ssafy.smartstore.ui.order
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -7,6 +8,8 @@ import com.ssafy.smartstore.base.BaseViewModel
 import com.ssafy.smartstore.data.dto.product.ProductCommentDto
 import com.ssafy.smartstore.data.dto.product.ProductDetailDto
 import com.ssafy.smartstore.data.repository.Repository
+import com.ssafy.smartstore.utils.FAILURE
+import com.ssafy.smartstore.utils.SUCCESS
 import kotlinx.coroutines.launch
 
 class OrderViewModel : BaseViewModel() {
@@ -20,6 +23,8 @@ class OrderViewModel : BaseViewModel() {
 
     private val _isDeleted = MutableLiveData<Boolean>()
     val isDeleted: LiveData<Boolean> get() = _isDeleted
+
+    var isOrdered = MutableLiveData<Int>()
 
     fun getProduct(productId: Int) {
         viewModelScope.launch(exceptionHandler) {
@@ -50,6 +55,24 @@ class OrderViewModel : BaseViewModel() {
                     _isDeleted.postValue(true)
                 } else {
                     _isDeleted.postValue(false)
+                }
+            }
+        }
+    }
+
+    fun getOrderedProductIds(userId: String, productId: Int) {
+        viewModelScope.launch(exceptionHandler) {
+            repository.getOrderedProductIds(userId).let {
+                if (it.isSuccessful) {
+                    it.body()?.forEach { id ->
+                        if(id == productId) {
+                            isOrdered.postValue(SUCCESS)
+                            return@launch
+                        }
+                    }
+                    isOrdered.postValue(FAILURE)
+                } else {
+                    isOrdered.postValue(FAILURE)
                 }
             }
         }

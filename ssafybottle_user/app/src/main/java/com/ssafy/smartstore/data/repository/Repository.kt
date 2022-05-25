@@ -75,6 +75,7 @@ class Repository private constructor(context: Context) {
     suspend fun getOrderByUser(userId: String) = orderApi.getOrderByUser(userId)
     suspend fun getOrderByOrderId(orderId: Int) = orderApi.getOrderByOrderId(orderId)
     suspend fun postOrder(order: OrderRequestDto) = orderApi.postOrder(order)
+    suspend fun getOrderedProductIds(userId: String) = orderApi.getOrderedProductIds(userId)
 
     /**
     Notification

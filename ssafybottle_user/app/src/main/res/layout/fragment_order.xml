@@ -216,6 +216,8 @@
                 android:backgroundTint="@color/primaryColor"
                 android:minWidth="0dp"
                 android:minHeight="0dp"
+                android:visibility="invisible"
+                tools:visibility="visible"
                 android:stateListAnimator="@null"
                 android:text="등록하기"
                 android:textColor="@color/white"

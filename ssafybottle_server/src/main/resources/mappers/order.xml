@@ -101,4 +101,10 @@
 		WHERE o_id = #{id}
 	</update>
 	
+	<select id="selectOrdedProducts" parameterType="string" resultType="int">
+		select d.product_id
+		from t_order_detail as d, t_order as o
+		where d.order_id = o.o_id AND o.user_id = #{id};
+	</select>
+	
 </mapper>

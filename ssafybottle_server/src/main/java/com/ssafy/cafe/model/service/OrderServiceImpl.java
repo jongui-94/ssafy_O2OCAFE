@@ -139,4 +139,9 @@ public class OrderServiceImpl implements OrderService {
 		}		
 	}
 
+	@Override
+	public List<Integer> getOrdedProducts(String userId) {
+		return oDao.selectOrdedProducts(userId);
+	}
+
 }

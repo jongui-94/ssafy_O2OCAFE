@@ -61,4 +61,10 @@ public class OrderRestController {
 		return oService.setOrderCompleted(orderId);
 	}
 	
+	@GetMapping("/isOrdered/{userId}")
+	@ApiOperation(value = "{userId}가 주문했던 상품들의 번호를 반환한다.", response = List.class)
+	public List<Integer> getOrdedProducts(@PathVariable String userId) {
+		return oService.getOrdedProducts(userId);
+	}	
+	
 }

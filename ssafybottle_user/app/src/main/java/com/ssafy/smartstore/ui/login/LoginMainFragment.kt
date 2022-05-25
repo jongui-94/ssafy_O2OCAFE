@@ -2,6 +2,7 @@ package com.ssafy.smartstore.ui.login
 
 import android.app.Activity.RESULT_OK
 import android.content.Intent
+import android.graphics.Paint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -61,10 +62,15 @@ class LoginMainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initView()
         initGoogleSignIn()
         registerObserver()
         checkAutoLogin()
         setOnClickListeners()
+    }
+
+    private fun initView() {
+        binding.textLoginmainJoin.paintFlags = Paint.UNDERLINE_TEXT_FLAG;
     }
 
     private fun initGoogleSignIn() {

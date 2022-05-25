@@ -58,4 +58,6 @@ public interface OrderService {
 	List<Order> getOrderList();
 	
 	public int setOrderCompleted(Integer orderId);
+	
+	List<Integer> getOrdedProducts(String userId);
 }
