@@ -9,7 +9,7 @@ android {
     compileSdk 30
 
     defaultConfig {
-        applicationId "com.ssafy.smartstore"
+        applicationId "com.ssafy.ssafybottle_manager"
         minSdk 21
         targetSdk 30
         versionCode 1

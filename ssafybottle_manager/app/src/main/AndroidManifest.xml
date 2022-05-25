@@ -9,9 +9,9 @@
     <application
         android:name=".application.ApplicationClass"
         android:allowBackup="false"
-        android:icon="@mipmap/ic_ssafy_coffee"
+        android:icon="@mipmap/ic_ssafybottle_manager"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_ssafy_coffee"
+        android:roundIcon="@mipmap/ic_ssafybottle_manager"
         android:supportsRtl="true"
         android:theme="@style/Theme.Ssafybottle_manager"
         android:usesCleartextTraffic="true">
