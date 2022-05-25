@@ -128,6 +128,9 @@ public class OrderServiceImpl implements OrderService {
 			User user = uDao.select(order.getUserId());
 			OrderDetailByOrderId orderDetail= dDao.selectOrderDetail(orderId);
 			
+			Notification noti = new Notification(user.getId(), "상품 준비완료", user.getName() + "님의 주문 " + orderDetail.getName() + " 포함 " + orderDetail.getQuantity() + "잔이 준비 완료되었습니다.");
+			nDao.insert(noti);
+			
 			try {
 				fService.sendMessageTo(user.getFtoken(), "상품 준비완료", user.getName() + "님의 주문 " + orderDetail.getName() + " 포함 " + orderDetail.getQuantity() + "잔이 준비 완료되었습니다.");
 			} catch(IOException e) {

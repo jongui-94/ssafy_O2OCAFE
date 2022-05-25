@@ -38,6 +38,7 @@ class NotificationFragment : Fragment() {
         initAdapter()
         registerObserver()
         setOnClickListeners()
+        otherListener()
     }
 
     private fun initData() {
@@ -80,6 +81,13 @@ class NotificationFragment : Fragment() {
         binding.imgNotificationBack.setOnClickListener { requireActivity().onBackPressed() }
         binding.imgNotificationDelete.setOnClickListener {
             viewModel.deleteAllNotification(userId)
+        }
+    }
+
+    private fun otherListener() {
+        binding.refreshNotification.setOnRefreshListener {
+            initData()
+            binding.refreshNotification.isRefreshing = false
         }
     }
 
