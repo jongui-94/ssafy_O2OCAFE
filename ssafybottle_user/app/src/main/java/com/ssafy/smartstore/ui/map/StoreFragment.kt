@@ -71,7 +71,8 @@ class StoreFragment : Fragment() {
     private fun findDirection() {
         val gmmIntentUri =
             //Uri.parse("google.navigation:q=$DEFAULT_LATITUDE,$DEFAULT_LONGITUDE&mode=w")
-            Uri.parse("http://maps.google.com/maps?f=d&daddr=경상북도 구미시 황상동 인동중앙로 15&hl=ko");
+//            Uri.parse("http://maps.google.com/maps?f=d&daddr=경상북도 구미시 황상동 인동중앙로 15&hl=ko");
+            Uri.parse("http://maps.google.com/maps?f=d&daddr=경기도 김포시 김포한강2로23번길 72&hl=ko");
 
         requireActivity().startActivity(
             Intent(

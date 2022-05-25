@@ -34,12 +34,12 @@
 	
 	<select id="selectBeverage" resultType="Product">
 		SELECT * FROM t_product WHERE type = "coffee"
-		ORDER BY id DESC
+		ORDER BY id ASC
 	</select>
 	
 	<select id="selectDessert" resultType="Product">
 		SELECT * FROM t_product WHERE type = "dessert"
-		ORDER BY id DESC
+		ORDER BY id ASC
 	</select>
 	
 	<select id="searchProduct" parameterType="String" resultType="Product">
@@ -75,8 +75,8 @@
 	
 	<select id="recommendBySell" parameterType="String" resultType="map">
 		SELECT SUM(od.quantity) as 'sells', od.product_id as 'id', p.name, p.price, p.img
-		FROM t_order_detail od, t_product p
-		WHERE od.product_id = p.id
+		FROM t_product p 
+		LEFT JOIN t_order_detail od ON p.id = od.product_id
 		GROUP BY p.id
 		ORDER BY SUM(od.quantity) DESC
 		LIMIT 10;
@@ -89,12 +89,10 @@
     </select>
     
     <select id="getSalesOne" resultType="map">
- 		SELECT p.id, p.name, p.img, p.price * od.quantity as sales, p.type, avg(c.rating) as rating
+		SELECT p.id, p.name, p.img, p.price * sum(od.quantity) as sales, p.type, (select avg(c.rating) from t_comment c where p.id = c.product_id) as rating
 		FROM t_product as p 
-        left join t_order_detail as od on p.id = od.product_id 
-        left join t_comment as c on p.id = c.product_id
-		WHERE p.id = od.product_id
-        GROUP BY p.id;
+		left join t_order_detail as od on p.id = od.product_id 
+		GROUP BY p.id;
     </select>
 
 </mapper>

@@ -212,7 +212,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
                     }
 
                     currentMarker = drawMarker(currentPosition, markerTitle, markerSnippet)
-                    //moveCamera(currentPosition)
+                    moveCamera(currentPosition)
                 }
             }
         }

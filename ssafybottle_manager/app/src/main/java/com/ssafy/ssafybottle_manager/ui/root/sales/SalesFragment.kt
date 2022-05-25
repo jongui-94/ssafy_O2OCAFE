@@ -114,7 +114,7 @@ class SalesFragment : Fragment() {
         mainViewModel.productSalesList.observe(viewLifecycleOwner) {
             analyzeData(it)
             productSalesAdapter.apply {
-                productSales = it
+                productSales = it.sortedByDescending { p -> p.rating }
                 notifyDataSetChanged()
             }
         }
@@ -134,7 +134,7 @@ class SalesFragment : Fragment() {
 
         setDataTotalCost(totalBeverage, totalDessert)
         setDataPieChart(totalBeverage, totalDessert)
-        setDataBarChart(salesList)
+        setDataBarChart(salesList.sortedByDescending { it.sales })
     }
 
     private fun setDataTotalCost(totalBeverage: Int, totalDessert: Int) {

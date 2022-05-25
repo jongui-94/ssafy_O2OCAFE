@@ -110,6 +110,8 @@ INSERT INTO t_product (name, type, price, img) VALUES
 ('누텔라 크로플', 'dessert', 2500, 'dessert2.png'),
 ('생크림 딸기 크로플', 'dessert', 3800, 'dessert3.png');
 
+commit;
+
 INSERT INTO t_order (user_id, order_table, completed) VALUES ('ssafy01', 'order_table 01', 'Y');
 INSERT INTO t_order (user_id, order_table, completed) VALUES ('ssafy01', 'order_table 02', 'Y');
 INSERT INTO t_order (user_id, order_table, completed) VALUES ('ssafy03', 'order_table 03', 'Y');
@@ -136,11 +138,11 @@ INSERT INTO t_order_detail (order_id, product_id, quantity) VALUES (6, 6, 17);
 INSERT INTO t_order_detail (order_id, product_id, quantity) VALUES (6, 15, 18);
 INSERT INTO t_order_detail (order_id, product_id, quantity) VALUES (7, 7, 27);
 INSERT INTO t_order_detail (order_id, product_id, quantity) VALUES (7, 16, 25);
-INSERT INTO t_order_detail (order_id, product_id, quantity) VALUES (8, 8, 15);
+INSERT INTO t_order_detail (order_id, product_id, quantity) VALUES (8, 8, 2);
 INSERT INTO t_order_detail (order_id, product_id, quantity) VALUES (8, 17, 15);
 INSERT INTO t_order_detail (order_id, product_id, quantity) VALUES (9, 9, 19);
 INSERT INTO t_order_detail (order_id, product_id, quantity) VALUES (9, 18, 21);
-INSERT INTO t_order_detail (order_id, product_id, quantity) VALUES (10, 8, 13);
+INSERT INTO t_order_detail (order_id, product_id, quantity) VALUES (10, 8, 4);
 INSERT INTO t_order_detail (order_id, product_id, quantity) VALUES (10, 10, 16);
 INSERT INTO t_order_detail (order_id, product_id, quantity) VALUES (11, 13, 13);
 
@@ -219,4 +221,4 @@ INSERT INTO t_stamp (user_id, order_id, quantity) VALUES ('ssafy07', 11, 7);
 INSERT INTO t_notification (user_id, title, content) VALUES('ssafy01','주문완료','주문이 완료되었습니다.');
 INSERT INTO t_notification (user_id, title, content) VALUES('ssafy01', '상품준비완료','주문하신 상품이 준비완료되었습니다.');
 
-commit;
+commit;       

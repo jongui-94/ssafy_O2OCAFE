@@ -68,7 +68,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
-                android:text="구미 황상동점"
+                android:text="김포 장기점"
                 android:textColor="@color/primaryColor"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/img_store_store" />
@@ -107,7 +107,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:text="경상북도 구미시 인동가산로 9-3"
+                android:text="경기도 김포시 김포한강2로23번길 72"
                 android:textColor="@color/dark_gray"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/text_store_branch" />
