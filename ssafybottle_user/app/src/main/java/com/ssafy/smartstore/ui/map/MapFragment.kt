@@ -123,7 +123,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
 
         storeMarker?.remove()
         storeMarker =
-            drawMarker(LatLng(DEFAULT_LATITUDE, DEFAULT_LONGITUDE), "싸피벅스", "010-1234-5678")
+            drawMarker(LatLng(DEFAULT_LATITUDE, DEFAULT_LONGITUDE), "싸피보틀", "010-1234-5678")
         moveCamera(latLng)
     }
 
